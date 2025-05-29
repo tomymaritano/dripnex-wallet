@@ -1,37 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dripnex 🧬
 
-## Getting Started
+**Dripnex** is a minimalist Web3 wallet interface — built for real people in a real world.  
+It's designed to connect your wallet simply, privately, and fast — without clutter.
 
-First, run the development server:
+## 🔍 What is it?
+
+A clean, crypto-native frontend starter that lets you:
+- Connect your wallet (RainbowKit + Wagmi)
+- Use a minimal, responsive and glassmorphic UI
+- Extend with your own on-chain logic
+
+## 🧱 Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [RainbowKit](https://rainbowkit.com/)
+- [Wagmi](https://wagmi.sh/)
+- [Framer Motion](https://www.framer.com/motion/)
+
+## 🚀 Getting Started
 
 ```bash
+git clone https://github.com/yourusername/dripnex.git
+cd dripnex
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> 📝 Make sure to replace your `WalletConnect` project ID in `wallet.ts`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+.
+├── app/
+│   ├── page.tsx         # Main layout
+│   ├── components/
+│   │   ├── Navbar.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Hero.tsx
+│   │   └── WalletButton.tsx
+├── public/
+│   └── logodripnex.svg
+├── styles/
+│   └── globals.css
+```
 
-## Learn More
+## 🛣️ Roadmap
 
-To learn more about Next.js, take a look at the following resources:
+- [x] Minimal wallet connection
+- [x] Crypto-style UI with glassmorphism
+- [ ] Display wallet address & ENS
+- [ ] View balances, NFTs, and on-chain data
+- [ ] Multi-chain support & transaction history
+- [ ] Light/dark theme toggle
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤝 Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/foo`)
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
 
-## Deploy on Vercel
+## 🧠 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# dripnex-wallet
+MIT © [tomymaritano](https://github.com/tomymaritano)

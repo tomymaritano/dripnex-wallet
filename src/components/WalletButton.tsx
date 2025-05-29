@@ -22,9 +22,9 @@ export default function WalletConnectButton() {
                 return (
                   <button
                     onClick={openConnectModal}
-                    className="flex items-center gap-2 px-4 py-2 bg-teal-500/10 text-teal-300 border border-teal-400 rounded-lg hover:bg-teal-400/20 transition text-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-500/10 text-gray-300 border border-gray-400 rounded-lg hover:bg-gray-400/20 transition text-sm"
                   >
-                    <FaWallet className="text-teal-300" />
+                    <FaWallet className="text-gray-300" />
                     Connect Wallet
                   </button>
                 );

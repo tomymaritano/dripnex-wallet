@@ -23,7 +23,16 @@ export default function Navbar() {
         </Link>
 
         {/* Right actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
+          {/* Link to Wallet Page */}
+          <Link
+            href="/wallet"
+            className="text-sm text-gray-300 hover:text-teal-400 transition hidden sm:inline"
+          >
+            Wallet
+          </Link>
+
+          {/* Socials */}
           <Link
             href="https://x.com"
             target="_blank"
@@ -41,7 +50,7 @@ export default function Navbar() {
             <FaGithub size={16} />
           </Link>
 
-          {/* Real Wallet Connect button */}
+          {/* Wallet Connect button */}
           <WalletConnectButton />
         </div>
       </div>

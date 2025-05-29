@@ -1,12 +1,15 @@
-import ClientLayout from '@/components/ClientLayout';
+// src/app/layout.tsx';
+
+import { Web3Wrapper } from "@/components/Web3Wrapper";
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <ClientLayout>
+        <Web3Wrapper>
           {children}
-        </ClientLayout>
+        </Web3Wrapper>
       </body>
     </html>
   );

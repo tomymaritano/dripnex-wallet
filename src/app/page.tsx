@@ -1,6 +1,6 @@
 'use client';
 
-import Web3Wrapper from '@/components/Web3Wrapper';
+import { Web3Wrapper } from '@/components/Web3Wrapper';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
