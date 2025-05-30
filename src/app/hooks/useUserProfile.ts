@@ -1,41 +1,39 @@
-// src/hooks/useUserProfile.ts
+// src/app/hooks/useUserProfile.ts
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import { UserProfile } from '@/types/user';
 
-export interface UserProfile {
-  id: string;
-  address: string;
-  created_at: string;
-  // podés agregar más campos acá si los tenés en Supabase
-}
-
-export function useUserProfile(address?: string | null): {
-  profile: UserProfile | null;
-  loading: boolean;
-} {
+export function useUserProfile(address?: string) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!address) return;
 
     const fetchProfile = async () => {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('address', address)
-        .single();
+      setError(null);
 
-      if (!error && data) {
-        setProfile(data);
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('wallet_address', address)
+          .maybeSingle(); // ✅ Esto maneja el caso de 0 resultados
+
+        if (error) throw error;
+        setProfile(data ?? null);
+      } catch (err) {
+        console.error('Error fetching user profile:', err);
+        setError('Could not fetch profile.');
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     };
 
     fetchProfile();
   }, [address]);
 
-  return { profile, loading };
+  return { profile, loading, error };
 }

@@ -1,7 +1,8 @@
-// src/types.ts
-export type UserProfile = {
+export interface UserProfile {
   id: string;
+  username: string;
+  email: string;
   wallet_address: string;
-  username: string | null;
   created_at: string;
-};
+  avatar_url?: string;
+}
