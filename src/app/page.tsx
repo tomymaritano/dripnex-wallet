@@ -9,7 +9,7 @@ import AboutSection from '@/components/AboutSection';
 import RoadmapTimeline from '@/components/RoadmapTimeline';
 import FAQSection from '@/components/FAQSection';
 import PartnersStack from '@/components/PartnerStack';
-import NewsletterCTA from '@/components/NewsletterCTA';
+import JoinCommunity from '@/components/JoinCommunity';
 
 export default function Home() {
   return (
@@ -22,7 +22,7 @@ export default function Home() {
         <RoadmapTimeline />
         <PartnersStack />
         <FAQSection />
-        <NewsletterCTA />
+        <JoinCommunity />
         <Footer />
       </div>
     </Web3Wrapper>

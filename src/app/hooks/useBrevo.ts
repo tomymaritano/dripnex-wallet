@@ -1,25 +1,35 @@
-// src/hooks/useBrevo.ts
-'use server';
+'use client';
 
-import SibApiV3Sdk from 'sib-api-v3-sdk';
+import { useState } from 'react';
 
-export async function subscribeToNewsletter(email: string) {
-  const client = SibApiV3Sdk.ApiClient.instance;
-  const apiKey = client.authentications['api-key'];
-  apiKey.apiKey = process.env.BREVO_API_KEY!;
+export function useBrevo() {
+  const [loading, setLoading] = useState(false);
 
-  const contactsApi = new SibApiV3Sdk.ContactsApi();
+  const subscribe = async (email: string) => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
 
-  try {
-    const response = await contactsApi.createContact({
-      email,
-      listIds: [2], // 👈 Cambiá este número por tu ID real de lista de Brevo
-      updateEnabled: true,
-    });
+      const data = await res.json();
+      setLoading(false);
 
-    return { success: true, message: 'You are now subscribed!' };
-  } catch (error) {
-    console.error('Brevo Error:', error);
-    return { success: false, message: 'Something went wrong. Please try again.' };
-  }
+      if (res.ok) return { success: true, message: '' };
+
+      if (data.message?.toLowerCase().includes('already')) {
+        return { success: true, message: 'already_subscribed' };
+      }
+
+      return { success: false, message: data.message || 'Subscription failed' };
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+      return { success: false, message: 'Something went wrong' };
+    }
+  };
+
+  return { subscribe, loading };
 }

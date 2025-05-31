@@ -2,18 +2,31 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useBrevo } from '@/app/hooks/useBrevo';
 
 export default function NewsletterCTA() {
+  const { subscribe, loading } = useBrevo();
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+
+    const result = await subscribe(email.trim());
+
+    if (result.success) {
+      setSubmitted(true);
+      setAlreadySubscribed(result.message === 'already_subscribed');
+      setError('');
+    } else {
+      setError(result.message);
+    }
   };
 
   return (
-    <section className="py-16 px-6 max-w-4xl mx-auto min-w-full text-white text-center">
+    <section className="py-6 px-6 max-w-4xl mx-auto w-full text-white text-center">
       <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-2xl p-10 shadow-xl">
         <h2 className="text-3xl font-bold mb-4">Stay in the loop</h2>
         <p className="text-gray-400 mb-6">
@@ -29,14 +42,17 @@ export default function NewsletterCTA() {
               transition={{ duration: 0.4 }}
               className="bg-green-500/10 text-green-400 border border-green-500/20 rounded-md px-6 py-4 max-w-md mx-auto"
             >
-              <h3 className="text-lg font-semibold">You’re on the list!</h3>
-              <p className="text-sm text-green-300 mt-1">Thanks for subscribing. We’ll keep you posted.</p>
+              <h3 className="text-lg font-semibold">
+                {alreadySubscribed ? "You’re already subscribed!" : "You’re on the list!"}
+              </h3>
+              <p className="text-sm text-green-300 mt-1">
+                {alreadySubscribed
+                  ? "Thanks for being part of the Dripnex community."
+                  : "Thanks for subscribing. We’ll keep you posted."}
+              </p>
             </motion.div>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
-            >
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
                 required
@@ -47,13 +63,16 @@ export default function NewsletterCTA() {
               />
               <button
                 type="submit"
+                disabled={loading}
                 className="bg-indigo-500 hover:bg-indigo-600 transition px-6 py-3 rounded-md font-medium"
               >
-                Subscribe
+                {loading ? 'Loading...' : 'Subscribe'}
               </button>
             </form>
           )}
         </AnimatePresence>
+
+        {error && <p className="text-red-400 text-sm mt-4">{error}</p>}
       </div>
     </section>
   );
