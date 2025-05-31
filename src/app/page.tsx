@@ -14,12 +14,13 @@ import NewsletterCTA from '@/components/NewsletterCTA';
 export default function Home() {
   return (
     <Web3Wrapper>
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#0d0d0d] text-white font-sans">
+      <div className="flex flex-col min-h-screen bg-[#070707] text-white font-sans">
         <Navbar />
         <Hero />
         <AboutSection />
-        <PartnersStack />
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent my-12" />
         <RoadmapTimeline />
+        <PartnersStack />
         <FAQSection />
         <NewsletterCTA />
         <Footer />

@@ -1,91 +1,46 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaPlus, FaMinus } from 'react-icons/fa';
+import {
+  SiEthereum,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiSupabase,
+  SiReact,
+} from 'react-icons/si';
 
-const faqs = [
-  {
-    question: 'Is Dripnex free to use?',
-    answer: 'Yes. Dripnex is currently free during the early stages of development.',
-  },
-  {
-    question: 'Is it safe to connect my wallet?',
-    answer: 'Absolutely. We use secure Web3 standards (Wagmi, MetaMask, WalletConnect) and never request private keys.',
-  },
-  {
-    question: 'Can I use it on mobile?',
-    answer: 'Yes, the interface is fully responsive and mobile-ready.',
-  },
-  {
-    question: 'When will NFT support be available?',
-    answer: 'It’s in our product roadmap and expected in future updates.',
-  },
+const tech = [
+  { name: 'Ethereum', icon: SiEthereum },
+  { name: 'Next.js', icon: SiNextdotjs },
+  { name: 'Tailwind', icon: SiTailwindcss },
+  { name: 'Supabase', icon: SiSupabase },
+  { name: 'React', icon: SiReact },
 ];
 
-export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggle = (index: number) => {
-    setOpenIndex(prev => (prev === index ? null : index));
-  };
-
+export default function TechStackShowcase() {
   return (
-    <section className="py-20 px-6 max-w-4xl mx-auto text-white">
-      <motion.h2
-        className="text-4xl font-bold mb-12 w-full text-center"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        Frequently Asked Questions
-      </motion.h2>
+    <section className="relative py-24 px-6 max-w-full mx-auto text-white overflow-hidden">
+      <h2 className="text-4xl font-bold mb-4 text-center">Powered by Leading Tech</h2>
+      <p className="text-gray-400 text-center mb-16">
+        Dripnex is built with modern, reliable and scalable technologies trusted by the Web3 community.
+      </p>
 
-      <div className="space-y-4">
-        {faqs.map((faq, index) => {
-          const isOpen = openIndex === index;
+      {/* Degradado lateral */}
+      <div className="absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-[#070707] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-[#070707] to-transparent z-10 pointer-events-none" />
 
-          return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl px-6 py-4"
+      {/* Marquesina */}
+      <div className="overflow-hidden">
+        <div className="flex animate-marquee space-x-6 w-max">
+          {[...tech, ...tech].map(({ name, icon: Icon }, i) => (
+            <div
+              key={`${name}-${i}`}
+              className="group bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-6 w-[160px] transition-shadow shadow-sm hover:shadow-lg backdrop-blur-sm flex flex-col items-center gap-2"
             >
-              <button
-                onClick={() => toggle(index)}
-                className="w-full flex justify-between items-center text-left"
-              >
-                <span className="text-lg font-medium">{faq.question}</span>
-                <motion.span
-                  initial={false}
-                  animate={{ rotate: isOpen ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="text-indigo-400"
-                >
-                  {isOpen ? <FaMinus /> : <FaPlus />}
-                </motion.span>
-              </button>
-
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    key="content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: 'easeInOut' }}
-                  >
-                    <p className="text-sm text-gray-400 mt-3">{faq.answer}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          );
-        })}
+              <Icon size={38} className="text-indigo-400 group-hover:scale-110 transition-transform" />
+              <span className="text-sm text-center text-gray-200 mt-1">{name}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
