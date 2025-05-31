@@ -30,7 +30,7 @@ export default function WalletPage() {
 
         {/* Footer */}
         <footer className="mt-12 text-sm text-gray-500 text-center">
-          <Link href="/" className="hover:text-teal-400 transition">
+          <Link href="/" className="hover:text-indigo-400 transition">
             ← Back to Home
           </Link>
         </footer>

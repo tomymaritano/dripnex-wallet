@@ -27,7 +27,7 @@ export default function Navbar() {
           {/* Link to Wallet Page */}
           <Link
             href="/wallet"
-            className="text-sm text-gray-300 hover:text-orange-400 transition hidden sm:inline"
+            className="text-sm text-gray-300 hover:text-indigo-400 transition hidden sm:inline"
           >
             Wallet
           </Link>

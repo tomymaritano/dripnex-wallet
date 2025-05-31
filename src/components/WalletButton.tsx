@@ -35,7 +35,7 @@ export default function WalletConnectButton() {
                   onClick={openAccountModal}
                   className="flex items-center gap-3 bg-gray-900/70 text-white border border-gray-700 px-4 py-2 rounded-lg backdrop-blur hover:bg-gray-800 transition text-sm"
                 >
-                  <FaWallet className="text-orange-400" />
+                  <FaWallet className="text-indigo-400" />
                   {account.ensAvatar && (
                     <img
                       src={account.ensAvatar}

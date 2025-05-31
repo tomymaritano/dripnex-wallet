@@ -6,7 +6,7 @@ import { FaGithub } from 'react-icons/fa';
 
 export default function Hero() {
   return (
-    <section className="relative flex-1 flex items-center justify-center px-4 overflow-hidden">
+    <section className="relative min-h-screen flex-1 flex items-center justify-center px-4 overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 z-0 animate-gradient bg-gradient-to-br from-teal-900 via-black to-gray-900 opacity-30 blur-2xl" />
 

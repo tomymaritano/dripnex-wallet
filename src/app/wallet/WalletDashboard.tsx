@@ -59,7 +59,7 @@ export default function WalletDashboard() {
         ) : profile ? (
           <>
             <div className="mb-6 p-4 rounded-lg border border-white/10 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500 to-teal-300 flex items-center justify-center text-black font-bold text-lg">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-300 flex items-center justify-center text-black font-bold text-lg">
                 {profile.username?.charAt(0).toUpperCase() || 'A'}
               </div>
               <div className="flex-1">
@@ -161,7 +161,7 @@ export default function WalletDashboard() {
         <div className="flex border-b border-gray-700 mb-4">
           <button
             className={`px-4 py-2 text-sm ${
-              activeTab === 'send' ? 'text-white border-b-2 border-teal-400' : 'text-gray-500 hover:text-white'
+              activeTab === 'send' ? 'text-white border-b-2 border-indigo-400' : 'text-gray-500 hover:text-white'
             }`}
             onClick={() => setActiveTab('send')}
           >
@@ -169,7 +169,7 @@ export default function WalletDashboard() {
           </button>
           <button
             className={`px-4 py-2 text-sm ${
-              activeTab === 'receive' ? 'text-white border-b-2 border-teal-400' : 'text-gray-500 hover:text-white'
+              activeTab === 'receive' ? 'text-white border-b-2 border-indigo-400' : 'text-gray-500 hover:text-white'
             }`}
             onClick={() => setActiveTab('receive')}
           >
@@ -206,7 +206,7 @@ export default function WalletDashboard() {
             </div>
             <button
               type="submit"
-              className="w-full py-2 bg-teal-500 hover:bg-teal-400 text-black rounded font-medium transition"
+              className="w-full py-2 bg-indigo-500 hover:bg-indigo-400 text-black rounded font-medium transition"
             >
               Confirm Send
             </button>
@@ -223,7 +223,7 @@ export default function WalletDashboard() {
               />
               <button
                 onClick={() => navigator.clipboard.writeText(address!)}
-                className="text-teal-400 hover:underline mt-2"
+                className="text-indigo-400 hover:underline mt-2"
               >
                 Copy Address
               </button>
