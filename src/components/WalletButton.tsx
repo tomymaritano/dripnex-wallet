@@ -16,16 +16,17 @@ export default function WalletConnectButton() {
               'aria-hidden': true,
               style: { opacity: 0, pointerEvents: 'none', userSelect: 'none' },
             })}
+            className="w-full sm:w-auto"
           >
             {(() => {
               if (!connected) {
                 return (
                   <button
                     onClick={openConnectModal}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-500/10 text-gray-300 border border-gray-400 rounded-lg hover:bg-gray-400/20 transition text-sm"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-gray-500/10 text-gray-300 border border-gray-400 rounded-xl hover:bg-gray-400/20 transition text-sm"
                   >
                     <FaWallet className="text-gray-300" />
-                    Connect Wallet
+                    <span className="truncate">Connect Wallet</span>
                   </button>
                 );
               }
@@ -33,7 +34,7 @@ export default function WalletConnectButton() {
               return (
                 <button
                   onClick={openAccountModal}
-                  className="flex items-center gap-3 bg-gray-900/70 text-white border border-gray-700 px-4 py-2 rounded-lg backdrop-blur hover:bg-gray-800 transition text-sm"
+className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 text-sm text-white border bg-indigo-950/40 border-gray-700 rounded-lg hover:bg-gray-800 transition-colors duration-200"
                 >
                   <FaWallet className="text-indigo-400" />
                   {account.ensAvatar && (
@@ -43,8 +44,8 @@ export default function WalletConnectButton() {
                       className="w-6 h-6 rounded-full border border-gray-600"
                     />
                   )}
-                  <span>{account.displayName}</span>
-                  <span className="text-gray-400 text-xs">{chain.name}</span>
+                  <span className="truncate max-w-[100px]">{account.displayName}</span>
+                  <span className="text-gray-400 text-xs hidden sm:inline">{chain.name}</span>
                 </button>
               );
             })()}
