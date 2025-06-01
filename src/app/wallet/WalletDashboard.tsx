@@ -6,7 +6,8 @@ import { supabase } from '@/lib/supabaseClient';
 import { useUserProfile } from '../hooks/useUserProfile';
 import EditProfileForm from '@/components/EditProfileForm';
 import { FaArrowDown, FaArrowUp, FaEdit, FaRegCopy } from 'react-icons/fa';
-import { fetchTransactions } from '@/lib/fetchTransactions';
+import { fetchTransactions, ParsedTransaction } from '@/lib/fetchTransactions';
+
 import Image from 'next/image';
 
 export default function WalletDashboard() {
@@ -16,7 +17,7 @@ export default function WalletDashboard() {
   const { profile, loading: profileLoading } = useUserProfile(address);
   const [showEdit, setShowEdit] = useState(false);
   const [activeTab, setActiveTab] = useState<'send' | 'receive'>('send');
-  const [transactions, setTransactions] = useState<any[]>([]);
+  const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
 
   useEffect(() => {
     const saveWallet = async () => {
