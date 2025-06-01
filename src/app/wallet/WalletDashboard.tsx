@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useUserProfile } from '../hooks/useUserProfile';
 import EditProfileForm from '@/components/EditProfileForm';
-import { FaArrowDown, FaArrowUp, FaEdit, FaRegCopy, FaSignOutAlt } from 'react-icons/fa';
+import { FaArrowDown, FaArrowUp, FaEdit, FaRegCopy } from 'react-icons/fa';
 import { fetchTransactions } from '@/lib/fetchTransactions';
+import Image from 'next/image';
 
 export default function WalletDashboard() {
   const { address, isConnected } = useAccount();
@@ -210,7 +211,7 @@ export default function WalletDashboard() {
           <div className="text-sm text-gray-300">
             <p className="text-gray-400 mb-3">Scan the QR or copy your address:</p>
             <div className="flex flex-col items-center gap-2">
-              <img
+              <Image
                 src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${address}`}
                 alt="QR Code"
               />
