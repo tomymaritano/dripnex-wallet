@@ -1,7 +1,7 @@
 'use client';
 
 import { Web3Wrapper } from '@/components/Web3Wrapper';
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import './globals.css';

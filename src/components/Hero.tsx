@@ -23,11 +23,12 @@ export default function Hero() {
         <p className="text-gray-400 text-lg">
           No clutter. No noise. Just a clean, secure way to connect to crypto — built for real people in a real world.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-stretch justify-center">
           <WalletButton />
           <Link
             href="https://github.com"
-            className="inline-flex items-center gap-2 px-5 py-3 border border-gray-600 text-white rounded-lg hover:bg-gray-800 transition text-sm"
+            className="inline-flex sm:inline-flex w-full sm:w-auto justify-center items-center gap-2 px-5 py-3 border border-gray-600 text-white rounded-lg hover:bg-gray-800 transition text-sm"
+
           >
             <FaGithub /> Contribute on GitHub
           </Link>

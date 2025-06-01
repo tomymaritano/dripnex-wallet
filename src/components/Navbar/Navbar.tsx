@@ -7,8 +7,8 @@ import { usePathname } from 'next/navigation';
 import { FaGithub, FaXTwitter, FaBars, FaMoon, FaSun } from 'react-icons/fa6';
 import { RxCross1 } from 'react-icons/rx';
 import { motion, AnimatePresence } from 'framer-motion';
-import WalletConnectButton from './WalletButton';
-import LegalDropdown from './LegalDropdown';
+import WalletConnectButton from '../WalletButton';
+import MoreDropdown from './MoreDropdown';
 
 const NAV_LINKS = [
   { href: '/wallet', label: 'Wallet' },
@@ -66,15 +66,13 @@ export default function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition ${
-                pathname === item.href ? 'text-indigo-400' : 'text-gray-300 hover:text-indigo-400'
-              }`}
+              className={`text-sm font-medium transition ${pathname === item.href ? 'text-indigo-400' : 'text-gray-300 hover:text-indigo-400'}`}
             >
               {item.label}
             </Link>
           ))}
 
-          <LegalDropdown />
+          <MoreDropdown />
 
           <div className="w-px h-5 bg-indigo-400/20" />
 
@@ -120,17 +118,15 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className={`text-white text-lg font-medium bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-center hover:bg-white/10 transition ${
-                    pathname === item.href ? 'text-indigo-400' : ''
-                  }`}
+                  className={`text-white text-lg font-medium bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-left hover:bg-white/10 transition ${pathname === item.href ? 'text-indigo-400' : ''}`}
                 >
                   {item.label}
                 </Link>
               ))}
 
-              <LegalDropdown isMobile />
+              <MoreDropdown isMobile onClickItem={() => setMenuOpen(false)} />
 
-              <div className="flex justify-center gap-6">
+              <div className="flex justify-center gap-6 w-full">
                 <Link
                   href="https://x.com/hacklabdog"
                   target="_blank"
@@ -150,12 +146,12 @@ export default function Navbar() {
               </div>
               <button
                 onClick={toggleTheme}
-                className="flex justify-center text-gray-300 hover:text-white transition"
+                className="flex justify-center text-gray-300 hover:text-white transition w-full"
                 aria-label="Toggle dark mode"
               >
                 {isDark ? <FaSun size={22} /> : <FaMoon size={22} />}
               </button>
-              <div className="flex justify-center">
+              <div className="flex justify-center w-full">
                 <WalletConnectButton />
               </div>
             </div>
