@@ -3,25 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlus, FaMinus } from 'react-icons/fa';
-
-const faqs = [
-  {
-    question: 'Is Dripnex free to use?',
-    answer: 'Yes. Dripnex is currently free during the early stages of development.',
-  },
-  {
-    question: 'Is it safe to connect my wallet?',
-    answer: 'Absolutely. We use secure Web3 standards (Wagmi, MetaMask, WalletConnect) and never request private keys.',
-  },
-  {
-    question: 'Can I use it on mobile?',
-    answer: 'Yes, the interface is fully responsive and mobile-ready.',
-  },
-  {
-    question: 'When will NFT support be available?',
-    answer: 'It’s in our product roadmap and expected in future updates.',
-  },
-];
+import { faqs } from '@/data/faqs';
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
