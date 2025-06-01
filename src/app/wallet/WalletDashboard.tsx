@@ -1,20 +1,20 @@
 'use client';
 import { useAccount, useBalance, useChainId } from 'wagmi';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { useUserProfile } from '../hooks/useUserProfile';
 import { fetchTransactions, ParsedTransaction } from '@/lib/fetchTransactions';
 import ProfileCard from './components/ProfileCard';
 import TransactionList from './components/TransactionList';
 import SendReceivePanel from './components/SendReceivePanel';
-import EditProfileForm from '@/app/profile/EditProfileForm';
 
 export default function WalletDashboard() {
+  const router = useRouter();
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { data: balanceData, isLoading } = useBalance({ address });
   const { profile, loading: profileLoading } = useUserProfile(address);
-  const [showEdit, setShowEdit] = useState(false);
   const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
 
   useEffect(() => {
@@ -39,12 +39,8 @@ export default function WalletDashboard() {
           balance={balanceData?.formatted}
           profile={profile}
           loading={profileLoading}
-          onEditClick={() => setShowEdit((prev) => !prev)} // ✅
+          onEditClick={() => router.push('/profile')} // 🔁 redirige a /profile
         />
-
-        {showEdit && profile && (
-          <EditProfileForm profile={profile} />
-        )}
 
         <div className="mt-10">
           <h3 className="text-sm text-gray-400 mb-4">Recent Transactions</h3>

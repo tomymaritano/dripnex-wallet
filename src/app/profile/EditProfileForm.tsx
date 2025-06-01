@@ -3,6 +3,7 @@
 import { supabase } from '@/lib/supabaseClient';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 type Profile = {
   username: string;
@@ -38,9 +39,11 @@ export default function EditProfileForm({ profile, onCancel, onSuccess }: Props)
 
     if (updateError) {
       setError('❌ Error al actualizar el perfil.');
+      toast.error('❌ Hubo un problema al guardar los cambios.');
       console.error(updateError);
     } else {
       setSuccess(true);
+      toast.success('✅ Cambios guardados correctamente');
       onSuccess?.();
     }
   };
@@ -48,7 +51,7 @@ export default function EditProfileForm({ profile, onCancel, onSuccess }: Props)
   return (
     <motion.form
       onSubmit={handleUpdate}
-      className="w-full bg-white/5 backdrop-blur-md border border-indigo-500/20 p-6 rounded-2xl shadow-xl space-y-6 transition-all"
+      className="w-full backdrop-blur-md border border-indigo-500/20 p-6 rounded-2xl shadow-xl space-y-6 transition-all"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -130,7 +133,7 @@ export default function EditProfileForm({ profile, onCancel, onSuccess }: Props)
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
           >
-            ✅ Cambios guardados correctamente
+            Cambios guardados correctamente
           </motion.p>
         )}
       </AnimatePresence>

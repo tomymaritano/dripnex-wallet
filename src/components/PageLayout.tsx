@@ -1,12 +1,25 @@
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer';
+import { ReactNode } from 'react';
 
-export default function PageLayout({ children }: { children: React.ReactNode }) {
+type Props = {
+  children: ReactNode;
+};
+
+export default function PageLayout({ children }: Props) {
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen mt-20 bg-black text-white">{children}</main>
-      <Footer />
-    </>
+    <div className="flex flex-col min-h-screen bg-black text-white">
+      <header>
+        <Navbar />
+      </header>
+
+      <main className="flex-1 mt-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
+        {children}
+      </main>
+
+      <footer>
+        <Footer />
+      </footer>
+    </div>
   );
 }
