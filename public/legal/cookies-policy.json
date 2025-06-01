@@ -1,0 +1,22 @@
+{
+  "title": "Cookies Policy",
+  "updatedAt": "June 1, 2025",
+  "sections": [
+    {
+      "heading": "What are cookies?",
+      "content": "Cookies are small text files stored on your device to help the site remember your preferences, improve performance, and analyze navigation."
+    },
+    {
+      "heading": "What types do we use?",
+      "content": "- Essential cookies: necessary for the functioning of the site.\n- Analytics cookies: to understand how the site is used.\n- Third-party cookies: such as Google Analytics or external services."
+    },
+    {
+      "heading": "How can you control them?",
+      "content": "You can configure your browser to accept, reject, or delete cookies. You can also change your consent at any time from the cookie banner."
+    },
+    {
+      "heading": "Contact",
+      "content": "If you have any questions about our cookies policy, write to us at contact@dripnex.app."
+    }
+  ]
+}

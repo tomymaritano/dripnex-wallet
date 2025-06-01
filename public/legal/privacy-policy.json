@@ -1,0 +1,26 @@
+{
+  "title": "Privacy Policy",
+  "updatedAt": "June 1, 2025",
+  "sections": [
+    {
+      "heading": "1. Information We Collect",
+      "content": "We collect personal information that you provide to us directly and data collected automatically through your use of the site."
+    },
+    {
+      "heading": "2. How We Use Information",
+      "content": "We use your data to provide, improve, and personalize our services, as well as to communicate with you."
+    },
+    {
+      "heading": "3. Sharing Your Information",
+      "content": "We do not sell your information. We may share it with trusted third parties to help operate our service."
+    },
+    {
+      "heading": "4. Your Rights",
+      "content": "You have the right to access, modify, or delete your personal data. Contact us to exercise these rights."
+    },
+    {
+      "heading": "5. Contact",
+      "content": "If you have questions about this policy, please reach out to contact@dripnex.app."
+    }
+  ]
+}

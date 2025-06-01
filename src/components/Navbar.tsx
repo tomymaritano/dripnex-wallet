@@ -62,10 +62,10 @@ export default function Navbar() {
 
           <div className="w-px h-5 bg-indigo-400/20" />
 
-          <Link href="https://x.com" target="_blank" className="text-gray-400 hover:text-white transition" aria-label="Twitter">
+          <Link href="https://x.com/hacklabdog" target="_blank" className="text-gray-400 hover:text-white transition" aria-label="Twitter">
             <FaXTwitter size={18} />
           </Link>
-          <Link href="https://github.com" target="_blank" className="text-gray-400 hover:text-white transition" aria-label="GitHub">
+          <Link href="https://github.com/tomymaritano/dripnex-app" target="_blank" className="text-gray-400 hover:text-white transition" aria-label="GitHub">
             <FaGithub size={18} />
           </Link>
 
