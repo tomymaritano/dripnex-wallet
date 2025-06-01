@@ -147,13 +147,6 @@ export default function WalletDashboard() {
             </ul>
           )}
         </div>
-
-        <button
-          className="mt-10 flex items-center gap-2 text-sm text-red-400 hover:text-white hover:underline transition"
-          onClick={() => window.location.reload()}
-        >
-          <FaSignOutAlt className="w-4 h-4" /> Disconnect Wallet
-        </button>
       </div>
 
       {/* Right Column: Send / Receive */}

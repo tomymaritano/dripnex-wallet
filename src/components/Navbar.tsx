@@ -3,19 +3,25 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { FaGithub, FaXTwitter, FaBars, FaMoon, FaSun } from 'react-icons/fa6';
 import { RxCross1 } from 'react-icons/rx';
 import { motion, AnimatePresence } from 'framer-motion';
 import WalletConnectButton from './WalletButton';
+import LegalDropdown from './LegalDropdown';
+
+const NAV_LINKS = [
+  { href: '/wallet', label: 'Wallet' },
+];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const html = document.documentElement;
     const stored = localStorage.getItem('theme');
-
     if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       html.classList.add('dark');
       setIsDark(true);
@@ -55,10 +61,20 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop menu */}
-        <div className="hidden sm:flex items-center gap-4">
-          <Link href="/wallet" className="text-sm text-gray-300 hover:text-indigo-400 transition font-medium">
-            Wallet
-          </Link>
+        <div className="hidden sm:flex items-center gap-5  relative">
+          {NAV_LINKS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`text-sm font-medium transition ${
+                pathname === item.href ? 'text-indigo-400' : 'text-gray-300 hover:text-indigo-400'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+
+          <LegalDropdown />
 
           <div className="w-px h-5 bg-indigo-400/20" />
 
@@ -99,20 +115,24 @@ export default function Navbar() {
             className="sm:hidden bg-black/90 backdrop-blur-md border-t border-indigo-500/10"
           >
             <div className="flex flex-col px-6 py-8 gap-8">
+              {NAV_LINKS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`text-white text-lg font-medium bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-center hover:bg-white/10 transition ${
+                    pathname === item.href ? 'text-indigo-400' : ''
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
 
-              {/* Wallet button */}
-              <Link
-                href="/wallet"
-                onClick={() => setMenuOpen(false)}
-                className="text-white text-lg font-medium bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-center hover:bg-white/10 transition"
-              >
-                Wallet
-              </Link>
+              <LegalDropdown isMobile />
 
-              {/* Socials */}
               <div className="flex justify-center gap-6">
                 <Link
-                  href="https://x.com"
+                  href="https://x.com/hacklabdog"
                   target="_blank"
                   className="text-gray-300 hover:text-white transition"
                   aria-label="Twitter"
@@ -120,7 +140,7 @@ export default function Navbar() {
                   <FaXTwitter size={22} />
                 </Link>
                 <Link
-                  href="https://github.com"
+                  href="https://github.com/tomymaritano/dripnex-app"
                   target="_blank"
                   className="text-gray-300 hover:text-white transition"
                   aria-label="GitHub"
@@ -128,8 +148,6 @@ export default function Navbar() {
                   <FaGithub size={22} />
                 </Link>
               </div>
-
-              {/* Theme toggle */}
               <button
                 onClick={toggleTheme}
                 className="flex justify-center text-gray-300 hover:text-white transition"
@@ -137,8 +155,6 @@ export default function Navbar() {
               >
                 {isDark ? <FaSun size={22} /> : <FaMoon size={22} />}
               </button>
-
-              {/* Wallet Connect */}
               <div className="flex justify-center">
                 <WalletConnectButton />
               </div>
