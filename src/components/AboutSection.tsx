@@ -33,8 +33,8 @@ export default function AboutSection() {
         transition={{ duration: 0.5, delay: 0.2 }}
         viewport={{ once: true }}
       >
-        Whether you're a builder, creator, or collector, Dripnex helps you see the bigger picture — from balances and transactions to NFTs and future AI-powered insights.
-        We’re building a space where crypto identity meets clarity and performance.
+        Whether you&apos;re a builder, creator, or collector, Dripnex helps you see the bigger picture — from balances and transactions to NFTs and future AI-powered insights.
+        We&apos;re building a space where crypto identity meets clarity and performance.
       </motion.p>
 
       <motion.p

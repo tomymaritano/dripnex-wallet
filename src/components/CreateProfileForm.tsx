@@ -29,6 +29,10 @@ export default function CreateProfileForm({ address }: { address: string }) {
       .eq('wallet_address', address)
       .single();
 
+    if (fetchError) {
+      console.error('Error fetching existing profile:', fetchError);
+    }
+
     if (existingProfile) {
       setError('Ya existe un perfil con esta wallet.');
       setLoading(false);

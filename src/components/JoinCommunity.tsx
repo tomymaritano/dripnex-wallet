@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { FaXTwitter, FaDiscord, FaGithub } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
 import NewsletterCTA from './NewsletterCTA';

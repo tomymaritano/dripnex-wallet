@@ -2,7 +2,7 @@
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { FaWallet } from 'react-icons/fa';
-
+import Image from 'next/image';
 export default function WalletConnectButton() {
   return (
     <ConnectButton.Custom>
@@ -23,7 +23,7 @@ export default function WalletConnectButton() {
                 return (
                   <button
                     onClick={openConnectModal}
-                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-gray-500/10 text-gray-300 border border-gray-400 rounded-xl hover:bg-gray-400/20 transition text-sm"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 text-sm text-white border bg-indigo-900/20 border-gray-700 rounded-lg hover:bg-gray-800 transition-colors duration-200"
                   >
                     <FaWallet className="text-gray-300" />
                     <span className="truncate">Connect Wallet</span>
@@ -34,11 +34,11 @@ export default function WalletConnectButton() {
               return (
                 <button
                   onClick={openAccountModal}
-className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 text-sm text-white border bg-indigo-950/40 border-gray-700 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 text-sm text-white border bg-indigo-950/40 border-gray-700 rounded-lg hover:bg-gray-800 transition-colors duration-200"
                 >
                   <FaWallet className="text-indigo-400" />
                   {account.ensAvatar && (
-                    <img
+                    <Image
                       src={account.ensAvatar}
                       alt="Avatar"
                       className="w-6 h-6 rounded-full border border-gray-600"

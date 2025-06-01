@@ -28,8 +28,12 @@ export default function SendETHForm() {
         value: parseEther(amount),
       });
       setTxHash(hash);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Unknown error');
+      }
     } finally {
       setIsSending(false);
     }

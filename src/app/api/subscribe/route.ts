@@ -12,14 +12,18 @@ export async function POST(req: Request) {
 
     const response = await subscribeToBrevo(email);
     return NextResponse.json({ message: 'Subscribed', response });
-  } catch (err: any) {
-    if (err.message === 'already_subscribed') {
-      return NextResponse.json({ message: 'Email already subscribed' }, { status: 200 });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      if (err.message === 'already_subscribed') {
+        return NextResponse.json({ message: 'Email already subscribed' }, { status: 200 });
+      }
+
+      return NextResponse.json(
+        { message: err.message || 'Failed to subscribe' },
+        { status: 500 }
+      );
     }
 
-    return NextResponse.json(
-      { message: err.message || 'Failed to subscribe' },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: 'Unknown error' }, { status: 500 });
   }
 }
