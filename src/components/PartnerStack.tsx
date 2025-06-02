@@ -18,29 +18,46 @@ const tech = [
 
 export default function TechStackShowcase() {
   return (
-    <section className="relative py-24 px-6 max-w-full mx-auto text-white overflow-hidden">
-      <h2 className="text-4xl font-bold mb-4 text-center">Powered by Leading Tech</h2>
-      <p className="text-gray-400 text-center mb-16">
-        Dripnex is built with modern, reliable and scalable technologies trusted by the Web3 community.
+    <section className="relative py-20 px-6 max-w-6xl mx-auto text-white overflow-hidden">
+      <h2 className="text-4xl sm:text-4xl font-bold mb-4 text-center">
+        Powered by Leading Tech
+      </h2>
+      <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto text-sm sm:text-base">
+        Dripnex is built with modern, scalable technologies trusted by the Web3 community.
       </p>
 
-      {/* Degradado lateral */}
-      <div className="absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-[#070707] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-[#070707] to-transparent z-10 pointer-events-none" />
+      {/* Desktop marqueé */}
+      <div className="hidden sm:block relative">
+        {/* Sombra lateral suave */}
+        <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
-      {/* Marquesina */}
-      <div className="overflow-hidden">
-        <div className="flex animate-marquee space-x-6 w-max">
-          {[...tech, ...tech].map(({ name, icon: Icon }, i) => (
-            <div
-              key={`${name}-${i}`}
-              className="group bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-6 w-[160px] transition-shadow shadow-sm hover:shadow-lg backdrop-blur-sm flex flex-col items-center gap-2"
-            >
-              <Icon size={38} className="text-indigo-400 group-hover:scale-110 transition-transform" />
-              <span className="text-sm text-center text-gray-200 mt-1">{name}</span>
-            </div>
-          ))}
+        <div className="overflow-hidden">
+          <div className="flex animate-marquee space-x-6 w-max">
+            {[...tech, ...tech].map(({ name, icon: Icon }, i) => (
+              <div
+                key={`${name}-${i}`}
+                className="group bg-white/5 hover:bg-indigo-500/10 border border-white/10 rounded-2xl p-5 w-[160px] transition-shadow shadow-sm hover:shadow-lg backdrop-blur-sm flex flex-col items-center gap-2"
+              >
+                <Icon size={36} className="text-indigo-400 group-hover:scale-110 transition-transform duration-300" />
+                <span className="text-sm text-center text-gray-200 mt-1">{name}</span>
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
+
+      {/* Mobile grid */}
+      <div className="grid grid-cols-2 gap-4 sm:hidden">
+        {tech.map(({ name, icon: Icon }) => (
+          <div
+            key={name}
+            className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col items-center text-center backdrop-blur-sm"
+          >
+            <Icon size={28} className="text-indigo-400 mb-2" />
+            <span className="text-xs text-gray-300">{name}</span>
+          </div>
+        ))}
       </div>
     </section>
   );

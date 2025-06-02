@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
 import Lottie from 'lottie-react';
 import animationData from '../../public/animations/web3-network-4.json';
+import CTAButton from './ui/CTAButton';
 
 export default function Hero() {
   return (
@@ -25,13 +26,12 @@ export default function Hero() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-stretch justify-center">
           <WalletButton />
-          <Link
-            href="https://github.com"
-            className="inline-flex sm:inline-flex w-full sm:w-auto justify-center items-center gap-2 px-5 py-3 border border-gray-600 text-white rounded-lg hover:bg-gray-800 transition text-sm"
-
-          >
-            <FaGithub /> Contribute on GitHub
-          </Link>
+  <CTAButton
+          href="https://github.com/tomymaritano/dripnex-wallet"
+          icon={<FaGithub className="text-indigo-400" />}
+        >
+          Become a Contributor
+        </CTAButton>
         </div>
       </div>
     </section>

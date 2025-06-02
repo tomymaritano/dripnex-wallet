@@ -1,6 +1,5 @@
 'use client';
 import { useState } from 'react';
-import Image from 'next/image';
 
 type Props = {
   address: string;
@@ -64,7 +63,7 @@ export default function SendReceivePanel({ address }: Props) {
       {activeTab === 'receive' && (
         <div className="text-sm text-gray-300 text-center">
           <p className="text-gray-400 mb-3">Scan the QR or copy your address:</p>
-          <Image
+          <img
             src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${address}`}
             alt="QR Code"
             width={150}
