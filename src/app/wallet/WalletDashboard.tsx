@@ -8,6 +8,7 @@ import { fetchTransactions, ParsedTransaction } from '@/lib/fetchTransactions';
 import ProfileCard from './components/ProfileCard';
 import TransactionList from './components/TransactionList';
 import SendReceivePanel from './components/SendReceivePanel';
+import DonateWidget from './components/DonateWidget';
 
 export default function WalletDashboard() {
   const router = useRouter();
@@ -31,7 +32,8 @@ export default function WalletDashboard() {
   if (!isConnected || !address) return null;
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 py-6 text-white">
+    <>
+     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 py-6 text-white">
       <div>
         <ProfileCard
           address={address}
@@ -50,5 +52,8 @@ export default function WalletDashboard() {
 
       <SendReceivePanel address={address} />
     </div>
+    <DonateWidget />
+    </>
+   
   );
 }
