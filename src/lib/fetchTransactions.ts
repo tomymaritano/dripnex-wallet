@@ -21,6 +21,8 @@ export interface ParsedTransaction {
   to: string;
   value: string; // ya convertido a ETH con toFixed
   timeStamp: string;
+  token?: string; // ✅ opcional, si no siempre está presente
+
 }
 
 export async function fetchTransactions(address: string): Promise<ParsedTransaction[]> {

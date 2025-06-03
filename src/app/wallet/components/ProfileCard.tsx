@@ -23,7 +23,6 @@ export default function ProfileCard({
   loading,
   onEditClick,
 }: Props) {
-  const iconClass = 'w-4 h-4 text-gray-400 hover:text-white transition';
   const [currency, setCurrency] = useState('USD');
   const [copied, setCopied] = useState(false);
   const fiatValue = useFiatValue(Number(balance), currency);
@@ -34,115 +33,129 @@ export default function ProfileCard({
     setTimeout(() => setCopied(false), 1500);
   };
 
-  if (loading) return <p className="text-gray-400 text-sm animate-pulse">Cargando perfil...</p>;
-  if (!profile) return <p className="text-sm text-red-500">No se encontró ningún perfil.</p>;
+  if (loading)
+    return <p className="text-gray-400 text-sm animate-pulse">Cargando perfil...</p>;
+
+  if (!profile)
+    return <p className="text-sm text-red-500">No se encontró ningún perfil.</p>;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="backdrop-blur-lg rounded-2xl p-6 border border-white/10 shadow-md space-y-6"
+      className="rounded-2xl p-6 border border-white/10 shadow-lg backdrop-blur bg-black/30 space-y-6"
     >
       {/* Header */}
       <div className="flex items-center gap-4">
-        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-300 flex items-center justify-center text-black font-bold text-xl shadow-inner">
+        <motion.div
+          whileHover={{ rotate: [0, 5, -5, 0], transition: { duration: 0.6 } }}
+          className="w-14 h-14 rounded-full bg-gradient-to-br from-indigo-400 to-blue-300 shadow-inner text-black font-bold text-xl flex items-center justify-center border-2 border-white/20"
+        >
           {profile.username?.charAt(0).toUpperCase() || 'A'}
-        </div>
+        </motion.div>
 
         <div className="flex-1">
-          <h2 className="text-white text-lg font-semibold">
+          <h2 className="text-white text-lg font-semibold leading-none">
             {profile.username || 'Anonymous'}
           </h2>
-          <p className="text-xs text-gray-400">
-            Joined: {new Date(profile.created_at).toLocaleDateString()}
+          <p className="text-xs text-gray-400 mt-1">
+            Joined on {new Date(profile.created_at).toLocaleDateString()}
           </p>
         </div>
 
         <motion.button
           onClick={onEditClick}
-          whileTap={{ scale: 0.95 }}
+          whileTap={{ scale: 0.9 }}
           title="Editar perfil"
           className="p-2 rounded-md hover:bg-white/10 transition"
         >
-          <FaEdit className={iconClass} />
+          <FaEdit className="w-4 h-4 text-gray-400 hover:text-white transition" />
         </motion.button>
       </div>
 
       <hr className="border-white/10" />
 
       {/* Info */}
-      <div className="space-y-4 text-sm text-gray-300">
-        {/* Dirección */}
+      <div className="space-y-5 text-sm text-gray-300">
+        {/* Balance Destacado */}
+        <div className="relative border border-indigo-500/30 bg-indigo-900/10 rounded-xl p-5 shadow-md">
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+          >
+            <div className="flex flex-col">
+              <span className="text-xs text-gray-400 uppercase tracking-wide mb-1">
+                Balance
+              </span>
+              <span className="text-lg font-extrabold text-white drop-shadow-sm">
+                {balance ?? '0'} ETH
+              </span>
+              <span className="text-sm text-indigo-300 font-medium mt-1">
+                ≈{' '}
+                {fiatValue?.toLocaleString(undefined, {
+                  style: 'currency',
+                  currency,
+                  maximumFractionDigits: 2,
+                }) ?? '...'}
+              </span>
+            </div>
+
+            <div className="relative text-white text-xs">
+              <label htmlFor="currency" className="sr-only">
+                Fiat currency
+              </label>
+              <select
+                id="currency"
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                className="appearance-none bg-black/30 hover:bg-black/40 border border-indigo-400/30 px-3 py-2 rounded-md font-semibold transition-all focus:outline-none"
+              >
+                {Object.entries(FIAT_CURRENCIES).map(([code, flag]) => (
+                  <option key={code} value={code}>
+                    {flag} {code}
+                  </option>
+                ))}
+              </select>
+              <span className="absolute top-1/2 right-2 -translate-y-1/2 pointer-events-none text-white/40 text-xs">
+                ▼
+              </span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Address */}
         <div>
-          <span className="block text-xs uppercase text-gray-500 mb-1 tracking-wider">
-            Address
-          </span>
-          <div className="flex items-center gap-2 rounded-md border border-white/10 px-3 py-2">
-            <span className="break-all font-mono text-xs text-white/90">{address}</span>
+          <label className="text-xs uppercase tracking-wider text-gray-500 block mb-1">
+            Wallet Address
+          </label>
+          <div className="flex items-center gap-2 px-3 py-2 border border-white/10 rounded-md bg-white/5 text-white font-mono text-xs">
+            <span className="break-all flex-1">{address}</span>
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={handleCopy}
+              title="Copiar"
               className="hover:text-white"
-              title="Copiar dirección"
             >
-              {copied ? <FaCheck className="text-green-400" /> : <FaRegCopy className={iconClass} />}
+              {copied ? (
+                <FaCheck className="text-green-400" />
+              ) : (
+                <FaRegCopy className="w-4 h-4 text-gray-400" />
+              )}
             </motion.button>
           </div>
         </div>
 
         {/* Chain ID */}
         <div>
-          <span className="block text-xs uppercase text-gray-500 mb-1 tracking-wider">
+          <label className="text-xs uppercase tracking-wider text-gray-500 block mb-1">
             Chain ID
-          </span>
-          <p className="border border-white/10 rounded-md px-3 py-2 text-white/80 text-xs">
+          </label>
+          <p className="px-3 py-2 border border-white/10 rounded-md bg-white/5 text-white text-xs">
             {chainId ?? 'N/A'}
           </p>
-        </div>
-
-        {/* Balance + Valor estimado */}
-        <div>
-          <span className="block text-xs uppercase text-gray-500 mb-1 tracking-wide">
-            Balance
-          </span>
-
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-md px-4 py-3 border border-white/10">
-            <div className="flex items-center gap-2 text-white">
-              <span className="text-md font-bold">{balance ?? '0'} ETH</span>
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-                className="px-2 py-1 bg-indigo-500/10 text-indigo-300 border border-indigo-400/30 rounded-full text-xs font-medium shadow-inner backdrop-blur-sm"
-              >
-                ≈ {fiatValue?.toLocaleString(undefined, {
-                  style: 'currency',
-                  currency,
-                  maximumFractionDigits: 2,
-                }) ?? '...'}
-              </motion.span>
-            </div>
-
-            {/* Select currency */}
-            <div className="relative flex items-center text-sm text-white">
-              <label htmlFor="currency" className="sr-only">Select fiat currency</label>
-              <select
-                id="currency"
-                aria-label="Select fiat currency"
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value)}
-                className="appearance-none bg-black/30 border border-white/10 rounded-md px-3 py-1.5 pr-8 text-xs font-semibold tracking-wide text-white/90 hover:bg-black/40 focus:outline-none transition-all"
-              >
-                {Object.entries(FIAT_CURRENCIES).map(([code, flag]) => (
-                  <option key={code} value={code}>
-                    {flag} {code.toUpperCase()}
-                  </option>
-                ))}
-              </select>
-              <span className="absolute right-2 pointer-events-none text-white/40 text-xs">▼</span>
-            </div>
-          </div>
         </div>
       </div>
     </motion.div>
