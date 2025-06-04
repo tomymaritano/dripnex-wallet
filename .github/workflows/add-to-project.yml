@@ -1,4 +1,6 @@
-name: Add issues to GitHub Project
+# .github/workflows/add-to-project.yml
+
+name: Add to GitHub Project
 
 on:
   issues:
@@ -6,11 +8,11 @@ on:
 
 jobs:
   add-to-project:
-    if: github.event.label.name == 'Backlog' || contains(github.event.issue.labels.*.name, 'Backlog')
     runs-on: ubuntu-latest
     steps:
       - name: Add issue to project
-        uses: actions/add-to-project@v1
+        uses: actions/add-to-project@v0.5.0
         with:
           project-url: https://github.com/users/tomymaritano/projects/3
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          labeled: Backlog
