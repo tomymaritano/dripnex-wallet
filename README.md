@@ -45,15 +45,60 @@ npm run dev
 ├── styles/
 │   └── globals.css
 ```
+# 🧠 Dripnex Project Backlog
 
-## 🛣️ Roadmap
+_Last updated: 2025-06-04_
 
-- [x] Minimal wallet connection
-- [x] Crypto-style UI with glassmorphism
-- [ ] Display wallet address & ENS
-- [ ] View balances, NFTs, and on-chain data
-- [ ] Multi-chain support & transaction history
-- [ ] Light/dark theme toggle
+---
+
+## ✅ Implemented Features
+- Wallet connection using Wagmi
+- ETH transfers via `useSendEth`
+- Send/Receive panel with QR code generation
+- Transaction history via Etherscan API
+- Profile registration with Supabase
+- DonateWidget with multichain placeholders
+- Newsletter integration with Brevo
+- Glassmorphism + responsive design
+- Tailwind + Skeleton UI integration
+- Wallet Dashboard: Profile + Transactions
+- Markdown blog using Sanity + PortableText
+
+---
+
+## 🔧 High Priority
+- [ ] Real multichain support (Polygon, BTC, SOL, etc.)
+- [ ] Display balance by token and network
+- [ ] Transaction view by token/network
+- [ ] Unified theming system (design tokens)
+- [ ] Enhanced feedback (errors, confirmations, loading)
+- [ ] Systematic visual improvements (accessibility, animations)
+
+---
+
+## 🛠️ Medium Priority
+- [ ] Fiat value display (USD, ARS)
+- [ ] Message signing support
+- [ ] Frequent contact list
+- [ ] Mobile UX improvements for Send/Receive panel
+
+---
+
+## 🔮 Low Priority
+- [ ] NFT support
+- [ ] Light/Dark theme toggle
+- [ ] Accessibility enhancements (focus states, aria-labels)
+
+---
+
+## 📚 Documentation Needed
+- [ ] `README.md` with vision and setup
+- [ ] Local development guide
+- [ ] Folder structure & architecture overview
+- [ ] Wallet and donations flow explained
+- [ ] Guide: how to add new chains/tokens
+- [ ] Supabase schema and usage
+- [ ] Transaction format and display logic
 
 ## 🤝 Contributing
 
