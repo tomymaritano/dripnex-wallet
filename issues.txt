@@ -1,0 +1,79 @@
+Title: Add multichain support
+Body: Implement real support for multiple chains (Polygon, BTC, SOL, etc.) in Send/Receive and balance display.
+Labels: Backlog
+
+Title: Show balances by token and network
+Body: Display wallet balances for each token and network clearly in the dashboard.
+Labels: Backlog
+
+Title: Token-specific transaction views
+Body: Allow users to filter and view transactions per token and per chain/network.
+Labels: Backlog
+
+Title: Create a unified theme system
+Body: Set up global design tokens (colors, font sizes, spacing, etc.) for consistent theming.
+Labels: Backlog
+
+Title: Improve user feedback
+Body: Add proper UX feedback for loading, errors, and confirmation states in all actions.
+Labels: Backlog
+
+Title: Refine visual polish and accessibility
+Body: Improve animations, spacing, responsiveness, and accessibility features like focus states.
+Labels: Backlog
+
+Title: Display fiat equivalent values
+Body: Show balances and transaction amounts in fiat (USD, ARS) for user clarity.
+Labels: Backlog
+
+Title: Add message signing support
+Body: Enable message signing capabilities for users to verify identity or connect to dapps.
+Labels: Backlog
+
+Title: Implement frequent contacts feature
+Body: Add a list of frequent contacts for quicker and easier transfers.
+Labels: Backlog
+
+Title: Improve mobile UX
+Body: Refactor Send/Receive panel to enhance experience on mobile screens.
+Labels: Backlog
+
+Title: NFT support
+Body: Add visual NFT display and metadata fetching for supported chains.
+Labels: Backlog
+
+Title: Theme toggle
+Body: Allow switching between light and dark themes with persistent storage.
+Labels: Backlog
+
+Title: Accessibility improvements
+Body: Add aria-labels, keyboard navigation, and contrast checks to improve accessibility.
+Labels: Backlog
+
+Title: Write README with project vision and setup
+Body: Create a `README.md` explaining the Dripnex vision, tech stack, and how to get started.
+Labels: Docs
+
+Title: Write local development guide
+Body: Document how to run Dripnex locally including setup of Supabase and environment variables.
+Labels: Docs
+
+Title: Folder structure overview
+Body: Add documentation for file/folder architecture and component roles.
+Labels: Docs
+
+Title: Explain wallet and donations flow
+Body: Document how wallets are connected and how the donation system works technically.
+Labels: Docs
+
+Title: Add guide to extend multichain support
+Body: Step-by-step guide for adding new chains and tokens to the wallet.
+Labels: Docs
+
+Title: Document Supabase schema
+Body: Share table definitions and relations used in Supabase (users, wallets, profiles).
+Labels: Docs
+
+Title: Transaction format and display logic
+Body: Describe how fetched transactions are parsed, formatted and rendered in the UI.
+Labels: Docs
