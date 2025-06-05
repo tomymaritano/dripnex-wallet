@@ -12,6 +12,7 @@ import JoinCommunity from '@/components/JoinCommunity';
 import { motion } from 'framer-motion';
 import './globals.css';
 import ContributeSection from '@/components/ContributeSection';
+import CryptoTickerMarquee from '@/components/CryptoTickerMarquee';
 
 function SectionDivider() {
   return (
@@ -28,9 +29,11 @@ export default function Home() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
+        
         <Navbar />
         <Hero />
         <AboutSection />
+      <CryptoTickerMarquee />
         <SectionDivider />
         <RoadmapTimeline />
         <ContributeSection />

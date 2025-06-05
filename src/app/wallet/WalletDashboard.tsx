@@ -14,7 +14,7 @@ export default function WalletDashboard() {
   const router = useRouter();
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
-  const { data: balanceData, isLoading } = useBalance({ address });
+  const { data: balanceData } = useBalance({ address });
   const { profile, loading: profileLoading } = useUserProfile(address);
   const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
 

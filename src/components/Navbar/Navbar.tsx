@@ -9,6 +9,7 @@ import { RxCross1 } from 'react-icons/rx';
 import { motion, AnimatePresence } from 'framer-motion';
 import WalletConnectButton from '../WalletButton';
 import MoreDropdown from './MoreDropdown';
+import CurrencyDropdown from '../CurrencySelector';
 
 const NAV_LINKS = [
   { href: '/wallet', label: 'Wallet' },
@@ -90,6 +91,7 @@ export default function Navbar() {
           </button>
 
           <WalletConnectButton />
+          <CurrencyDropdown />
         </div>
 
         {/* Mobile menu button */}

@@ -1,10 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
+// import Lottie from 'lottie-react';
+// import web3Animation from '../../public/animations/animation-server.json';
 
 export default function AboutSection() {
   return (
-    <section className="pt-16 pb-12 px-6 text-white max-w-3xl mx-auto text-center">
+    <section className="pt-16 pb-12 px-6 text-white max-w-4xl mx-auto text-center">
+      {/* <Lottie animationData={web3Animation}
+        loop
+        className="w-50 h-50 mx-auto my-6"
+      /> */}
+
       <motion.h2
         className="text-4xl font-bold mb-6 tracking-tight"
         initial={{ opacity: 0, y: 30 }}

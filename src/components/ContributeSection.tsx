@@ -1,5 +1,4 @@
 import {
-  FaGithub,
   FaBug,
   FaComments,
   FaCodeBranch,
@@ -7,7 +6,7 @@ import {
   FaStar,
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import CTAButton from './ui/CTAButton';
+
 import Card3D from './ui/Card3D';
 
 const waysToContribute = [
@@ -45,7 +44,7 @@ const waysToContribute = [
 
 export default function HowToContributeSection() {
   return (
-    <section className="py-24 px-6 max-w-6xl mx-auto text-white text-center">
+    <section className="py-8 px-6 max-w-6xl mx-auto text-white text-center">
       <motion.h2
         className="text-4xl font-bold text-center mb-12"
         initial={{ opacity: 0, y: 20 }}
@@ -81,21 +80,6 @@ export default function HowToContributeSection() {
           </motion.div>
         ))}
       </div>
-
-      <motion.div
-        className="flex justify-center"
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4 }}
-        viewport={{ once: true }}
-      >
-        <CTAButton
-          href="https://github.com/tomymaritano/dripnex-wallet"
-          icon={<FaGithub className="text-indigo-400" />}
-        >
-          Become a Contributor
-        </CTAButton>
-      </motion.div>
     </section>
   );
 }

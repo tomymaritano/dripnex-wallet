@@ -50,9 +50,10 @@
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 25s linear infinite;
+  display: flex;
+  width: max-content;
 }
-
 .group:hover .pause-on-hover {
   animation-play-state: paused;
 }
