@@ -10,6 +10,8 @@ interface Coin {
   price_change_percentage_24h: number;
 }
 
+
+
 export function useTopCoins(vs_currency = 'usd') {
   const [coins, setCoins] = useState<Coin[]>([]);
   const [loading, setLoading] = useState(true);
