@@ -42,8 +42,8 @@ export default function CreateProfileForm({ address }: { address: string }) {
     // Si no existe, lo creamos
     const { error: insertError } = await supabase
       .from('profiles')
-      .upsert(
-        { wallet_address: address, name, email },
+        .upsert(
+          { wallet_address: address, username, email },
         { onConflict: 'wallet_address' }
       );
 
