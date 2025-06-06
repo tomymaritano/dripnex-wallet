@@ -18,7 +18,7 @@ export default function CryptoTickerMarquee() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="flex justify-between items-center py-3 text-sm sm:text-base text-gray-300">
-            <span className="font-semibold">Top 10 Cryptocurrencies</span>
+            <span className="font-semibold">Top 5 Cryptocurrencies</span>
             <span className="text-xs sm:text-sm text-gray-500">
               Prices in {currency.toUpperCase()}
             </span>
