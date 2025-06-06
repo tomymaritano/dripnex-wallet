@@ -51,7 +51,7 @@ export default function AboutSection() {
         transition={{ duration: 0.5, delay: 0.3 }}
         viewport={{ once: true }}
       >
-        Currently focused on Ethereum and testnets. Multi-chain and Beth transactions coming soon.
+        Currently focused on Ethereum and testnets. Multi-chain and ETH transactions coming soon.
       </motion.p>
     </section>
   );

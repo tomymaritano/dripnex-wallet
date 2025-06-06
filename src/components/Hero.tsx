@@ -23,7 +23,7 @@ export default function Hero() {
           No clutter. No noise. Just a clean, secure way to connect to crypto — built for real people in a real world.
         </p>
         <p className="text-gray-500 text-sm">
-          Currently focused on Ethereum and testnets. Multi-chain and Beth transactions coming soon.
+          Currently focused on Ethereum and testnets. Multi-chain and ETH transactions coming soon.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-stretch justify-center">

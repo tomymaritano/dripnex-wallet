@@ -9,8 +9,8 @@ const roadmap = [
     date: 'May 2025',
   },
   {
-    title: 'Token sending (Beth)',
-    description: 'Ability to send ETH (Beth) directly from the dashboard.',
+    title: 'Token sending (ETH)',
+    description: 'Ability to send ETH (ETH) directly from the dashboard.',
     date: 'Coming Soon',
   },
   {
