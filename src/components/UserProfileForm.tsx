@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { useUserProfile } from './UserProfile';
+import { useUserProfile } from '@/app/hooks/useUserProfile';
 import { useAccount } from 'wagmi';
 import { supabase } from '@/lib/supabaseClient';
 
 export default function UserProfileForm() {
   const { address } = useAccount();
-  const { profile, loading } = useUserProfile();
+  const { profile, loading } = useUserProfile(address);
   const [username, setUsername] = useState(profile?.username || '');
   const [message, setMessage] = useState('');
 
