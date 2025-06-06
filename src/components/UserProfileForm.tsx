@@ -17,7 +17,7 @@ export default function UserProfileForm() {
 
     const { error } = await supabase
       .from('profiles')
-      .upsert({ address, username }, { onConflict: 'address' });
+      .upsert({ wallet_address: address, username }, { onConflict: 'wallet_address' });
 
     setMessage(error ? 'Error saving username' : 'Username saved!');
   };
