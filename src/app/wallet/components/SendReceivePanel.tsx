@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useBalance } from 'wagmi';
 import { motion } from 'framer-motion';
 import { FaRegCopy, FaCheck } from 'react-icons/fa';
 import { NETWORKS } from '@/lib/networks';
@@ -19,6 +20,7 @@ export default function SendReceivePanel({ address }: Props) {
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
   const [networkKey, setNetworkKey] = useState<keyof typeof NETWORKS>('ethereum');
+  const [token, setToken] = useState(NETWORKS['ethereum'].tokens[0]);
   const [copiedAddress, setCopiedAddress] = useState(false);
   const [amountCopied, setAmountCopied] = useState<string | null>(null);
 
@@ -26,6 +28,14 @@ export default function SendReceivePanel({ address }: Props) {
   const { send, estimate, isPending, isConfirming, hash: txHash } =
     useSendTransactionWithGas(provider.chainId);
   const [gas, setGas] = useState<bigint | null>(null);
+  useEffect(() => {
+    setToken(NETWORKS[networkKey].tokens[0]);
+  }, [networkKey]);
+  const { data: tokenBalance } = useBalance({
+    address: address as `0x${string}`,
+    token: token.address as `0x${string}`,
+    chainId: provider.chainId,
+  });
 
   const isValidAddress = recipient.startsWith('0x') && recipient.length === 42;
   const suggestedAmounts = ['0.01', '0.05', '0.1', '0.5', '1'];
@@ -105,6 +115,31 @@ export default function SendReceivePanel({ address }: Props) {
               ))}
             </select>
           </div>
+          <div>
+            <label className="block text-gray-400 mb-1">Token</label>
+            <select
+              value={token.address}
+              onChange={(e) =>
+                setToken(
+                  NETWORKS[networkKey].tokens.find(
+                    (t) => t.address === e.target.value
+                  )!
+                )
+              }
+              className="w-full px-3 py-2 bg-gray-900 border border-white/10 rounded-md text-white"
+            >
+              {NETWORKS[networkKey].tokens.map((t) => (
+                <option key={t.address} value={t.address}>
+                  {t.symbol}
+                </option>
+              ))}
+            </select>
+            {tokenBalance && (
+              <p className="text-xs text-gray-400 mt-1">
+                Balance: {tokenBalance.formatted} {token.symbol}
+              </p>
+            )}
+          </div>
           {/* Recipient */}
           <div>
             <label className="block text-gray-400 mb-1">Recipient Address</label>
@@ -170,7 +205,7 @@ export default function SendReceivePanel({ address }: Props) {
           {/* Result */}
           {txHash && (
             <p className="text-center text-xs text-green-400 mt-2">
-              ✅ Sent {amount} to {recipient.slice(0, 6)}...{' '}
+              ✅ Sent {amount} {token.symbol} to {recipient.slice(0, 6)}...{' '}
               <a
                 href={`${provider.explorer}${txHash}`}
                 target="_blank"

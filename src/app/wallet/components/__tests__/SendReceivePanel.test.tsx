@@ -12,6 +12,10 @@ vi.mock('@/app/hooks/useSendTransaction', () => ({
   }),
 }));
 
+vi.mock('wagmi', () => ({
+  useBalance: () => ({ data: { formatted: '0' } }),
+}));
+
 describe('SendReceivePanel', () => {
   it('renders send tab by default', () => {
     const { getByText } = render(<SendReceivePanel address="0x123" />);

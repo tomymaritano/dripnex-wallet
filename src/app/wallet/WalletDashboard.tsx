@@ -3,12 +3,34 @@ import { useAccount, useBalance, useChainId } from 'wagmi';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import { NETWORKS } from '@/lib/networks';
 import { useUserProfile } from '../hooks/useUserProfile';
 import { fetchTransactions, ParsedTransaction } from '@/lib/fetchTransactions';
 import ProfileCard from './components/ProfileCard';
 import TransactionList from './components/TransactionList';
 import SendReceivePanel from './components/SendReceivePanel';
 import DonateWidget from './components/DonateWidget';
+
+function TokenBalance({
+  address,
+  chainId,
+  token,
+}: {
+  address: `0x${string}`;
+  chainId: number;
+  token?: { address: `0x${string}`; symbol: string };
+}) {
+  const { data } = useBalance({
+    address,
+    chainId,
+    token: token?.address,
+  });
+  return (
+    <span>
+      {data?.formatted ?? '0'} {token?.symbol ?? ''}
+    </span>
+  );
+}
 
 /**
  * Main dashboard showing wallet info, transactions and donation widget.
@@ -54,6 +76,31 @@ export default function WalletDashboard() {
           loading={profileLoading}
           onEditClick={() => router.push('/profile')} // 🔁 redirige a /profile
         />
+
+        <div className="mt-6 space-y-2 text-sm text-gray-300">
+          {Object.entries(NETWORKS).map(([key, net]) => (
+            <div key={key}>
+              <p className="font-semibold">{net.name}</p>
+              <div className="ml-2 space-y-1">
+                <div>
+                  <TokenBalance
+                    address={address as `0x${string}`}
+                    chainId={net.chainId}
+                  />
+                </div>
+                {net.tokens.map((t) => (
+                  <div key={t.address}>
+                    <TokenBalance
+                      address={address as `0x${string}`}
+                      chainId={net.chainId}
+                      token={t}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="mt-10">
           <h3 className="text-sm text-gray-400 mb-4">Recent Transactions</h3>
