@@ -2,15 +2,9 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaRegCopy, FaCheck } from 'react-icons/fa';
-<<<<<<< HEAD
-import { useSendTransaction } from '@/app/hooks/useSendTransaction';
-import { BLOCK_EXPLORERS } from '@/lib/constants/blockExplorers';
-import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
-=======
 import { useSendEth } from '@/app/hooks/useSendETH';
 import { isAddress } from 'viem';
 import toast from 'react-hot-toast';
->>>>>>> origin/codex/validate-recipient-addresses-and-add-error-handling
 
 type Props = {
   address: string;
@@ -25,27 +19,9 @@ export default function SendReceivePanel({ address }: Props) {
   const [copiedAddress, setCopiedAddress] = useState(false);
   const [amountCopied, setAmountCopied] = useState<string | null>(null);
 
-<<<<<<< HEAD
-  const isValidAddress = recipient.startsWith('0x') && recipient.length === 42;
-
-  const {
-    send,
-    isPending,
-    isConfirming,
-    txHash,
-    estimatedFee,
-    isError,
-    error,
-  } = useSendTransaction(
-    selectedNetwork,
-    isValidAddress ? (recipient as `0x${string}`) : undefined,
-    amount || undefined
-  );
-=======
   const { send, isPending, isConfirming, txHash } = useSendEth();
 
   const isValidAddress = isAddress(recipient);
->>>>>>> origin/codex/validate-recipient-addresses-and-add-error-handling
   const suggestedAmounts = ['0.01', '0.05', '0.1', '0.5', '1'];
 
   const handleCopyAddress = () => {
