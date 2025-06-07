@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import { subscribeToBrevo } from '@/lib/email';
 import { isRateLimited } from '@/utils/rateLimiter';
+import { z } from 'zod';
 
 /**
  * Subscribe a user to Brevo while applying rate limiting by IP.
@@ -23,11 +24,16 @@ export async function POST(req: Request) {
       );
     }
 
-    const { email } = await req.json();
+    const body = await req.json();
+    const bodySchema = z.object({
+      email: z.string().email(),
+    });
+    const parsed = bodySchema.safeParse(body);
 
-    if (!email || typeof email !== 'string' || !email.includes('@')) {
+    if (!parsed.success) {
       return NextResponse.json({ message: 'Invalid email' }, { status: 400 });
     }
+    const { email } = parsed.data;
 
     const response = await subscribeToBrevo(email);
     return NextResponse.json({ message: 'Subscribed', response });
