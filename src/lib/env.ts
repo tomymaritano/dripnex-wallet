@@ -1,4 +1,3 @@
-// src/lib/env.ts
 import { z } from 'zod'
 
 // Variables que podés usar en el browser
@@ -12,8 +11,8 @@ const clientEnvSchema = z.object({
   NEXT_PUBLIC_SOLANA_WALLET: z.string(),
   NEXT_PUBLIC_LITECOIN_WALLET: z.string(),
   NEXT_PUBLIC_DOGECOIN_WALLET: z.string(),
-  UPSTASH_REDIS_REST_URL: z.string().url(),
-  UPSTASH_REDIS_REST_TOKEN: z.string(),
+  UPSTASH_REDIS_REST_URL: z.string().url().optional(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
 })
 
 // Variables que solo vas a usar en el server
@@ -22,7 +21,7 @@ const serverEnvSchema = z.object({
   BREVO_API_KEY: z.string(),
 })
 
-// Hacés el parse por separado:
+// Parse client env inmediatamente (safe)
 export const clientEnv = clientEnvSchema.parse({
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
@@ -37,13 +36,20 @@ export const clientEnv = clientEnvSchema.parse({
   UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
 })
 
-export const serverEnv = serverEnvSchema.parse({
-  ETHERSCAN_API_KEY: process.env.ETHERSCAN_API_KEY,
-  BREVO_API_KEY: process.env.BREVO_API_KEY,
-})
+// Parse server env solo cuando estamos en server
+export const serverEnv = (() => {
+  if (typeof window !== 'undefined') {
+    return undefined
+  }
 
-// 👇 Export general que esperan otros módulos
+  return serverEnvSchema.parse({
+    ETHERSCAN_API_KEY: process.env.ETHERSCAN_API_KEY,
+    BREVO_API_KEY: process.env.BREVO_API_KEY,
+  })
+})()
+
+// Export general
 export const env = {
   ...clientEnv,
-  ...serverEnv,
+  ...(serverEnv ?? {}), // si es undefined en client, no rompe
 }
