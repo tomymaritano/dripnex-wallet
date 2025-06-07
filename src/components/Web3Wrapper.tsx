@@ -10,6 +10,11 @@ import { config } from '@/lib/wallet';
 
 const queryClient = new QueryClient();
 
+/**
+ * Setup Wagmi, React Query and RainbowKit providers.
+ *
+ * @param props.children Components requiring Web3 context.
+ */
 export function Web3Wrapper({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
 

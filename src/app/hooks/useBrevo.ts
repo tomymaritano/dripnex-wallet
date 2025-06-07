@@ -2,6 +2,11 @@
 
 import { useState } from 'react';
 
+/**
+ * Handle newsletter subscriptions through the `/api/subscribe` endpoint.
+ *
+ * @returns Object containing the `subscribe` function and loading state.
+ */
 export function useBrevo() {
   const [loading, setLoading] = useState(false);
 

@@ -16,6 +16,14 @@ interface DonateWidgetProps {
   showHeader?: boolean;
 }
 
+/**
+ * Complete donation widget combining selectors and send button.
+ *
+ * @param props.defaultCrypto Default crypto to show.
+ * @param props.title Title shown at top.
+ * @param props.description Optional description text.
+ * @param props.showHeader Whether to display header section.
+ */
 export default function DonateWidget({
   defaultCrypto = 'ETH',
   title = 'Support Dripnex',

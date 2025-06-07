@@ -10,6 +10,9 @@ import TransactionList from './components/TransactionList';
 import SendReceivePanel from './components/SendReceivePanel';
 import DonateWidget from './components/DonateWidget';
 
+/**
+ * Main dashboard showing wallet info, transactions and donation widget.
+ */
 export default function WalletDashboard() {
   const router = useRouter();
   const { address, isConnected } = useAccount();

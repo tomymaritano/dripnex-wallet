@@ -17,6 +17,14 @@ interface Props {
   effect: 'pulse' | 'flash-up' | 'flash-down' | null;
 }
 
+/**
+ * Display a single cryptocurrency price item within the ticker marquee.
+ *
+ * @param props.coin Coin data.
+ * @param props.currency Currency code used for formatting.
+ * @param props.previous Previous price for change tooltip.
+ * @param props.effect Visual effect to apply on price change.
+ */
 export function CryptoTickerItem({ coin, currency, previous, effect }: Props) {
   const change = coin.price_change_percentage_24h;
   const isUp = change >= 0;

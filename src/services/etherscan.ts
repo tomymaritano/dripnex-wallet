@@ -4,6 +4,12 @@ import { env } from '@/lib/env'
 
 const ETHERSCAN_BASE_URL = 'https://api.etherscan.io/api'
 
+/**
+ * Fetch transactions from Etherscan directly.
+ *
+ * @param address Wallet address.
+ * @returns Array of transaction objects.
+ */
 export async function getTransactions(address: string) {
   const res = await fetch(
     `${ETHERSCAN_BASE_URL}?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=desc&apikey=${env.ETHERSCAN_API_KEY}`

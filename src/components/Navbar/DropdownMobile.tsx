@@ -14,6 +14,13 @@ type Props = {
   onClickItem?: () => void;
 };
 
+/**
+ * Mobile version of the multi-section dropdown menu.
+ *
+ * @param props.label Menu label.
+ * @param props.sections Sections of links.
+ * @param props.onClickItem Callback when an item is clicked.
+ */
 export default function DropdownMobile({ label, sections, onClickItem }: Props) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);

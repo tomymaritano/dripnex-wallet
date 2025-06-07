@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 
+/**
+ * Toggle between dark and light themes.
+ */
 export default function DarkToggle() {
   const [isDark, setIsDark] = useState(false);
 

@@ -4,6 +4,9 @@ const transactions = [
   { type: "out", amount: "-0.2 ETH", address: "0xdef..." },
 ];
 
+/**
+ * Placeholder list of example transactions.
+ */
 export default function TransactionList() {
   return (
     <ul className="space-y-3">

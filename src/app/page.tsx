@@ -20,6 +20,9 @@ function SectionDivider() {
   );
 }
 
+/**
+ * Home page composed of several landing sections.
+ */
 export default function Home() {
   return (
     <Web3Wrapper>

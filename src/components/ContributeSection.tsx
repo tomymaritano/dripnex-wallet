@@ -42,6 +42,9 @@ const waysToContribute = [
   },
 ];
 
+/**
+ * Display ways users can contribute to the project.
+ */
 export default function HowToContributeSection() {
   return (
     <section className="py-8 px-6 max-w-6xl mx-auto text-white text-center">

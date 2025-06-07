@@ -7,6 +7,11 @@ import {
 } from 'react-icons/fa';
 import { SiSolana, SiLitecoin } from 'react-icons/si';
 
+/**
+ * Return an icon component for the given crypto symbol.
+ *
+ * @param symbol Cryptocurrency symbol.
+ */
 export function CryptoLogos({ symbol }: { symbol: string }) {
   const iconProps = { className: 'inline mr-2 text-lg' };
 

@@ -9,6 +9,12 @@ type Props = {
   currentAddress: `0x${string}`;
 };
 
+/**
+ * Displays a list of transactions with copy-to-clipboard helpers.
+ *
+ * @param props.transactions Parsed transaction array.
+ * @param props.currentAddress Address used to detect incoming/outgoing.
+ */
 export default function TransactionList({ transactions, currentAddress }: Props) {
   const [copiedHash, setCopiedHash] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);

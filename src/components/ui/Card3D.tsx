@@ -3,6 +3,12 @@
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
+/**
+ * Wrapper that applies a subtle 3D tilt effect on hover.
+ *
+ * @param props.children Content inside the card.
+ * @param props.className Optional additional classes.
+ */
 export default function Card3D({
   children,
   className = '',

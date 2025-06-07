@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useBrevo } from '@/app/hooks/useBrevo';
 
+/**
+ * Newsletter call-to-action with email subscription form.
+ */
 export default function NewsletterCTA() {
   const { subscribe, loading } = useBrevo();
   const [email, setEmail] = useState('');

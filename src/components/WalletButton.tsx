@@ -4,6 +4,9 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { FaWallet } from 'react-icons/fa';
 import Image from 'next/image';
 
+/**
+ * Wrapper around RainbowKit's `ConnectButton.Custom` providing styling.
+ */
 export default function WalletConnectButton() {
   return (
     <ConnectButton.Custom>

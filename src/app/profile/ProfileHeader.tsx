@@ -5,6 +5,12 @@ type Props = {
   createdAt: string;
 };
 
+/**
+ * Header displaying user avatar and join date.
+ *
+ * @param props.username Username of the profile.
+ * @param props.createdAt Creation date string.
+ */
 export default function ProfileHeader({ username, createdAt }: Props) {
   const firstLetter = username.charAt(0).toUpperCase();
 

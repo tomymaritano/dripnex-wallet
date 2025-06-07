@@ -15,6 +15,9 @@ const NAV_LINKS = [
   { href: '/wallet', label: 'Wallet' },
 ];
 
+/**
+ * Site navigation with theme toggle and wallet button.
+ */
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);

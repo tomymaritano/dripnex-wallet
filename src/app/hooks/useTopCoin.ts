@@ -12,6 +12,12 @@ interface Coin {
 
 
 
+/**
+ * Retrieve basic market data for top coins from CoinGecko.
+ *
+ * @param vs_currency Currency in which to price the coins.
+ * @returns Coin list and loading state.
+ */
 export function useTopCoins(vs_currency = 'usd') {
   const [coins, setCoins] = useState<Coin[]>([]);
   const [loading, setLoading] = useState(true);

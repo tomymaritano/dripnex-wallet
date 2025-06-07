@@ -6,6 +6,12 @@ type Props = {
   currency: string;
 };
 
+/**
+ * Display the fiat value of a given ETH amount.
+ *
+ * @param props.eth Amount in ETH.
+ * @param props.currency Fiat currency code.
+ */
 export default function FiatValue({ eth, currency }: Props) {
   const [price, setPrice] = useState<number | null>(null);
 

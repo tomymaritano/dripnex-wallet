@@ -12,6 +12,13 @@ interface Props {
   setAmount: (val: string) => void;
 }
 
+/**
+ * Input group for selecting a donation amount.
+ *
+ * @param props.selectedCrypto Selected cryptocurrency.
+ * @param props.amount Current amount.
+ * @param props.setAmount Setter for amount.
+ */
 export default function AmountInput({ selectedCrypto, amount, setAmount }: Props) {
   const [amountCopied, setAmountCopied] = useState<string | null>(null);
 
