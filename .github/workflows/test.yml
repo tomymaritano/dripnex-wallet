@@ -7,12 +7,27 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npm test
+    test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+        - name: Cache NPM
+          uses: actions/cache@v4
+          with:
+            path: ~/.npm
+            key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-npm-
+        - run: npm install
+        - run: npm run lint
+        - run: npm run build
+        - run: npm test -- --run --reporter=junit --outputFile=vitest-results.xml
+        - name: Upload Vitest Results
+          uses: actions/upload-artifact@v4
+          if: always()
+          with:
+            name: vitest-results
+            path: vitest-results.xml
