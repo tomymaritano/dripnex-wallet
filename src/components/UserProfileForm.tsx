@@ -16,11 +16,12 @@ export default function UserProfileForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!address) return;
+    if (!profile) return;
 
     const { error } = await supabase
       .from('profiles')
-      .upsert({ wallet_address: address, username }, { onConflict: 'wallet_address' });
+      .update({ username })
+      .eq('id', profile.id);
 
     setMessage(error ? 'Error saving username' : 'Username saved!');
   };

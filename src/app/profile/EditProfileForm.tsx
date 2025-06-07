@@ -6,9 +6,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
 
 type Profile = {
+  id: string;
   username: string;
   email: string;
-  wallet_address: string;
 };
 
 type Props = {
@@ -33,7 +33,7 @@ export default function EditProfileForm({ profile, onCancel, onSuccess }: Props)
     const { error: updateError } = await supabase
       .from('profiles')
       .update({ username, email })
-      .eq('wallet_address', profile.wallet_address);
+      .eq('id', profile.id);
 
     setSaving(false);
 

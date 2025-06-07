@@ -4,9 +4,9 @@ import { supabase } from '@/lib/supabaseClient';
 import { UserProfile } from '@/types/user';
 
 /**
- * Load a user profile from the `profiles` table using Supabase.
+ * Load a user profile and wallet list from Supabase using a wallet address.
  *
- * @param address Wallet address to fetch.
+ * @param address Wallet address used to look up the profile.
  * @returns Profile data, loading flag, error message and a refetch function.
  */
 export function useUserProfile(address?: string) {
@@ -20,13 +20,27 @@ export function useUserProfile(address?: string) {
     setError(null);
 
     try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('wallet_address', address)
+      // Find the profile linked to this wallet
+      const { data: wallet, error: walletErr } = await supabase
+        .from('wallets')
+        .select('profile_id')
+        .eq('address', address)
         .maybeSingle();
 
-      if (error) throw error;
+      if (walletErr) throw walletErr;
+      if (!wallet) {
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
+
+      const { data, error: profileErr } = await supabase
+        .from('profiles')
+        .select('*, wallets(id, address, chain_id, profile_id, created_at)')
+        .eq('id', wallet.profile_id)
+        .maybeSingle();
+
+      if (profileErr) throw profileErr;
       setProfile(data ?? null);
     } catch (err) {
       console.error('Error fetching user profile:', err);
