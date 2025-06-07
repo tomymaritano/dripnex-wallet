@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import SendReceivePanel from '../SendReceivePanel';
+import TransferPanel from '../TransferPanel';
 
 vi.mock('@/app/hooks/useSendTransaction', () => ({
   useSendTransactionWithGas: () => ({
@@ -12,9 +12,9 @@ vi.mock('@/app/hooks/useSendTransaction', () => ({
   }),
 }));
 
-describe('SendReceivePanel', () => {
+describe('TransferPanel', () => {
   it('renders send tab by default', () => {
-    const { getByText } = render(<SendReceivePanel address="0x123" />);
+    const { getByText } = render(<TransferPanel address="0x123" />);
     expect(getByText('Send')).toBeInTheDocument();
   });
 });

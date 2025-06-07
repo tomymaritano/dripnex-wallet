@@ -14,7 +14,7 @@ type Props = {
  *
  * @param props.address Wallet address used for receive tab.
  */
-export default function SendReceivePanel({ address }: Props) {
+export default function TransferPanel({ address }: Props) {
   const [activeTab, setActiveTab] = useState<'send' | 'receive'>('send');
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
