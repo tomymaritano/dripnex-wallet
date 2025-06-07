@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 import { env } from './env'
 
 const ETHERSCAN_API_KEY = env.NEXT_PUBLIC_ETHERSCAN_API_KEY
@@ -19,7 +18,6 @@ interface EtherscanResponse {
   result: EtherscanTransaction[];
 }
 
->>>>>>> origin/codex/create-env.ts-with-zod-validation
 export interface ParsedTransaction {
   hash: string;
   from: string;
