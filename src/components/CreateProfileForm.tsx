@@ -27,36 +27,46 @@ export default function CreateProfileForm({ address }: { address: string }) {
 
     setLoading(true);
 
-    // Verificamos si ya existe un perfil para esa wallet
-    const { data: existingProfile, error: fetchError } = await supabase
-      .from('profiles')
+    // Check if wallet already linked to a profile
+    const { data: existingWallet, error: fetchError } = await supabase
+      .from('wallets')
       .select('id')
-      .eq('wallet_address', address)
-      .single();
+      .eq('address', address)
+      .maybeSingle();
 
     if (fetchError) {
-      console.error('Error fetching existing profile:', fetchError);
+      console.error('Error fetching existing wallet:', fetchError);
     }
 
-    if (existingProfile) {
+    if (existingWallet) {
       setError('Ya existe un perfil con esta wallet.');
       setLoading(false);
       return;
     }
 
-    // Si no existe, lo creamos
-    const { error: insertError } = await supabase
+    // Create profile and link wallet
+    const { data: profileData, error: profileErr } = await supabase
       .from('profiles')
-      .upsert(
-        { wallet_address: address, username, email },
-        { onConflict: 'wallet_address' }
-      );
+      .insert({ username, email })
+      .select('id')
+      .single();
+
+    if (profileErr || !profileData) {
+      setLoading(false);
+      setError('Falló la creación del perfil');
+      console.error(profileErr);
+      return;
+    }
+
+    const { error: walletErr } = await supabase
+      .from('wallets')
+      .insert({ profile_id: profileData.id, address });
 
     setLoading(false);
 
-    if (insertError) {
+    if (walletErr) {
       setError('Falló la creación del perfil');
-      console.error(insertError);
+      console.error(walletErr);
     } else {
       setSuccess(true);
       setTimeout(() => window.location.reload(), 1000);

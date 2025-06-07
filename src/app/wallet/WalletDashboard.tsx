@@ -9,6 +9,7 @@ import ProfileCard from './components/ProfileCard';
 import TransactionList from './components/TransactionList';
 import SendReceivePanel from './components/SendReceivePanel';
 import DonateWidget from './components/DonateWidget';
+import WalletList from './components/WalletList';
 
 /**
  * Main dashboard showing wallet info, transactions and donation widget.
@@ -18,14 +19,16 @@ export default function WalletDashboard() {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { data: balanceData } = useBalance({ address });
-  const { profile, loading: profileLoading } = useUserProfile(address);
+  const { profile, loading: profileLoading, refetch } = useUserProfile(address);
   const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
 
   useEffect(() => {
-    if (isConnected && address && chainId) {
-      supabase.from('wallets').upsert({ address, chain_id: chainId }, { onConflict: 'address' });
+    if (isConnected && address && chainId && profile) {
+      supabase
+        .from('wallets')
+        .upsert({ address, chain_id: chainId, profile_id: profile.id }, { onConflict: 'address' });
     }
-  }, [address, chainId, isConnected]);
+  }, [address, chainId, isConnected, profile]);
 
   useEffect(() => {
     if (!address || !isConnected) return;
@@ -52,8 +55,14 @@ export default function WalletDashboard() {
           balance={balanceData?.formatted}
           profile={profile}
           loading={profileLoading}
-          onEditClick={() => router.push('/profile')} // 🔁 redirige a /profile
+          onEditClick={() => router.push('/profile')}
         />
+
+        {profile && (
+          <div className="mt-6">
+            <WalletList profileId={profile.id} wallets={profile.wallets} onChange={refetch} />
+          </div>
+        )}
 
         <div className="mt-10">
           <h3 className="text-sm text-gray-400 mb-4">Recent Transactions</h3>
@@ -65,6 +74,6 @@ export default function WalletDashboard() {
     </div>
     <DonateWidget />
     </>
-   
+
   );
 }
