@@ -32,6 +32,24 @@ npm run dev
 > 📝 Make sure to replace your `WalletConnect` project ID in `wallet.ts`.
 > The `.env.example` file lists all variables needed for local development.
 
+## 🧪 Running Tests
+
+1. Install dependencies if you haven't already:
+
+   ```bash
+   npm install
+   ```
+
+2. Create a `.env.test` file with the environment variables required for tests. You can copy from `.env.example` and adjust the values as needed.
+
+3. Execute the test suite with:
+
+   ```bash
+   npm test
+   ```
+
+   Vitest will run all the unit and integration tests located under `src/**/__tests__`.
+
 ## 📁 Structure
 
 ```
