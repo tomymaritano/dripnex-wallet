@@ -6,6 +6,11 @@ type Props = {
   children: ReactNode;
 };
 
+/**
+ * Layout component used across pages with navbar and footer.
+ *
+ * @param props.children Page content.
+ */
 export default function PageLayout({ children }: Props) {
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">

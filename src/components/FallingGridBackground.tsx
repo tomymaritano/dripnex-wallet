@@ -2,6 +2,9 @@
 
 import Lottie from 'lottie-react';
 import animationData from '../../public/animations/web3-network-4.json';
+/**
+ * Animated background visual using a Lottie animation.
+ */
 export default function Web3Visual() {
   return (
     <div className="relative w-full h-[60vh] flex items-center justify-center overflow-hidden">

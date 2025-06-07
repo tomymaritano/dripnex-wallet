@@ -5,6 +5,12 @@ interface Coin {
   current_price: number;
 }
 
+/**
+ * Track price movements to apply visual effects on updates.
+ *
+ * @param coins Array of coin objects with `id` and `current_price`.
+ * @returns Effects map and previous prices for each coin.
+ */
 export function usePriceEffects(coins: Coin[]) {
   const previousPricesRef = useRef<{ [id: string]: number }>({});
   const [effects, setEffects] = useState<{ [id: string]: 'pulse' | 'flash-up' | 'flash-down' | null }>({});

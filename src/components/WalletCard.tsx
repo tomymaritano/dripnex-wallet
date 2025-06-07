@@ -1,4 +1,7 @@
 // src/components/WalletCard.tsx
+/**
+ * Example wallet card component used in demos.
+ */
 export default function WalletCard() {
   return (
     <div className="bg-gradient-to-br from-black to-gray-900 p-4 border border-cyan-500 rounded-xl shadow-lg hover:shadow-cyan-500/40 transition">

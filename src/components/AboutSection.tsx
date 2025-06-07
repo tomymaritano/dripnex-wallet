@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 // import Lottie from 'lottie-react';
 // import web3Animation from '../../public/animations/animation-server.json';
 
+/**
+ * Landing page introduction section.
+ *
+ * @returns Animated hero description of Dripnex.
+ */
 export default function AboutSection() {
   return (
     <section className="pt-16 pb-12 px-6 text-white max-w-4xl mx-auto text-center">

@@ -5,6 +5,9 @@ import { FaGithub } from 'react-icons/fa';
 import Lottie from 'lottie-react';
 import animationData from '../../public/animations/web3-network-4.json';
 
+/**
+ * Main hero section displayed on the home page.
+ */
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden bg-black/20">

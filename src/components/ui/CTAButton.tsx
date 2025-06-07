@@ -11,6 +11,12 @@ type CTAButtonProps = {
   icon?: ReactNode;
 } & HTMLMotionProps<'a'>;
 
+/**
+ * Animated call-to-action button with optional icon.
+ *
+ * @param props.href Destination URL.
+ * @param props.newTab Open in new tab when true.
+ */
 export default function CTAButton({
   children,
   href,

@@ -13,6 +13,13 @@ type Props = {
   sections: LegalItem[];
 };
 
+/**
+ * Render a legal document page.
+ *
+ * @param props.title Document title.
+ * @param props.updatedAt Last updated date string.
+ * @param props.sections Array of content sections.
+ */
 export default function LegalPage({ title, updatedAt, sections }: Props) {
   return (
     <PageLayout>

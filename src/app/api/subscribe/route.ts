@@ -3,6 +3,12 @@ import { NextResponse } from 'next/server';
 import { subscribeToBrevo } from '@/lib/email';
 import { isRateLimited } from '@/utils/rateLimiter';
 
+/**
+ * Subscribe a user to Brevo while applying rate limiting by IP.
+ *
+ * @param req Incoming POST request with an `email` field.
+ * @returns JSON response describing the result.
+ */
 export async function POST(req: Request) {
   try {
     const ip =

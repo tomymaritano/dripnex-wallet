@@ -1,5 +1,10 @@
 // lib/hooks/useCurrency.ts
 import { useEffect, useState } from 'react';
+/**
+ * Hook that retrieves a list of supported fiat currencies using the CoinGecko API.
+ *
+ * @returns Object containing the currency array and loading state.
+ */
 
 export function useCurrency() {
   const [currencies, setCurrencies] = useState<string[]>([]);

@@ -12,6 +12,9 @@ const currencies = [
   { code: 'ars', label: 'ARS', flag: '🇦🇷' },
 ];
 
+/**
+ * Dropdown for selecting the preferred fiat currency.
+ */
 export default function CurrencyDropdown() {
   const { currency, setCurrency } = useCurrencyStore();
   const current = currencies.find((c) => c.code === currency);

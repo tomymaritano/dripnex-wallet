@@ -5,6 +5,9 @@ import { useUserProfile } from '@/app/hooks/useUserProfile';
 import { useAccount } from 'wagmi';
 import { supabase } from '@/lib/supabaseClient';
 
+/**
+ * Form that allows a user to update their profile username.
+ */
 export default function UserProfileForm() {
   const { address } = useAccount();
   const { profile, loading } = useUserProfile(address);

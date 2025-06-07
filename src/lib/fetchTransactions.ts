@@ -31,6 +31,12 @@ interface ApiResponse {
   error?: string;
 }
 
+/**
+ * Fetch parsed transactions for the given address from the API route.
+ *
+ * @param address Wallet address.
+ * @returns Transaction data or error.
+ */
 export async function fetchTransactions(address: string): Promise<ApiResponse> {
   const res = await fetch(`/api/etherscan?address=${address}`);
   const data = await res.json();

@@ -6,6 +6,9 @@ import { motion } from 'framer-motion';
 import PageLayout from '@/components/PageLayout';
 import './globals.css'; // Ensure global styles are imported
 
+/**
+ * Custom 404 page.
+ */
 export default function NotFoundPage() {
   const router = useRouter();
 

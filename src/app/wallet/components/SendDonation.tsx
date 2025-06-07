@@ -14,6 +14,14 @@ interface Props {
   explorerBase: string;
 }
 
+/**
+ * Handles sending the donation transaction using wagmi.
+ *
+ * @param props.selectedCrypto Crypto being used.
+ * @param props.amount Amount to send.
+ * @param props.address Destination address.
+ * @param props.explorerBase Explorer base URL for transaction link.
+ */
 export default function SendDonation({
   selectedCrypto,
   amount,

@@ -22,6 +22,9 @@ const itemVariants = {
   show: { opacity: 1, y: 0 },
 };
 
+/**
+ * Section encouraging users to join the community and newsletter.
+ */
 export default function CommunityBanner() {
   return (
     <motion.section

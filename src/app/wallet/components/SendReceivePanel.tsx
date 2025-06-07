@@ -8,6 +8,11 @@ type Props = {
   address: string;
 };
 
+/**
+ * Panel for sending ETH or displaying wallet QR for receiving.
+ *
+ * @param props.address Wallet address used for receive tab.
+ */
 export default function SendReceivePanel({ address }: Props) {
   const [activeTab, setActiveTab] = useState<'send' | 'receive'>('send');
   const [recipient, setRecipient] = useState('');

@@ -12,6 +12,12 @@ type Props = {
   sections: DropdownSection[];
 };
 
+/**
+ * Desktop navigation dropdown with multiple sections.
+ *
+ * @param props.label Menu label.
+ * @param props.sections Sections of links.
+ */
 export default function DropdownDesktop({ label, sections }: Props) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);

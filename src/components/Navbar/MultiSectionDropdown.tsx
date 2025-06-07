@@ -12,6 +12,14 @@ export type MultiSectionDropdownProps = {
   onClickItem?: () => void;
 };
 
+/**
+ * Responsive dropdown that switches between desktop and mobile implementations.
+ *
+ * @param props.label Menu label.
+ * @param props.sections Sections to render.
+ * @param props.isMobile Render mobile version if true.
+ * @param props.onClickItem Optional item click handler.
+ */
 export default function MultiSectionDropdown({
   label,
   sections,

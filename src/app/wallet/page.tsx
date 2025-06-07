@@ -4,6 +4,9 @@ import WalletDashboard from './WalletDashboard';
 import PageLayout from '@/components/PageLayout';
 import { motion } from 'framer-motion';
 
+/**
+ * Wallet management page displaying the dashboard.
+ */
 export default function WalletPage() {
   return (
     <PageLayout>
