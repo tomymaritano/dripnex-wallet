@@ -18,10 +18,21 @@ export async function GET(request: Request) {
     const data = await res.json();
 
     if (data.status !== '1') {
-      return NextResponse.json({ error: data.message || 'Failed to fetch transactions' }, { status: 500 });
+      return NextResponse.json(
+        { error: data.message || 'Failed to fetch transactions' },
+        { status: 500 }
+      );
     }
 
-    return NextResponse.json({ transactions: data.result });
+    const transactions = (data.result || []).map((tx: any) => ({
+      hash: tx.hash,
+      from: tx.from,
+      to: tx.to,
+      value: (parseFloat(tx.value) / 1e18).toFixed(4),
+      timeStamp: tx.timeStamp,
+    }));
+
+    return NextResponse.json({ transactions });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });

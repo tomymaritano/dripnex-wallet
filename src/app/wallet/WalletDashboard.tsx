@@ -26,7 +26,15 @@ export default function WalletDashboard() {
 
   useEffect(() => {
     if (!address || !isConnected) return;
-    fetchTransactions(address).then(setTransactions).catch(console.error);
+    fetchTransactions(address)
+      .then((data) => {
+        if (!data.error) {
+          setTransactions(data.transactions);
+        } else {
+          console.error(data.error);
+        }
+      })
+      .catch(console.error);
   }, [address, isConnected]);
 
   if (!isConnected || !address) return null;
