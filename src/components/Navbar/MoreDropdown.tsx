@@ -1,4 +1,5 @@
-import MultiSectionDropdown, { DropdownSection } from './DropdownMenu';
+import MultiSectionDropdown from './MultiSectionDropdown';
+import { DropdownSection } from './types';
 
 const sections: DropdownSection[] = [
   {
