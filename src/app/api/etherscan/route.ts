@@ -2,6 +2,35 @@
 import { NextResponse } from 'next/server'
 import { env } from '@/lib/env'
 
+/**
+ * Interface representing a transaction item returned by the
+ * Etherscan `txlist` API. Only the fields relevant for the
+ * endpoint are typed here, but the structure mirrors the
+ * Etherscan response to enable strict access to properties.
+ */
+interface EtherscanTx {
+  blockNumber: string
+  timeStamp: string
+  hash: string
+  nonce: string
+  blockHash: string
+  transactionIndex: string
+  from: string
+  to: string
+  value: string
+  gas: string
+  gasPrice: string
+  isError: string
+  txreceipt_status: string
+  input: string
+  contractAddress: string
+  cumulativeGasUsed: string
+  gasUsed: string
+  confirmations: string
+  methodId: string
+  functionName: string
+}
+
 const ETHERSCAN_API_KEY = env.ETHERSCAN_API_KEY
 const ETHERSCAN_BASE_URL = 'https://api.etherscan.io/api';
 
@@ -35,7 +64,7 @@ export async function GET(request: Request) {
       );
     }
 
-    const transactions = (data.result || []).map((tx: any) => ({
+    const transactions = (data.result || []).map((tx: EtherscanTx) => ({
       hash: tx.hash,
       from: tx.from,
       to: tx.to,
