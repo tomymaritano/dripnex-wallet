@@ -1,4 +1,6 @@
-const ETHERSCAN_API_KEY = process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY;
+import { env } from './env'
+
+const ETHERSCAN_API_KEY = env.NEXT_PUBLIC_ETHERSCAN_API_KEY
 const ETHERSCAN_API_URL = 'https://api.etherscan.io/api';
 
 export interface EtherscanTransaction {

@@ -1,7 +1,8 @@
 // src/api/etherscan/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'
+import { env } from '@/lib/env'
 
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
+const ETHERSCAN_API_KEY = env.ETHERSCAN_API_KEY
 const ETHERSCAN_BASE_URL = 'https://api.etherscan.io/api';
 
 export async function GET(request: Request) {

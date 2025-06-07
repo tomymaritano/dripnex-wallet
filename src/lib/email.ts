@@ -1,6 +1,7 @@
+import { env } from './env'
+
 export async function subscribeToBrevo(email: string) {
-  const apiKey = process.env.BREVO_API_KEY;
-  if (!apiKey) throw new Error('Brevo API key not set in environment variables');
+  const apiKey = env.BREVO_API_KEY
 
   const res = await fetch('https://api.brevo.com/v3/contacts', {
     method: 'POST',
