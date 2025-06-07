@@ -2,13 +2,16 @@ import { renderHook, act } from '@testing-library/react';
 import { vi } from 'vitest';
 import { useSendEth } from './useSendETH';
 
-const mockSendTransactionAsync = vi.fn(() => Promise.resolve('0xtest'));
+const mockSendTransaction = vi.fn((_, { onSuccess }) => {
+  onSuccess('0xtest');
+});
 
 vi.mock('wagmi', () => ({
   useAccount: () => ({ address: '0x123' }),
   useSendTransaction: () => ({
-    sendTransactionAsync: mockSendTransactionAsync,
+    sendTransaction: mockSendTransaction,
     isPending: false,
+    data: undefined,
     error: undefined,
     isError: false,
   }),
@@ -22,14 +25,14 @@ vi.mock('viem', () => ({
   parseEther: (v: string) => v,
 }));
 
-test('send calls wagmi and updates txHash', async () => {
+test('send calls wagmi and updates txHash', () => {
   const { result } = renderHook(() => useSendEth());
-  await act(async () => {
-    await result.current.send('0xabc', '1');
+  act(() => {
+    result.current.send('0xabc', '1');
   });
-  expect(mockSendTransactionAsync).toHaveBeenCalledWith({
-    to: '0xabc',
-    value: '1',
-  });
+  expect(mockSendTransaction).toHaveBeenCalledWith(
+    { to: '0xabc', value: '1' },
+    expect.objectContaining({ onSuccess: expect.any(Function) })
+  );
   expect(result.current.txHash).toBe('0xtest');
 });

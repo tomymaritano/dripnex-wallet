@@ -13,7 +13,6 @@ import CurrencyDropdown from '../CurrencySelector';
 
 const NAV_LINKS = [
   { href: '/wallet', label: 'Wallet' },
-  { href: '/send', label: 'Send' },
 ];
 
 export default function Navbar() {

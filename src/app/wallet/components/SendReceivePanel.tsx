@@ -3,16 +3,12 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaRegCopy, FaCheck } from 'react-icons/fa';
 import { useSendEth } from '@/app/hooks/useSendETH';
-import { isAddress } from 'viem';
-import toast from 'react-hot-toast';
 
 type Props = {
   address: string;
 };
 
 export default function SendReceivePanel({ address }: Props) {
-  const networks = [mainnet, polygon, optimism, arbitrum];
-  const [selectedNetwork, setSelectedNetwork] = useState<number>(networks[0].id);
   const [activeTab, setActiveTab] = useState<'send' | 'receive'>('send');
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
@@ -21,7 +17,7 @@ export default function SendReceivePanel({ address }: Props) {
 
   const { send, isPending, isConfirming, txHash } = useSendEth();
 
-  const isValidAddress = isAddress(recipient);
+  const isValidAddress = recipient.startsWith('0x') && recipient.length === 42;
   const suggestedAmounts = ['0.01', '0.05', '0.1', '0.5', '1'];
 
   const handleCopyAddress = () => {
@@ -32,17 +28,10 @@ export default function SendReceivePanel({ address }: Props) {
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isValidAddress) {
-      toast.error('Invalid address for this network');
-      return;
-    }
     try {
       await send(recipient as `0x${string}`, amount);
     } catch (err) {
       console.error('Transaction failed', err);
-      toast.error(
-        err instanceof Error ? err.message : 'Transaction failed'
-      );
     }
   };
 
@@ -82,21 +71,6 @@ export default function SendReceivePanel({ address }: Props) {
       {/* Send */}
       {activeTab === 'send' && (
         <form onSubmit={handleSend} className="space-y-5 text-sm">
-          {/* Network */}
-          <div>
-            <label className="block text-gray-400 mb-1">Network</label>
-            <select
-              value={selectedNetwork}
-              onChange={(e) => setSelectedNetwork(Number(e.target.value))}
-              className="w-full px-3 py-2 bg-gray-900 border border-white/10 rounded-md text-white"
-            >
-              {networks.map((net) => (
-                <option key={net.id} value={net.id}>
-                  {net.name}
-                </option>
-              ))}
-            </select>
-          </div>
           {/* Recipient */}
           <div>
             <label className="block text-gray-400 mb-1">Recipient Address</label>
@@ -145,9 +119,6 @@ export default function SendReceivePanel({ address }: Props) {
               placeholder="0.1"
               className="w-full px-3 py-2 bg-gray-900 border border-white/10 rounded text-white placeholder:text-gray-500"
             />
-            {estimatedFee && (
-              <p className="text-xs text-gray-400 mt-1">Estimated Fee: {estimatedFee} ETH</p>
-            )}
           </div>
 
           {/* Submit */}
@@ -164,18 +135,13 @@ export default function SendReceivePanel({ address }: Props) {
             <p className="text-center text-xs text-green-400 mt-2">
               ✅ Sent {amount} ETH to {recipient.slice(0, 6)}...{' '}
               <a
-                href={`${BLOCK_EXPLORERS[selectedNetwork]}${txHash}`}
+                href={`https://etherscan.io/tx/${txHash}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline"
               >
-                View on Explorer
+                View on Etherscan
               </a>
-            </p>
-          )}
-          {isError && (
-            <p className="text-center text-xs text-red-400 mt-2">
-              ❌ {error ? (error as Error).message : 'Transaction failed'}
             </p>
           )}
         </form>
