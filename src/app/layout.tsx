@@ -1,5 +1,3 @@
-// src/app/layout.tsx';
-
 import { Web3Wrapper } from "@/components/Web3Wrapper";
 import { Toaster } from 'react-hot-toast';
 
