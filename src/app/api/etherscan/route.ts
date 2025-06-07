@@ -1,6 +1,7 @@
 // src/api/etherscan/route.ts
 import { NextResponse } from 'next/server'
 import { env } from '@/lib/env'
+import { z } from 'zod'
 
 /**
  * Interface representing a transaction item returned by the
@@ -44,12 +45,17 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const address = searchParams.get('address');
 
-  if (!address) {
-    return NextResponse.json({ error: 'Missing wallet address' }, { status: 400 });
-  }
+  const querySchema = z.object({
+    address: z.string().regex(/^0x[a-fA-F0-9]{40}$/),
+  })
 
-  if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
-    return NextResponse.json({ error: 'Invalid address' }, { status: 400 });
+  const parsed = querySchema.safeParse({ address })
+
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: address ? 'Invalid address' : 'Missing wallet address' },
+      { status: 400 }
+    )
   }
 
   try {
