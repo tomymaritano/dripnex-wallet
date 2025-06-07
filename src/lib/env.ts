@@ -12,6 +12,8 @@ const clientEnvSchema = z.object({
   NEXT_PUBLIC_SOLANA_WALLET: z.string(),
   NEXT_PUBLIC_LITECOIN_WALLET: z.string(),
   NEXT_PUBLIC_DOGECOIN_WALLET: z.string(),
+  UPSTASH_REDIS_REST_URL: z.string().url(),
+  UPSTASH_REDIS_REST_TOKEN: z.string(),
 })
 
 // Variables que solo vas a usar en el server

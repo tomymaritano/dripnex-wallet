@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       req.headers.get('x-real-ip') ||
       'unknown';
 
-    if (isRateLimited(ip)) {
+    if (await isRateLimited(ip)) {
       return NextResponse.json(
         { message: 'Too many requests' },
         { status: 429 }
