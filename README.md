@@ -70,7 +70,7 @@ _Last updated: 2025-06-04_
 ---
 
 ## 🔧 High Priority
-- [ ] Real multichain support (Polygon, BTC, SOL, etc.)
+- [x] Real multichain support (Ethereum, Polygon, BSC, Arbitrum, Optimism)
 - [ ] Display balance by token and network
 - [ ] Transaction view by token/network
 - [ ] Unified theming system (design tokens)

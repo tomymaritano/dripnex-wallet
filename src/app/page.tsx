@@ -1,6 +1,5 @@
 'use client';
 
-import { Web3Wrapper } from '@/components/Web3Wrapper';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
@@ -25,7 +24,6 @@ function SectionDivider() {
  */
 export default function Home() {
   return (
-    <Web3Wrapper>
       <motion.div
         className="flex flex-col min-h-screen bg-black text-white"
         initial={{ opacity: 0 }}
@@ -45,6 +43,5 @@ export default function Home() {
         <JoinCommunity />
         <Footer />
       </motion.div>
-    </Web3Wrapper>
   );
 }
