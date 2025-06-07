@@ -45,10 +45,21 @@ npm run dev
 3. Execute the test suite with:
 
    ```bash
-   npm test
-   ```
+  npm test
+  ```
 
    Vitest will run all the unit and integration tests located under `src/**/__tests__`.
+
+## 🐳 Docker Setup
+
+Build the production image and start the supporting services with Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+The stack includes the Next.js app, a Supabase container, and a Redis instance
+for rate limiting.
 
 ## 📁 Structure
 
