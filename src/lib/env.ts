@@ -23,7 +23,6 @@ const serverEnvSchema = z.object({
 })
 
 // Hacés el parse por separado:
-
 export const clientEnv = clientEnvSchema.parse({
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
@@ -34,9 +33,17 @@ export const clientEnv = clientEnvSchema.parse({
   NEXT_PUBLIC_SOLANA_WALLET: process.env.NEXT_PUBLIC_SOLANA_WALLET,
   NEXT_PUBLIC_LITECOIN_WALLET: process.env.NEXT_PUBLIC_LITECOIN_WALLET,
   NEXT_PUBLIC_DOGECOIN_WALLET: process.env.NEXT_PUBLIC_DOGECOIN_WALLET,
+  UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+  UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
 })
 
 export const serverEnv = serverEnvSchema.parse({
   ETHERSCAN_API_KEY: process.env.ETHERSCAN_API_KEY,
   BREVO_API_KEY: process.env.BREVO_API_KEY,
 })
+
+// 👇 Export general que esperan otros módulos
+export const env = {
+  ...clientEnv,
+  ...serverEnv,
+}
