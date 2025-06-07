@@ -10,4 +10,8 @@ describe('NETWORKS', () => {
   it('lists polygon', () => {
     expect(NETWORKS.polygon.chainId).toBe(137);
   });
+
+  it('includes ERC20 tokens', () => {
+    expect(NETWORKS.ethereum.tokens[0].symbol).toBe('USDC');
+  });
 });
