@@ -1,9 +1,22 @@
 // src/app/api/subscribe/route.ts
 import { NextResponse } from 'next/server';
 import { subscribeToBrevo } from '@/lib/email';
+import { isRateLimited } from '@/utils/rateLimiter';
 
 export async function POST(req: Request) {
   try {
+    const ip =
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      req.headers.get('x-real-ip') ||
+      'unknown';
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { message: 'Too many requests' },
+        { status: 429 }
+      );
+    }
+
     const { email } = await req.json();
 
     if (!email || typeof email !== 'string' || !email.includes('@')) {
