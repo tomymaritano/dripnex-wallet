@@ -10,23 +10,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import QRCode from 'react-qr-code';
 import PageLayout from '@/components/PageLayout'
 import { CryptoLogos } from '../wallet/components/CryptoLogos'
-import { env } from '@/lib/env'
-
-const WALLETS: Record<string, string> = {
-  ETH: env.NEXT_PUBLIC_ETH_WALLET,
-  BTC: env.NEXT_PUBLIC_BITCOIN_WALLET,
-  SOL: env.NEXT_PUBLIC_SOLANA_WALLET,
-  LTC: env.NEXT_PUBLIC_LITECOIN_WALLET,
-  DOGE: env.NEXT_PUBLIC_DOGECOIN_WALLET,
-}
-
-const explorers: Record<string, string> = {
-  ETH: 'https://etherscan.io/tx/',
-  BTC: 'https://www.blockchain.com/btc/tx/',
-  SOL: 'https://solscan.io/tx/',
-  LTC: 'https://blockchair.com/litecoin/transaction/',
-  DOGE: 'https://blockchair.com/dogecoin/transaction/',
-};
+import { WALLETS, EXPLORERS } from '@/lib/donation'
 
 const suggestedAmounts = ['0.01', '0.05', '0.1', '0.5', '1'];
 const cryptoOptions = ['ETH', 'BTC', 'SOL', 'LTC', 'DOGE'] as const;
@@ -48,7 +32,7 @@ export default function DonatePage() {
   } = useSendTransaction();
 
   const address = WALLETS[selectedCrypto];
-  const explorerBase = explorers[selectedCrypto];
+  const explorerBase = EXPLORERS[selectedCrypto];
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(address);

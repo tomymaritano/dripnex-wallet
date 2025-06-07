@@ -6,23 +6,7 @@ import { CryptoType } from './cryptoTypes'
 import CryptoSelector from './CryptoSelector'
 import AmountInput from './AmountInput'
 import SendDonation from './SendDonation'
-import { env } from '@/lib/env'
-
-const WALLETS: Record<string, string> = {
-  ETH: env.NEXT_PUBLIC_ETH_WALLET,
-  BTC: env.NEXT_PUBLIC_BITCOIN_WALLET,
-  SOL: env.NEXT_PUBLIC_SOLANA_WALLET,
-  LTC: env.NEXT_PUBLIC_LITECOIN_WALLET,
-  DOGE: env.NEXT_PUBLIC_DOGECOIN_WALLET,
-}
-
-const explorers: Record<string, string> = {
-  ETH: 'https://etherscan.io/tx/',
-  BTC: 'https://www.blockchain.com/btc/tx/',
-  SOL: 'https://solscan.io/tx/',
-  LTC: 'https://blockchair.com/litecoin/transaction/',
-  DOGE: 'https://blockchair.com/dogecoin/transaction/',
-};
+import { WALLETS, EXPLORERS } from '@/lib/donation'
 
 
 interface DonateWidgetProps {
@@ -42,7 +26,7 @@ export default function DonateWidget({
   const [amount, setAmount] = useState('0.01');
 
   const address = WALLETS[selectedCrypto];
-  const explorerBase = explorers[selectedCrypto];
+  const explorerBase = EXPLORERS[selectedCrypto];
 
   return (
     <section className="w-full max-w-full rounded-2xl shadow-2xl p-8 border border-white/10 backdrop-blur bg-black/30 space-y-8 text-white">
