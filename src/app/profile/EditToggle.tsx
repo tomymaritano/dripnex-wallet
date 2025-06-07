@@ -4,6 +4,11 @@ type Props = {
   onClick: () => void;
 };
 
+/**
+ * Button used to toggle profile editing mode.
+ *
+ * @param props.onClick Called when the button is clicked.
+ */
 export default function EditToggle({ onClick }: Props) {
   return (
     <motion.button

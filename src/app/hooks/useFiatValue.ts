@@ -1,6 +1,13 @@
 // lib/hooks/useFiatValue.ts
 import { useEffect, useState } from 'react';
 
+/**
+ * Convert an ETH amount to the selected fiat currency using CoinGecko.
+ *
+ * @param eth ETH amount.
+ * @param currency Fiat currency code.
+ * @returns Converted value or `null` while loading.
+ */
 export function useFiatValue(eth: number, currency: string) {
   const [fiatValue, setFiatValue] = useState<number | null>(null);
 

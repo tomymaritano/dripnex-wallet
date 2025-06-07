@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { faqs } from '@/data/faqs';
 
+/**
+ * Frequently asked questions accordion component.
+ */
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

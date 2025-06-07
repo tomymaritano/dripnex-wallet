@@ -1,5 +1,8 @@
 import { FaXTwitter, FaGithub, FaTelegram, FaLinkedin } from 'react-icons/fa6';
 
+/**
+ * Application footer with social links and navigation.
+ */
 export default function Footer() {
   return (
     <footer className="w-full border-t border-white/10 bg-black/30 backdrop-blur-md text-gray-400 text-sm">

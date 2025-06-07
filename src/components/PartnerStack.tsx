@@ -16,6 +16,9 @@ const tech = [
   { name: 'React', icon: SiReact },
 ];
 
+/**
+ * Showcases technologies used in the project.
+ */
 export default function TechStackShowcase() {
   return (
     <section className="relative py-20 px-6 max-w-6xl mx-auto text-white overflow-hidden">

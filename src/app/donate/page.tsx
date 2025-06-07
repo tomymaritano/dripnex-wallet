@@ -16,6 +16,9 @@ const suggestedAmounts = ['0.01', '0.05', '0.1', '0.5', '1'];
 const cryptoOptions = ['ETH', 'BTC', 'SOL', 'LTC', 'DOGE'] as const;
 type CryptoType = typeof cryptoOptions[number];
 
+/**
+ * Donation page allowing supporters to send crypto.
+ */
 export default function DonatePage() {
   const [amount, setAmount] = useState('0.01');
   const [copied, setCopied] = useState(false);

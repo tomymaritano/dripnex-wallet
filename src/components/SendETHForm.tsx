@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { useAccount, useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem';
 
+/**
+ * Form used in early prototypes to send ETH manually.
+ */
 export default function SendETHForm() {
   const { isConnected } = useAccount();
   const [to, setTo] = useState('');

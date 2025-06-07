@@ -25,6 +25,9 @@ const roadmap = [
   },
 ];
 
+/**
+ * Vertical timeline showing the product roadmap.
+ */
 export default function RoadmapTimeline() {
   return (
     <section className="py-16 px-6 max-w-5xl mx-auto text-white">

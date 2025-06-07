@@ -5,6 +5,12 @@ import { env } from '@/lib/env'
 const ETHERSCAN_API_KEY = env.ETHERSCAN_API_KEY
 const ETHERSCAN_BASE_URL = 'https://api.etherscan.io/api';
 
+/**
+ * API endpoint that proxies the Etherscan `txlist` API.
+ *
+ * @param request - `Request` containing the wallet `address` query parameter.
+ * @returns JSON response with the list of parsed transactions.
+ */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const address = searchParams.get('address');

@@ -5,6 +5,9 @@ import { useTopCoins } from '@/app/hooks/useTopCoin';
 import { usePriceEffects } from '@/app/hooks/usePriceEffects';
 import { CryptoTickerItem } from './CryptoTickerItem';
 
+/**
+ * Scrolling marquee that shows top cryptocurrency prices.
+ */
 export default function CryptoTickerMarquee() {
   const { currency } = useCurrencyStore();
   const { coins, loading } = useTopCoins(currency);

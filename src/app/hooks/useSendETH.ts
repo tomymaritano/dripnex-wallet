@@ -4,6 +4,11 @@ import { parseEther } from 'viem';
 import { useAccount, useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
 import { useState } from 'react';
 
+/**
+ * Utility hook to send ETH using `wagmi`'s `useSendTransaction`.
+ *
+ * @returns State and helper methods for sending ETH transactions.
+ */
 export function useSendEth() {
   const [txHash, setTxHash] = useState<`0x${string}` | null>(null);
   const { address } = useAccount();

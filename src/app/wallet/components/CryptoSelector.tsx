@@ -12,6 +12,13 @@ interface Props {
   address: string;
 }
 
+/**
+ * Selector for choosing which cryptocurrency to donate with.
+ *
+ * @param props.selectedCrypto Current crypto option.
+ * @param props.setSelectedCrypto Setter for selection.
+ * @param props.address Wallet address to display.
+ */
 export default function CryptoSelector({
   selectedCrypto,
   setSelectedCrypto,

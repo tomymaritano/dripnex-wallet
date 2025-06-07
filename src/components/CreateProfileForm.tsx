@@ -3,6 +3,11 @@
 import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 
+/**
+ * Simple form for creating a user profile associated with a wallet.
+ *
+ * @param address Wallet address being registered.
+ */
 export default function CreateProfileForm({ address }: { address: string }) {
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');

@@ -1,5 +1,11 @@
 import { env } from './env'
 
+/**
+ * Add an email address to the Brevo contacts list.
+ *
+ * @param email Address to subscribe.
+ * @returns API response body.
+ */
 export async function subscribeToBrevo(email: string) {
   const apiKey = env.BREVO_API_KEY
 

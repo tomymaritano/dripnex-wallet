@@ -24,6 +24,12 @@ type MoreDropdownProps = {
   onClickItem?: () => void;
 };
 
+/**
+ * Wrapper component configuring `MultiSectionDropdown` for the "More" menu.
+ *
+ * @param props.isMobile Render a mobile version.
+ * @param props.onClickItem Optional click handler.
+ */
 export default function MoreDropdown({ isMobile = false, onClickItem }: MoreDropdownProps) {
   return (
     <MultiSectionDropdown
