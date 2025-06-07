@@ -24,10 +24,12 @@ A clean, crypto-native frontend starter that lets you:
 git clone https://github.com/yourusername/dripnex.git
 cd dripnex
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
 > 📝 Make sure to replace your `WalletConnect` project ID in `wallet.ts`.
+> The `.env.example` file lists all variables needed for local development.
 
 ## 📁 Structure
 
