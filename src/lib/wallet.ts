@@ -1,17 +1,24 @@
 // src/lib/wallet.ts
 import { getDefaultConfig } from '@rainbow-me/rainbowkit'
-import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains'
 import { http } from 'wagmi'
 import { env } from './env'
+import { NETWORKS } from './networks'
 
 export const config = getDefaultConfig({
   appName: 'Dripnex',
   projectId: env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
-  chains: [mainnet, polygon, optimism, arbitrum],
+  chains: [
+    NETWORKS.ethereum.chain,
+    NETWORKS.polygon.chain,
+    NETWORKS.optimism.chain,
+    NETWORKS.arbitrum.chain,
+    NETWORKS.bsc.chain,
+  ],
   transports: {
-    [mainnet.id]: http(),
-    [polygon.id]: http(),
-    [optimism.id]: http(),
-    [arbitrum.id]: http(),
+    [NETWORKS.ethereum.chain.id]: http(),
+    [NETWORKS.polygon.chain.id]: http(),
+    [NETWORKS.optimism.chain.id]: http(),
+    [NETWORKS.arbitrum.chain.id]: http(),
+    [NETWORKS.bsc.chain.id]: http(),
   },
 });
