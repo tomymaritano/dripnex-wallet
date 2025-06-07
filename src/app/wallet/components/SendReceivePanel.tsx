@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaRegCopy, FaCheck } from 'react-icons/fa';
 import { useSendEth } from '@/app/hooks/useSendETH';
+import { isAddress } from 'viem';
+import toast from 'react-hot-toast';
 
 type Props = {
   address: string;
@@ -17,7 +19,7 @@ export default function SendReceivePanel({ address }: Props) {
 
   const { send, isPending, isConfirming, txHash } = useSendEth();
 
-  const isValidAddress = recipient.startsWith('0x') && recipient.length === 42;
+  const isValidAddress = isAddress(recipient);
   const suggestedAmounts = ['0.01', '0.05', '0.1', '0.5', '1'];
 
   const handleCopyAddress = () => {
@@ -28,10 +30,17 @@ export default function SendReceivePanel({ address }: Props) {
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isValidAddress) {
+      toast.error('Invalid address for this network');
+      return;
+    }
     try {
       await send(recipient as `0x${string}`, amount);
     } catch (err) {
       console.error('Transaction failed', err);
+      toast.error(
+        err instanceof Error ? err.message : 'Transaction failed'
+      );
     }
   };
 

@@ -1,15 +1,19 @@
 'use client';
 
 import { parseEther } from 'viem';
-import { useAccount, useSendTransaction, useWaitForTransactionReceipt } from 'wagmi';
-import { useState } from 'react';
+import {
+  useAccount,
+  useSendTransaction,
+  useWaitForTransactionReceipt,
+} from 'wagmi';
+import { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 export function useSendEth() {
   const [txHash, setTxHash] = useState<`0x${string}` | null>(null);
   const { address } = useAccount();
   const {
-    sendTransaction,
-    data,
+    sendTransactionAsync,
     isPending,
     error,
     isError,
@@ -20,19 +24,26 @@ export function useSendEth() {
     query: { enabled: !!txHash },
   });
 
-  const send = (to: `0x${string}`, amount: string) => {
-    sendTransaction(
-      {
+  const send = async (to: `0x${string}`, amount: string) => {
+    try {
+      const tx = await sendTransactionAsync({
         to,
         value: parseEther(amount),
-      },
-      {
-        onSuccess: (data) => {
-          setTxHash(data);
-        },
-      }
-    );
+      });
+      setTxHash(tx);
+      toast.success('✅ Transaction submitted');
+      return tx;
+    } catch (err) {
+      toast.error('❌ Transaction failed');
+      throw err;
+    }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('✅ Transaction confirmed');
+    }
+  }, [isSuccess]);
 
   return {
     send,
