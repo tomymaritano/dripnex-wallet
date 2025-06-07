@@ -1,5 +1,12 @@
 import { createPublicClient, http, type PublicClient } from 'viem';
-import { mainnet, polygon, bsc, arbitrum, optimism } from 'viem/chains';
+import {
+  mainnet,
+  polygon,
+  bsc,
+  arbitrum,
+  optimism,
+  type Chain,
+} from 'viem/chains';
 
 /** Parameters for sending a transaction */
 export interface SendTxParams {
@@ -20,7 +27,7 @@ export interface NetworkProvider {
  *
  * @param chain Chain configuration from viem.
  */
-function client(chain: any): PublicClient {
+function client(chain: Chain): PublicClient {
   return createPublicClient({ chain, transport: http() });
 }
 
