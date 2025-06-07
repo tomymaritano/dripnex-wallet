@@ -1,6 +1,6 @@
 'use client';
 
-import WalletDashboard from './WalletDashboard';
+import Dashboard from '@/features/wallet/Dashboard';
 import PageLayout from '@/components/PageLayout';
 import { motion } from 'framer-motion';
 
@@ -30,7 +30,7 @@ export default function WalletPage() {
 
         {/* Dashboard Section */}
         <section className="mt-10">
-          <WalletDashboard />
+          <Dashboard />
         </section>
       </motion.div>
     </PageLayout>

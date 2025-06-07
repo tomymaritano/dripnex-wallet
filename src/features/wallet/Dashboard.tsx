@@ -3,17 +3,17 @@ import { useAccount, useBalance, useChainId } from 'wagmi';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
-import { useUserProfile } from '../hooks/useUserProfile';
+import { useUserProfile } from '@/app/hooks/useUserProfile';
 import { fetchTransactions, ParsedTransaction } from '@/lib/fetchTransactions';
 import ProfileCard from './components/ProfileCard';
 import TransactionList from './components/TransactionList';
-import SendReceivePanel from './components/SendReceivePanel';
+import TransferPanel from './components/TransferPanel';
 import DonateWidget from './components/DonateWidget';
 
 /**
  * Main dashboard showing wallet info, transactions and donation widget.
  */
-export default function WalletDashboard() {
+export default function Dashboard() {
   const router = useRouter();
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
@@ -61,7 +61,7 @@ export default function WalletDashboard() {
         </div>
       </div>
 
-      <SendReceivePanel address={address} />
+      <TransferPanel address={address} />
     </div>
     <DonateWidget />
     </>
