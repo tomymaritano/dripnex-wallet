@@ -13,6 +13,10 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Missing wallet address' }, { status: 400 });
   }
 
+  if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
+    return NextResponse.json({ error: 'Invalid address' }, { status: 400 });
+  }
+
   try {
     const url = `${ETHERSCAN_BASE_URL}?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=desc&apikey=${ETHERSCAN_API_KEY}`;
     const res = await fetch(url);
