@@ -32,6 +32,39 @@ npm run dev
 > 📝 Make sure to replace your `WalletConnect` project ID in `wallet.ts`.
 > The `.env.example` file lists all variables needed for local development.
 
+## 🌐 Environment Variables
+
+`dripnex` relies on a few environment variables for API keys and wallet
+addresses. Copy `.env.example` to `.env.local` and fill in your values.
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | URL of your Supabase instance |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key used in the browser |
+| `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` | WalletConnect project ID |
+| `NEXT_PUBLIC_ETHERSCAN_API_KEY` | Public API key for client Etherscan calls |
+| `ETHERSCAN_API_KEY` | Private API key for server-side Etherscan requests |
+| `BREVO_API_KEY` | API key for the Brevo email service |
+| `NEXT_PUBLIC_ETH_WALLET` | Donation address for Ethereum |
+| `NEXT_PUBLIC_BITCOIN_WALLET` | Donation address for Bitcoin |
+| `NEXT_PUBLIC_SOLANA_WALLET` | Donation address for Solana |
+| `NEXT_PUBLIC_LITECOIN_WALLET` | Donation address for Litecoin |
+| `NEXT_PUBLIC_DOGECOIN_WALLET` | Donation address for Dogecoin |
+
+Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
+
+## 🐳 Docker Usage
+
+You can run the app in a container without installing Node locally. Build the
+image and start the server with:
+
+```bash
+docker build -t dripnex .
+docker run --env-file .env.local -p 3000:3000 dripnex
+```
+
+The server will be available at `http://localhost:3000`.
+
 ## 🧪 Running Tests
 
 1. Install dependencies if you haven't already:
@@ -50,16 +83,11 @@ npm run dev
 
    Vitest will run all the unit and integration tests located under `src/**/__tests__`.
 
-## 🐳 Docker Setup
+4. Run the linter to make sure your code follows the project's style rules:
 
-Build the production image and start the supporting services with Docker Compose:
-
-```bash
-docker compose up --build
-```
-
-The stack includes the Next.js app, a Supabase container, and a Redis instance
-for rate limiting.
+   ```bash
+   npm run lint
+   ```
 
 ## 📁 Structure
 
@@ -150,6 +178,8 @@ _Last updated: 2025-06-04_
 3. Commit your changes
 4. Push to the branch
 5. Open a Pull Request
+
+For detailed guidelines see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## 🧠 License
 
