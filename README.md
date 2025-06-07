@@ -14,6 +14,7 @@ A clean, crypto-native frontend starter that lets you:
 
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [PostCSS](https://postcss.org/) configured via `postcss.config.js` (Tailwind CSS + Autoprefixer)
 - [RainbowKit](https://rainbowkit.com/)
 - [Wagmi](https://wagmi.sh/)
 - [Framer Motion](https://www.framer.com/motion/)
