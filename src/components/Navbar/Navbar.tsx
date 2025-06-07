@@ -13,7 +13,8 @@ import CurrencyDropdown from '../CurrencySelector';
 
 const NAV_LINKS = [
   { href: '/wallet', label: 'Wallet' },
-  { href: '/send', label: 'Send' },
+  // Send now points to the wallet dashboard where the send panel lives
+  { href: '/wallet', label: 'Send' },
 ];
 
 /**
