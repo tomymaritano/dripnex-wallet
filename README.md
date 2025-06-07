@@ -48,6 +48,66 @@ npm run dev
 ├── styles/
 │   └── globals.css
 ```
+
+## 🏗️ Architecture
+
+- **Next.js App Router** lives in `src/app` and powers all routes and layouts.
+- **components/** houses shared UI like the navbar and wallet button.
+- **lib/** contains utilities and the Web3 config (`wallet.ts`).
+- **services/** wraps external APIs such as Etherscan.
+- **app/hooks/** exposes React hooks for core features.
+
+All pages are wrapped with `Web3Wrapper` from `layout.tsx`, which provides Wagmi,
+RainbowKit and React Query context.
+
+## 🔌 Wallet Connection & Networks
+
+`WalletButton` uses RainbowKit's `<ConnectButton>` to connect wallets. The list
+of supported chains and RPC endpoints lives in `src/lib/wallet.ts`:
+
+```ts
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
+import { http } from 'wagmi';
+
+export const config = getDefaultConfig({
+  appName: 'Dripnex',
+  projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID!,
+  chains: [mainnet, polygon, optimism, arbitrum],
+  transports: {
+    [mainnet.id]: http(),
+    [polygon.id]: http(),
+    [optimism.id]: http(),
+    [arbitrum.id]: http(),
+  },
+});
+```
+
+### Adding a network
+
+1. Import the chain from `wagmi/chains`.
+2. Add it to the `chains` array and define a transport in `transports`.
+
+```ts
+import { bsc } from 'wagmi/chains';
+
+export const config = getDefaultConfig({
+  // ...
+  chains: [mainnet, polygon, optimism, arbitrum, bsc],
+  transports: {
+    [mainnet.id]: http(),
+    [polygon.id]: http(),
+    [optimism.id]: http(),
+    [arbitrum.id]: http(),
+    [bsc.id]: http('https://bsc-dataseed.binance.org'),
+  },
+});
+```
+
+## 🛠 Development & Testing
+
+- Start the dev server with `npm run dev`.
+- Run the test suite with `npm test`.
 # 🧠 Dripnex Project Backlog
 
 _Last updated: 2025-06-04_
