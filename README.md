@@ -66,6 +66,17 @@ npm run dev
 ├── styles/
 │   └── globals.css
 ```
+
+## 🔒 Security
+
+The application sends several security headers defined in `next.config.ts`:
+
+- **Content-Security-Policy** restricts asset loading to the same origin.
+- **X-Frame-Options: DENY** prevents embedding the site in iframes.
+- **X-Content-Type-Options: nosniff** stops MIME type sniffing.
+- **Referrer-Policy: same-origin** only sends referrer info for same-site requests.
+- **X-XSS-Protection: 1; mode=block** enables basic XSS filtering in old browsers.
+
 # 🧠 Dripnex Project Backlog
 
 _Last updated: 2025-06-04_
