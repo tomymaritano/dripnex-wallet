@@ -1,20 +1,21 @@
 'use client';
 
-import { useState } from 'react';
-import { FaCheck, FaRegCopy, FaSpinner } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
-import { parseEther } from 'viem';
-import { useAccount, useSendTransaction } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import QRCode from 'react-qr-code';
+import { useState } from 'react'
+import { FaCheck, FaRegCopy, FaSpinner } from 'react-icons/fa'
+import { motion, AnimatePresence } from 'framer-motion'
+import { parseEther } from 'viem'
+import { useAccount, useSendTransaction } from 'wagmi'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
+import QRCode from 'react-qr-code'
+import { env } from '@/lib/env'
 
 const WALLETS: Record<string, string> = {
-  ETH: process.env.NEXT_PUBLIC_ETH_WALLET!,
-  BTC: process.env.NEXT_PUBLIC_BITCOIN_WALLET!,
-  SOL: process.env.NEXT_PUBLIC_SOLANA_WALLET!,
-  LTC: process.env.NEXT_PUBLIC_LITECOIN_WALLET!,
-  DOGE: process.env.NEXT_PUBLIC_DOGECOIN_WALLET!,
-};
+  ETH: env.NEXT_PUBLIC_ETH_WALLET,
+  BTC: env.NEXT_PUBLIC_BITCOIN_WALLET,
+  SOL: env.NEXT_PUBLIC_SOLANA_WALLET,
+  LTC: env.NEXT_PUBLIC_LITECOIN_WALLET,
+  DOGE: env.NEXT_PUBLIC_DOGECOIN_WALLET,
+}
 
 const explorers: Record<string, string> = {
   ETH: 'https://etherscan.io/tx/',
