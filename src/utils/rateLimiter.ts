@@ -1,26 +1,20 @@
-const WINDOW_MS = 60 * 60 * 1000; // 1 hour
-const LIMIT = 5;
+import { Redis } from '@upstash/redis'
 
-interface Entry {
-  count: number;
-  reset: number;
-}
+const redis = Redis.fromEnv()
 
-const requests = new Map<string, Entry>();
+const WINDOW_SECONDS = 60 * 60 // 1 hour
+const LIMIT = 5
 
-export function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const entry = requests.get(ip);
-
-  if (!entry || now > entry.reset) {
-    requests.set(ip, { count: 1, reset: now + WINDOW_MS });
-    return false;
+export async function isRateLimited(ip: string): Promise<boolean> {
+  const key = `rate_limit:${ip}`
+  try {
+    const count = await redis.incr(key)
+    if (count === 1) {
+      await redis.expire(key, WINDOW_SECONDS)
+    }
+    return count > LIMIT
+  } catch {
+    // If Redis fails, allow the request
+    return false
   }
-
-  if (entry.count >= LIMIT) {
-    return true;
-  }
-
-  entry.count += 1;
-  return false;
 }
