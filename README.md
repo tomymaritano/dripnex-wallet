@@ -126,7 +126,8 @@ docker-compose up
 
 The application sends several security headers defined in `next.config.ts`:
 
-- **Content-Security-Policy** restricts asset loading to the same origin.
+- **Content-Security-Policy** restricts asset loading to the same origin while
+  allowing inline scripts required by Next.js.
 - **X-Frame-Options: DENY** prevents embedding the site in iframes.
 - **X-Content-Type-Options: nosniff** stops MIME type sniffing.
 - **Referrer-Policy: same-origin** only sends referrer info for same-site requests.
