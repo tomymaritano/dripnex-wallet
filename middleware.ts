@@ -10,15 +10,15 @@ export function middleware(req: NextRequest) {
   // Dynamic CSP depending on environment
 
   const csp = `
-    default-src 'self';
-    script-src 'self' 'unsafe-inline' https:;
-    style-src 'self' 'unsafe-inline' https:;
-    img-src * blob: data:;
-    connect-src *;
-    font-src 'self' https: data:;
-    object-src 'none';
-    frame-ancestors 'none';
-  `.replace(/\s{2,}/g, ' ').trim()
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https:;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  img-src * blob: data:;
+  connect-src *;
+  font-src 'self' https://fonts.gstatic.com data:;
+  object-src 'none';
+  frame-ancestors 'none';
+`.replace(/\s{2,}/g, ' ').trim();
 
   res.headers.set('Content-Security-Policy', csp)
 
@@ -27,4 +27,5 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  runtime: 'nodejs', // <--- esta línea la agregás
 }

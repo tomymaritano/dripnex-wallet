@@ -58,7 +58,8 @@ export default function Navbar() {
             src="/logodripnex.svg"
             alt="Dripnex Logo"
             width={38}
-            height={undefined}
+            height={38}
+            style={{ height: 'auto' }} // 🔥 agregar esto            
             priority
             className="h-auto w-10 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
           />
