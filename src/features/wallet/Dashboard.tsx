@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { NETWORKS } from '@/lib/networks';
-import { useUserProfile } from '../hooks/useUserProfile';
+import { useUserProfile } from '@/app/hooks/useUserProfile';
 import { fetchTransactions, ParsedTransaction } from '@/lib/fetchTransactions';
 import ProfileCard from './components/ProfileCard';
 import TransactionList from './components/TransactionList';
