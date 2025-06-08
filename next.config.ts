@@ -8,7 +8,7 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-inline'; " +
       "style-src 'self' 'unsafe-inline'; " +
       "img-src 'self' https: data:; " +
-      "connect-src 'self' https:; " +
+      "connect-src 'self' https: ws:; " +
       "frame-ancestors 'none';",
   },
   { key: 'X-Frame-Options', value: 'DENY' },
