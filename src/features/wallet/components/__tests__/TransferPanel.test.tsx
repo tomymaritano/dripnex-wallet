@@ -18,7 +18,9 @@ vi.mock('wagmi', () => ({
 
 describe('TransferPanel', () => {
   it('renders send tab by default', () => {
-    const { getByText } = render(<TransferPanel address="0x123" />);
+    const { getByText } = render(
+      <TransferPanel address="0x123" contacts={[]} />
+    );
     expect(getByText('Send')).toBeInTheDocument();
   });
 });

@@ -6,6 +6,14 @@ export interface Wallet {
   created_at: string;
 }
 
+export interface Contact {
+  id: string;
+  profile_id: string;
+  address: string;
+  name: string | null;
+  created_at: string;
+}
+
 export interface UserProfile {
   id: string;
   username: string;
@@ -13,4 +21,5 @@ export interface UserProfile {
   created_at: string;
   avatar_url?: string;
   wallets: Wallet[];
+  contacts: Contact[];
 }

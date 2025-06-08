@@ -25,7 +25,7 @@ export function useUserProfile(address?: string) {
     try {
       const { data, error: profileErr } = await supabase
         .from('profiles')
-        .select('*, wallets(id, address, chain_id, created_at)')
+        .select('*, wallets(id, address, chain_id, created_at), contacts(id, address, name, created_at)')
         .eq('wallets.address', address)
         .maybeSingle();
 

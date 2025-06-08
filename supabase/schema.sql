@@ -13,3 +13,11 @@ CREATE TABLE wallets (
   chain_id integer,
   created_at timestamptz DEFAULT now()
 );
+
+CREATE TABLE contacts (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  profile_id uuid REFERENCES profiles(id) ON DELETE CASCADE,
+  address text NOT NULL,
+  name text,
+  created_at timestamptz DEFAULT now()
+);

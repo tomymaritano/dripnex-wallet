@@ -5,9 +5,12 @@ import { motion } from 'framer-motion';
 import { FaRegCopy, FaCheck } from 'react-icons/fa';
 import { NETWORKS } from '@/lib/networks';
 import { useSendTransactionWithGas } from '@/app/hooks/useSendTransaction';
+import ContactSelector from './ContactSelector';
+import { Contact } from '@/types/user';
 
 type Props = {
   address: string;
+  contacts: Contact[];
 };
 
 /**
@@ -15,7 +18,7 @@ type Props = {
  *
  * @param props.address Wallet address used for receive tab.
  */
-export default function TransferPanel({ address }: Props) {
+export default function TransferPanel({ address, contacts }: Props) {
   const [activeTab, setActiveTab] = useState<'send' | 'receive'>('send');
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
@@ -141,6 +144,12 @@ export default function TransferPanel({ address }: Props) {
             )}
           </div>
           {/* Recipient */}
+          {contacts.length > 0 && (
+            <div>
+              <label className="block text-gray-400 mb-1">Contact</label>
+              <ContactSelector contacts={contacts} onSelect={setRecipient} />
+            </div>
+          )}
           <div>
             <label className="block text-gray-400 mb-1">Recipient Address</label>
             <input

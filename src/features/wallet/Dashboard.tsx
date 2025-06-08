@@ -11,6 +11,7 @@ import TransactionList from './components/TransactionList';
 import TransferPanel from './components/TransferPanel';
 import DonateWidget from './components/DonateWidget';
 import WalletList from './components/WalletList';
+import ContactList from './components/ContactList';
 
 function TokenBalance({
   address,
@@ -82,8 +83,9 @@ export default function Dashboard() {
 
 
         {profile && (
-          <div className="mt-6">
+          <div className="mt-6 space-y-6">
             <WalletList profileId={profile.id} wallets={profile.wallets} onChange={refetch} />
+            <ContactList profileId={profile.id} contacts={profile.contacts} onChange={refetch} />
           </div>
         )}
 
@@ -118,7 +120,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <TransferPanel address={address} />
+      <TransferPanel address={address} contacts={profile?.contacts ?? []} />
     </div>
     <DonateWidget />
     </>
