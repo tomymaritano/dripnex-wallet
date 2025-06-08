@@ -102,8 +102,20 @@ docker-compose up
 4. Run the linter to make sure your code follows the project's style rules:
 
    ```bash
-   npm run lint
-   ```
+ npm run lint
+  ```
+
+## 📱 Progressive Web App
+
+The app ships with a basic service worker and web app manifest. To build and
+serve the PWA locally run:
+
+```bash
+npm run pwa
+```
+
+This registers the service worker from `public/sw.js` and uses the manifest
+located at `public/manifest.json`.
 
 ## 📁 Structure
 
