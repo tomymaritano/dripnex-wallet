@@ -58,9 +58,9 @@ export default function Navbar() {
             src="/logodripnex.svg"
             alt="Dripnex Logo"
             width={38}
-            height={38}
+            height={undefined}
             priority
-            className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+            className="h-auto w-10 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
           />
         </Link>
 

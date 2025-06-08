@@ -15,29 +15,18 @@ export function useUserProfile(address?: string) {
   const [error, setError] = useState<string | null>(null);
 
   const fetchProfile = useCallback(async () => {
-    if (!address) return;
+    if (!address) {
+      setProfile(null);
+      return;
+    }
     setLoading(true);
     setError(null);
 
     try {
-      // Find the profile linked to this wallet
-      const { data: wallet, error: walletErr } = await supabase
-        .from('wallets')
-        .select('profile_id')
-        .eq('address', address)
-        .maybeSingle();
-
-      if (walletErr) throw walletErr;
-      if (!wallet) {
-        setProfile(null);
-        setLoading(false);
-        return;
-      }
-
       const { data, error: profileErr } = await supabase
         .from('profiles')
-        .select('*, wallets(id, address, chain_id, profile_id, created_at)')
-        .eq('id', wallet.profile_id)
+        .select('*, wallets(id, address, chain_id, created_at)')
+        .eq('wallets.address', address)
         .maybeSingle();
 
       if (profileErr) throw profileErr;
