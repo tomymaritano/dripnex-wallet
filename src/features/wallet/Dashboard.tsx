@@ -80,11 +80,37 @@ export default function Dashboard() {
           onEditClick={() => router.push('/profile')}
         />
 
+
         {profile && (
           <div className="mt-6">
             <WalletList profileId={profile.id} wallets={profile.wallets} onChange={refetch} />
           </div>
         )}
+
+        <div className="mt-6 space-y-2 text-sm text-gray-300">
+          {Object.entries(NETWORKS).map(([key, net]) => (
+            <div key={key}>
+              <p className="font-semibold">{net.name}</p>
+              <div className="ml-2 space-y-1">
+                <div>
+                  <TokenBalance
+                    address={address as `0x${string}`}
+                    chainId={net.chainId}
+                  />
+                </div>
+                {net.tokens.map((t) => (
+                  <div key={t.address}>
+                    <TokenBalance
+                      address={address as `0x${string}`}
+                      chainId={net.chainId}
+                      token={t}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="mt-10">
           <h3 className="text-sm text-gray-400 mb-4">Recent Transactions</h3>
