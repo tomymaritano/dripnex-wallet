@@ -35,7 +35,7 @@ function verify(signed: string | undefined, token: string | null) {
   return hash === sign(raw) && raw === token
 }
 
-export function csrf<T extends (req: Request) => any>(handler: T) {
+export function csrf<T extends (req: Request) => unknown>(handler: T) {
   return async function wrapped(req: Request) {
     const cookieHeader = req.headers.get('cookie') || ''
     const match = cookieHeader.match(new RegExp(`${COOKIE_NAME}=([^;]+)`))

@@ -51,14 +51,13 @@ addresses. Copy `.env.example` to `.env.local` and fill in your values.
 | `NEXT_PUBLIC_SOLANA_WALLET` | Donation address for Solana |
 | `NEXT_PUBLIC_LITECOIN_WALLET` | Donation address for Litecoin |
 | `NEXT_PUBLIC_DOGECOIN_WALLET` | Donation address for Dogecoin |
-| `UPSTASH_REDIS_REST_URL` | URL for Upstash Redis REST API *(optional)* |
-| `UPSTASH_REDIS_REST_TOKEN` | Token for Upstash Redis REST API *(optional)* |
+| `UPSTASH_REDIS_REST_URL` | Optional Redis REST endpoint used in Docker |
+| `UPSTASH_REDIS_REST_TOKEN` | Token for the Upstash REST API |
 
 Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
 
-Docker and `docker-compose` read variables from `.env.local`. The test suite
-uses `.env.test`. Copy `.env.example` to these files and adjust the values for
-your environment.
+Create a `.env.local` file with these values for local development and Docker.
+Tests load variables from `.env.test` using the same keys.
 
 ## 🐳 Docker Usage
 
@@ -74,14 +73,13 @@ The server will be available at `http://localhost:3000`.
 
 ### Docker Compose
 
-If you want to run Supabase and Redis along with the app, start all services
-with:
+If you want Supabase and Redis alongside the app, start everything with:
 
 ```bash
 docker-compose up
 ```
 
-This reads variables from `.env.local` and sets up the required containers.
+`docker-compose` reads the same `.env.local` file used for local development.
 
 ## 🧪 Running Tests
 
@@ -91,7 +89,7 @@ This reads variables from `.env.local` and sets up the required containers.
    npm install
    ```
 
-2. Create a `.env.test` file with the environment variables required for tests. You can copy from `.env.example` and adjust the values as needed.
+2. Create a `.env.test` file with the same keys listed above. The tests will load this file automatically.
 
 3. Execute the test suite with:
 
@@ -140,6 +138,8 @@ The application sends several security headers defined in `next.config.ts`:
 - **GET `/healthz`** — returns `200 OK` when the server is running.
 - All POST requests require a CSRF token. The token is stored in the
   `_dripnex_csrf` cookie and must be sent using the `X-CSRF-Token` header.
+
+The API provides a `/healthz` endpoint for health checks. All POST routes require a `csrfToken` header to mitigate CSRF attacks.
 
 # 🧠 Dripnex Project Backlog
 

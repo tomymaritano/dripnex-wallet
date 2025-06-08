@@ -1,6 +1,6 @@
 # Contributing to Dripnex
 
-Thank you for helping make **Dripnex** better! This document describes the workflow for submitting changes and the conventions used in the project.
+Thank you for helping make **Dripnex** better! This document describes the workflow for submitting changes and the conventions used in the project. All commits should follow the Conventional Commits style and every pull request should adhere to the guidelines below.
 
 ## Pull Request Workflow
 
@@ -10,6 +10,7 @@ Thank you for helping make **Dripnex** better! This document describes the workf
 4. Push the branch to your fork and open a Pull Request against `main`. Use a
    descriptive title and include a short summary of the changes.
 5. One of the maintainers will review your PR. Please respond to any feedback and update your branch as needed.
+6. Include a concise description of the change and link to any related issues in the PR body.
 
 ## Commit Style
 
