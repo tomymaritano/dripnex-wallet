@@ -143,6 +143,8 @@ The application sends several security headers defined in `next.config.ts`:
 
 The API provides a `/healthz` endpoint for health checks. All POST routes require a `csrfToken` header to mitigate CSRF attacks.
 
+The API provides a `/healthz` endpoint for health checks. All POST routes require a `csrfToken` header to mitigate CSRF attacks.
+
 # 🧠 Dripnex Project Backlog
 
 _Last updated: 2025-06-04_
