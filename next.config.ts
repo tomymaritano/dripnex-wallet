@@ -3,13 +3,15 @@ import type { NextConfig } from "next";
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
-    value:
-      "default-src 'self'; " +
-      "script-src 'self' 'unsafe-inline'; " +
-      "style-src 'self' 'unsafe-inline'; " +
-      "img-src 'self' https: data:; " +
-      "connect-src 'self' https: ws:; " +
-      "frame-ancestors 'none';",
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "img-src 'self' https: data:",
+      "connect-src 'self' https: ws:",
+      "font-src 'self' https://fonts.gstatic.com data:",
+      "frame-ancestors 'none'",
+    ].join('; '),
   },
   { key: 'X-Frame-Options', value: 'DENY' },
   { key: 'X-Content-Type-Options', value: 'nosniff' },
