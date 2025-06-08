@@ -1,6 +1,7 @@
 // src/lib/wallet.ts
 
 import { getDefaultConfig } from '@rainbow-me/rainbowkit'
+import { ledgerWallet, trezorWallet } from '@rainbow-me/rainbowkit/wallets'
 import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains'
 import { http, type Config } from 'wagmi'
 import { env } from './env'
@@ -12,10 +13,25 @@ declare global {
 
 export function getWalletConfig(): Config {
   if (!globalThis._walletConfig) {
+    const chains = [mainnet, polygon, optimism, arbitrum]
     globalThis._walletConfig = getDefaultConfig({
       appName: 'Dripnex',
       projectId: env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
-      chains: [mainnet, polygon, optimism, arbitrum],
+      chains,
+      wallets: [
+        {
+          groupName: 'Hardware',
+          wallets: [
+            ledgerWallet({ projectId: env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID, chains }),
+            trezorWallet({
+              chains,
+              projectId: env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
+              manifestEmail: env.NEXT_PUBLIC_TREZOR_MANIFEST_EMAIL,
+              manifestAppUrl: env.NEXT_PUBLIC_TREZOR_MANIFEST_APP_URL,
+            }),
+          ],
+        },
+      ],
       transports: {
         [mainnet.id]: http(),
         [polygon.id]: http(),

@@ -30,6 +30,8 @@ npm run dev
 ```
 
 > 📝 Make sure to replace your `WalletConnect` project ID in `wallet.ts`.
+> For Trezor support, set `NEXT_PUBLIC_TREZOR_MANIFEST_EMAIL` and
+> `NEXT_PUBLIC_TREZOR_MANIFEST_APP_URL` in `.env.local`.
 > The `.env.example` file lists all variables needed for local development.
 
 ## 🌐 Environment Variables
@@ -42,6 +44,8 @@ addresses. Copy `.env.example` to `.env.local` and fill in your values.
 | `NEXT_PUBLIC_SUPABASE_URL` | URL of your Supabase instance |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key used in the browser |
 | `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` | WalletConnect project ID |
+| `NEXT_PUBLIC_TREZOR_MANIFEST_EMAIL` | Email for the Trezor Connect manifest |
+| `NEXT_PUBLIC_TREZOR_MANIFEST_APP_URL` | App URL for the Trezor Connect manifest |
 | `NEXT_PUBLIC_ETHERSCAN_API_KEY` | Public API key for client Etherscan calls |
 | `ETHERSCAN_API_KEY` | Private API key for server-side Etherscan requests |
 | `BREVO_API_KEY` | API key for the Brevo email service |
