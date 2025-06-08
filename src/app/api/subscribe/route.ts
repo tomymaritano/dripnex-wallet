@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import { subscribeToBrevo } from '@/lib/email';
 import { isRateLimited } from '@/utils/rateLimiter';
+import { csrf } from '@/lib/csrf';
 import { z } from 'zod';
 
 /**
@@ -10,7 +11,7 @@ import { z } from 'zod';
  * @param req Incoming POST request with an `email` field.
  * @returns JSON response describing the result.
  */
-export async function POST(req: Request) {
+export const POST = csrf(async (req: Request) => {
   try {
     const ip =
       req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
@@ -51,4 +52,4 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: 'Unknown error' }, { status: 500 });
   }
-}
+});

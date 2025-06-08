@@ -45,6 +45,7 @@ addresses. Copy `.env.example` to `.env.local` and fill in your values.
 | `NEXT_PUBLIC_ETHERSCAN_API_KEY` | Public API key for client Etherscan calls |
 | `ETHERSCAN_API_KEY` | Private API key for server-side Etherscan requests |
 | `BREVO_API_KEY` | API key for the Brevo email service |
+| `CSRF_SECRET` | Secret used to sign CSRF tokens |
 | `NEXT_PUBLIC_ETH_WALLET` | Donation address for Ethereum |
 | `NEXT_PUBLIC_BITCOIN_WALLET` | Donation address for Bitcoin |
 | `NEXT_PUBLIC_SOLANA_WALLET` | Donation address for Solana |
@@ -115,6 +116,7 @@ The application sends several security headers defined in `next.config.ts`:
 - **X-Content-Type-Options: nosniff** stops MIME type sniffing.
 - **Referrer-Policy: same-origin** only sends referrer info for same-site requests.
 - **X-XSS-Protection: 1; mode=block** enables basic XSS filtering in old browsers.
+- **CSRF Protection** requires sending the `csrf-token` header with POST requests. The value comes from the `csrfToken` cookie set by the server.
 
 # 🧠 Dripnex Project Backlog
 
