@@ -7,7 +7,8 @@ Thank you for helping make **Dripnex** better! This document describes the workf
 1. **Fork** the repository and create a new branch off of `main`.
 2. Make your changes and ensure that `npm test` and `npm run lint` run without errors.
 3. Commit your work following the commit style described below.
-4. Push the branch to your fork and open a Pull Request against `main`.
+4. Push the branch to your fork and open a Pull Request against `main`. Use a
+   descriptive title and include a short summary of the changes.
 5. One of the maintainers will review your PR. Please respond to any feedback and update your branch as needed.
 
 ## Commit Style
@@ -24,6 +25,13 @@ A typical commit message looks like:
 ```
 feat: add support for additional networks
 ```
+
+## Pull Request Guidelines
+
+- Use a descriptive title and summary for your PR.
+- Reference any related issues by number.
+- Keep changes focused; open separate PRs for unrelated work.
+- Ensure `npm test` and `npm run lint` pass before requesting review.
 
 ## Coding Conventions
 
