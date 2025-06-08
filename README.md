@@ -44,6 +44,7 @@ addresses. Copy `.env.example` to `.env.local` and fill in your values.
 | `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` | WalletConnect project ID |
 | `NEXT_PUBLIC_ETHERSCAN_API_KEY` | Public API key for client Etherscan calls |
 | `ETHERSCAN_API_KEY` | Private API key for server-side Etherscan requests |
+| `NEXT_PUBLIC_LIFI_API_KEY` | API key for Li.Fi bridge quotes |
 | `BREVO_API_KEY` | API key for the Brevo email service |
 | `CSRF_SECRET` | Secret used to sign CSRF tokens |
 | `NEXT_PUBLIC_ETH_WALLET` | Donation address for Ethereum |
@@ -58,6 +59,13 @@ Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
 
 Create a `.env.local` file with these values for local development and Docker.
 Tests load variables from `.env.test` using the same keys.
+
+## 🔗 Bridge Usage
+
+The wallet can fetch cross-chain quotes using the [Li.Fi](https://li.fi) API. Set
+`NEXT_PUBLIC_LIFI_API_KEY` in your `.env.local` to enable requests. Then use the
+**BridgePanel** component to select the source/target chains and token. The
+panel will display the estimated amount received on the destination chain.
 
 ## 🐳 Docker Usage
 
@@ -157,6 +165,7 @@ _Last updated: 2025-06-04_
 - Transaction history via Etherscan API
 - Profile registration with Supabase
 - DonateWidget with multichain placeholders
+- Cross-chain quotes using Li.Fi
 - Newsletter integration with Brevo
 - Glassmorphism + responsive design
 - Tailwind + Skeleton UI integration
