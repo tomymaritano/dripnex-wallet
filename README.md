@@ -132,6 +132,11 @@ The application sends several security headers defined in `next.config.ts`:
 - **X-Content-Type-Options: nosniff** stops MIME type sniffing.
 - **Referrer-Policy: same-origin** only sends referrer info for same-site requests.
 - **X-XSS-Protection: 1; mode=block** enables basic XSS filtering in old browsers.
+- **Strict-Transport-Security** forces HTTPS connections for two years.
+- **Permissions-Policy** disables unused browser features like camera and microphone.
+- **Cross-Origin-Embedder-Policy: require-corp** enables cross-origin isolation.
+- **Cross-Origin-Resource-Policy: same-origin** restricts where resources can be loaded from.
+- **Cross-Origin-Opener-Policy: same-origin** isolates the browsing context.
 - **CSRF Protection** requires sending the `csrf-token` header with POST requests. The value comes from the `csrfToken` cookie set by the server.
 
 ## API
