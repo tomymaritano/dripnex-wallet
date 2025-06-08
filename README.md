@@ -50,8 +50,13 @@ addresses. Copy `.env.example` to `.env.local` and fill in your values.
 | `NEXT_PUBLIC_SOLANA_WALLET` | Donation address for Solana |
 | `NEXT_PUBLIC_LITECOIN_WALLET` | Donation address for Litecoin |
 | `NEXT_PUBLIC_DOGECOIN_WALLET` | Donation address for Dogecoin |
+| `UPSTASH_REDIS_REST_URL` | Optional Redis REST endpoint used in Docker |
+| `UPSTASH_REDIS_REST_TOKEN` | Token for the Upstash REST API |
 
 Variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
+
+Create a `.env.local` file with these values for local development and Docker.
+Tests load variables from `.env.test` using the same keys.
 
 ## 🐳 Docker Usage
 
@@ -65,6 +70,16 @@ docker run --env-file .env.local -p 3000:3000 dripnex
 
 The server will be available at `http://localhost:3000`.
 
+### Docker Compose
+
+If you want Supabase and Redis alongside the app, start everything with:
+
+```bash
+docker-compose up
+```
+
+`docker-compose` reads the same `.env.local` file used for local development.
+
 ## 🧪 Running Tests
 
 1. Install dependencies if you haven't already:
@@ -73,7 +88,7 @@ The server will be available at `http://localhost:3000`.
    npm install
    ```
 
-2. Create a `.env.test` file with the environment variables required for tests. You can copy from `.env.example` and adjust the values as needed.
+2. Create a `.env.test` file with the same keys listed above. The tests will load this file automatically.
 
 3. Execute the test suite with:
 
@@ -115,6 +130,8 @@ The application sends several security headers defined in `next.config.ts`:
 - **X-Content-Type-Options: nosniff** stops MIME type sniffing.
 - **Referrer-Policy: same-origin** only sends referrer info for same-site requests.
 - **X-XSS-Protection: 1; mode=block** enables basic XSS filtering in old browsers.
+
+The API provides a `/healthz` endpoint for health checks. All POST routes require a `csrfToken` header to mitigate CSRF attacks.
 
 # 🧠 Dripnex Project Backlog
 
