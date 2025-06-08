@@ -6,9 +6,10 @@ const securityHeaders = [
     value:
       "default-src 'self'; " +
       "script-src 'self' 'unsafe-inline'; " +
-      "style-src 'self' 'unsafe-inline'; " +
+      "style-src 'self' 'unsafe-inline' https:; " +
       "img-src 'self' https: data:; " +
-      "connect-src 'self' https: ws:; " +
+      "connect-src 'self' https: wss:; " +
+      "font-src 'self' https: data:; " +
       "frame-ancestors 'none';",
   },
   { key: 'X-Frame-Options', value: 'DENY' },
