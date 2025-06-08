@@ -34,8 +34,9 @@ npm run dev
 
 ## 🌐 Environment Variables
 
-`dripnex` relies on a few environment variables for API keys and wallet
+`dripnex` relies on several environment variables for API keys and wallet
 addresses. Copy `.env.example` to `.env.local` and fill in your values.
+For a complete description of each variable see [docs/env.md](docs/env.md).
 
 | Variable | Purpose |
 | --- | --- |
