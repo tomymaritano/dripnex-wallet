@@ -23,6 +23,7 @@ export function setupCsrf() {
         httpOnly: true,
         sameSite: 'strict',
         path: '/',
+        secure: process.env.NODE_ENV === 'production',
       })
     }
     return res
