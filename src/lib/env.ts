@@ -20,6 +20,7 @@ const serverEnvSchema = z.object({
   ETHERSCAN_API_KEY: z.string(),
   BREVO_API_KEY: z.string(),
   CSRF_SECRET: z.string(),
+  ALCHEMY_API_KEY: z.string().optional(),
 })
 
 // Parse client env inmediatamente (safe)
@@ -47,6 +48,7 @@ export const serverEnv = (() => {
     ETHERSCAN_API_KEY: process.env.ETHERSCAN_API_KEY,
     BREVO_API_KEY: process.env.BREVO_API_KEY,
     CSRF_SECRET: process.env.CSRF_SECRET,
+    ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY,
   })
 })()
 
