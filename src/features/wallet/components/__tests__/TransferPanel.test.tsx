@@ -12,6 +12,15 @@ vi.mock('@/app/hooks/useSendTransaction', () => ({
   }),
 }));
 
+vi.mock('@/app/hooks/useSendToken', () => ({
+  useSendToken: () => ({
+    send: vi.fn(() => Promise.resolve('0xtest')),
+    hash: '0xtest',
+    isPending: false,
+    isConfirming: false,
+  }),
+}));
+
 vi.mock('wagmi', () => ({
   useBalance: () => ({ data: { formatted: '0' } }),
 }));

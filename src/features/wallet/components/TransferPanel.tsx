@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import { FaRegCopy, FaCheck } from 'react-icons/fa';
 import { NETWORKS } from '@/lib/networks';
 import { useSendTransactionWithGas } from '@/app/hooks/useSendTransaction';
+import { useSendToken } from '@/app/hooks/useSendToken';
 import ContactSelector from './ContactSelector';
-import { Contact } from '@/types/user';
 
 type Props = {
   address: string;
@@ -28,8 +28,23 @@ export default function TransferPanel({ address, contacts }: Props) {
   const [amountCopied, setAmountCopied] = useState<string | null>(null);
 
   const provider = NETWORKS[networkKey];
-  const { send, estimate, isPending, isConfirming, hash: txHash } =
-    useSendTransactionWithGas(provider.chainId);
+  const isTokenSelected = !!token;
+  const {
+    send: sendEth,
+    estimate,
+    isPending: isEthPending,
+    isConfirming: isEthConfirming,
+    hash: ethHash,
+  } = useSendTransactionWithGas(provider.chainId);
+  const {
+    send: sendToken,
+    hash: tokenHash,
+    isPending: isTokenPending,
+    isConfirming: isTokenConfirming,
+  } = useSendToken(provider.chainId);
+  const txHash = isTokenSelected ? tokenHash : ethHash;
+  const isPending = isTokenSelected ? isTokenPending : isEthPending;
+  const isConfirming = isTokenSelected ? isTokenConfirming : isEthConfirming;
   const [gas, setGas] = useState<bigint | null>(null);
   useEffect(() => {
     setToken(NETWORKS[networkKey].tokens[0]);
@@ -52,21 +67,30 @@ export default function TransferPanel({ address, contacts }: Props) {
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await send(recipient as `0x${string}`, amount);
+      if (isTokenSelected) {
+        await sendToken(
+          token.address as `0x${string}`,
+          recipient as `0x${string}`,
+          amount,
+          token.decimals,
+        );
+      } else {
+        await sendEth(recipient as `0x${string}`, amount);
+      }
     } catch (err) {
       console.error('Transaction failed', err);
     }
   };
 
   useEffect(() => {
-    if (isValidAddress && amount) {
+    if (!isTokenSelected && isValidAddress && amount) {
       estimate(recipient as `0x${string}`, amount)
         .then(setGas)
         .catch(() => setGas(null));
     } else {
       setGas(null);
     }
-  }, [recipient, amount, isValidAddress, estimate]);
+  }, [recipient, amount, isValidAddress, estimate, isTokenSelected]);
 
   useEffect(() => {
     if (txHash) {
