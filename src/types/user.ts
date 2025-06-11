@@ -1,3 +1,5 @@
+// src/types/user.ts
+
 export interface Wallet {
   id: string;
   profile_id: string;

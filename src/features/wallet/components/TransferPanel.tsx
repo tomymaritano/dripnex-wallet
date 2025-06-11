@@ -8,6 +8,8 @@ import { useSendTransactionWithGas } from '@/app/hooks/useSendTransaction';
 import { useSendToken } from '@/app/hooks/useSendToken';
 import ContactSelector from './ContactSelector';
 
+import type { Contact } from '../../../types/user';
+
 type Props = {
   address: string;
   contacts: Contact[];

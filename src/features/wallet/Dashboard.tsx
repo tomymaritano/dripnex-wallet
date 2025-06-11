@@ -2,7 +2,6 @@
 import { useAccount, useBalance, useChainId } from 'wagmi';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { supabase } from '@/lib/supabaseClient';
 import { NETWORKS } from '@/lib/networks';
 import { useUserProfile } from '@/app/hooks/useUserProfile';
@@ -118,12 +117,6 @@ export default function Dashboard() {
         <div className="mt-10">
           <h3 className="text-sm text-gray-400 mb-4">Recent Transactions</h3>
           <TransactionList transactions={transactions} currentAddress={address} />
-        </div>
-
-        <div className="mt-6">
-          <Link href="/wallet/nfts" className="text-indigo-400 hover:underline text-sm">
-            View NFT Gallery
-          </Link>
         </div>
       </div>
 
