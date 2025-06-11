@@ -1,7 +1,7 @@
 // src/lib/wallet.ts
 
 import { getDefaultConfig } from '@rainbow-me/rainbowkit'
-import { ledgerWallet, trezorWallet } from '@rainbow-me/rainbowkit/wallets'
+import { ledgerWallet } from '@rainbow-me/rainbowkit/wallets'
 import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains'
 import { http, type Config } from 'wagmi'
 import { env } from './env'
@@ -23,12 +23,6 @@ export function getWalletConfig(): Config {
           groupName: 'Hardware',
           wallets: [
             ledgerWallet({ projectId: env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID, chains }),
-            trezorWallet({
-              chains,
-              projectId: env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
-              manifestEmail: env.NEXT_PUBLIC_TREZOR_MANIFEST_EMAIL,
-              manifestAppUrl: env.NEXT_PUBLIC_TREZOR_MANIFEST_APP_URL,
-            }),
           ],
         },
       ],
@@ -42,3 +36,5 @@ export function getWalletConfig(): Config {
   }
   return globalThis._walletConfig
 }
+
+export type { Config }
