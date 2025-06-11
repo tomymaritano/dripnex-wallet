@@ -136,7 +136,7 @@ located at `public/manifest.json`.
 
 ## 🔒 Security
 
-The application sends several security headers defined in `next.config.ts`:
+The application sends several security headers via middleware (`src/middleware/securityHeaders.ts`):
 
   - **Content-Security-Policy** restricts asset loading to the same origin while
   allowing inline scripts required by Next.js.

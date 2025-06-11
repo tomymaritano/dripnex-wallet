@@ -1,14 +1,13 @@
 // middleware.ts
 import type { NextRequest } from 'next/server'
 import { setupCsrf } from './src/lib/csrf'
-import { buildCsp } from './src/lib/csp'
+import { setSecurityHeaders } from './src/middleware/securityHeaders'
 
 const csrfMiddleware = setupCsrf()
 
 export function middleware(req: NextRequest) {
   const res = csrfMiddleware(req)
-  const nonce = req.headers.get('x-nonce') || undefined
-  res.headers.set('Content-Security-Policy', buildCsp(nonce))
+  setSecurityHeaders(res)
   return res
 }
 
