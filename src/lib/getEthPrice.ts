@@ -3,17 +3,21 @@
  *
  * @returns Object with `usd` and `ars` prices.
  */
-let cachedPrice: { usd: number; ars: number } | null = null;
-let cachedAt = 0;
-
-export function invalidateEthPriceCache() {
-  cachedPrice = null;
-  cachedAt = 0;
+declare global {
+  // eslint-disable-next-line no-var
+  var _ethPriceCache:
+    | { value: { usd: number; ars: number }; timestamp: number }
+    | undefined;
 }
 
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
 export async function getEthPrice() {
-  if (cachedPrice && Date.now() - cachedAt < 5 * 60_000) {
-    return cachedPrice;
+  const cached = globalThis._ethPriceCache;
+  const now = Date.now();
+
+  if (cached && now - cached.timestamp < CACHE_TTL_MS) {
+    return cached.value;
   }
 
   const res = await fetch(
@@ -21,10 +25,13 @@ export async function getEthPrice() {
   );
   if (!res.ok) throw new Error('Error fetching ETH price');
   const data = await res.json();
-  cachedPrice = {
+
+  const price = {
     usd: data.ethereum.usd,
     ars: data.ethereum.ars,
   };
-  cachedAt = Date.now();
-  return cachedPrice;
+
+  globalThis._ethPriceCache = { value: price, timestamp: now };
+
+  return price;
 }
