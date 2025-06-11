@@ -1,19 +1,20 @@
 import { Web3Wrapper } from "@/components/Web3Wrapper";
 import { Toaster } from 'react-hot-toast';
-import { headers } from 'next/headers';
+import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
 
-
-/**
- * Application root layout used by Next.js.
- */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const nonce = headers().get('x-nonce') || undefined;
+;
+
   return (
     <html lang="en">
-      <body nonce={nonce}>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#000000" />
+      </head>
+      <body>
+        <ServiceWorkerRegister />
         <Web3Wrapper>
           <Toaster position="top-right" />
-
           {children}
         </Web3Wrapper>
       </body>
