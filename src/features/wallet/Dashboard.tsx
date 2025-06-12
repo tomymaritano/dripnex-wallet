@@ -11,7 +11,7 @@ import TransferPanel from './components/TransferPanel';
 import DonateWidget from './components/DonateWidget';
 import WalletList from './components/WalletList';
 import WalletInfoCard from '@/components/WalletInfoCard';
-import TokenBalance from './components/TokenBalance';
+import TokenGroup from './components/TokenGroup';
 
 export default function Dashboard() {
   const { address, isConnected } = useAccount();
@@ -57,22 +57,17 @@ export default function Dashboard() {
           {profile && (
             <WalletList profileId={profile.id} wallets={profile.wallets} onChange={refetch} />
           )}
-
-          <div className="rounded-xl border border-white/10 py-4 px-5 backdrop-blur shadow-lg space-y-4">
-            <h3 className="text-base font-bold text-white">Token Balances</h3>
-            {Object.entries(NETWORKS).map(([key, net]) => (
-              <div key={key} className="space-y-1">
-                <p className="text-sm text-gray-300 mb-1">{net.name}</p>
-                <TokenBalance address={address as `0x${string}`} chainId={net.chainId} />
-                {net.tokens.map((t) => (
-                  <TokenBalance
-                    key={t.address}
-                    address={address as `0x${string}`}
-                    chainId={net.chainId}
-                    token={t}
-                  />
-                ))}
-              </div>
+          <div className="space-y-4">
+            <h3 className="text-base font-bold text-white mb-2">Token Balances</h3>
+            {Object.entries(NETWORKS).map(([key, net], index) => (
+              <TokenGroup
+                key={key}
+                networkName={net.name}
+                chainId={net.chainId}
+                address={address as `0x${string}`}
+                tokens={net.tokens}
+                initiallyOpen={index === 0}  // 👈 solo el primero abierto
+              />
             ))}
           </div>
 

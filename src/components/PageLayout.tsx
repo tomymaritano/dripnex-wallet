@@ -18,7 +18,7 @@ export default function PageLayout({ children }: Props) {
         <Navbar />
       </header>
 
-      <main className="flex-1 mt-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
+      <main className="flex-1 mt-20 px-4 sm:px-6 lg:px-8 max-w-9xl mx-auto w-full">
         {children}
       </main>
 

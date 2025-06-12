@@ -24,7 +24,10 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['coin-images.coingecko.com'],
+    domains: [
+      'coin-images.coingecko.com',
+      'cryptologos.cc', // 👈 AGREGÁS ESTE
+    ],
   },
   async headers() {
     return [
