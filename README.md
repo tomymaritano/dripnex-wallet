@@ -89,6 +89,18 @@ docker-compose up
 
 `docker-compose` reads the same `.env.local` file used for local development.
 
+### Apply Supabase Schema
+
+Start the Supabase container and apply the schema locally with:
+
+```bash
+docker-compose up -d supabase
+PGPASSWORD=postgres psql -h localhost -p 54322 -U postgres -f supabase/schema.sql
+```
+
+The command loads the tables, RLS settings and policies defined in
+`supabase/schema.sql`.
+
 ## 🧪 Running Tests
 
 1. Install dependencies if you haven't already:

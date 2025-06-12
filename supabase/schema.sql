@@ -13,3 +13,12 @@ CREATE TABLE wallets (
   chain_id integer,
   created_at timestamptz DEFAULT now()
 );
+
+ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE wallets ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "profiles_crud_owner" ON profiles
+  FOR ALL USING (id = auth.uid()) WITH CHECK (id = auth.uid());
+
+CREATE POLICY "wallets_crud_owner" ON wallets
+  FOR ALL USING (profile_id = auth.uid()) WITH CHECK (profile_id = auth.uid());
