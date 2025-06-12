@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import { isAddress } from 'viem';
 import { Wallet } from '@/types/user';
 import { Loader2, Trash2, Plus } from 'lucide-react';
 
@@ -15,9 +16,15 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
   const [newAddress, setNewAddress] = useState('');
   const [adding, setAdding] = useState(false);
   const [removingId, setRemovingId] = useState<string | null>(null);
+  const [addressError, setAddressError] = useState('');
+
 
   const handleAdd = async () => {
-    if (!newAddress) return;
+    if (!newAddress || !isAddress(newAddress)) {
+      setAddressError('Invalid address');
+      return;
+    }
+    setAddressError('');
     setAdding(true);
     await supabase.from('wallets').insert({ profile_id: profileId, address: newAddress });
     setAdding(false);
@@ -71,13 +78,22 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
             <input
               type="text"
               value={newAddress}
-              onChange={(e) => setNewAddress(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                setNewAddress(value);
+                if (value === '' || isAddress(value)) {
+                  setAddressError('');
+                } else {
+                  setAddressError('Invalid address');
+                }
+              }}
               className="flex-1 px-3 py-2 bg-white/10 border border-white/10 rounded-md text-white placeholder:text-gray-400 text-xs backdrop-blur"
               placeholder="Enter wallet address"
             />
             <button
               onClick={handleAdd}
-              disabled={adding || newAddress.trim() === ''}
+              disabled={adding || newAddress.trim() === '' || !!addressError}
+
               className="flex items-center gap-1 bg-teal-500 hover:bg-teal-400 text-black font-semibold px-3 py-2 rounded transition disabled:opacity-50 text-xs"
             >
               {adding ? (
@@ -90,6 +106,9 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
               )}
             </button>
           </div>
+          {addressError && (
+            <p className="text-red-400 text-xs mt-1">{addressError}</p>
+          )}
         </div>
       </div>
     </div>
