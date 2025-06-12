@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { Wallet } from '@/types/user';
+import { Loader2, Trash2, Plus } from 'lucide-react'; // íconos, opcional si usás Lucide
 
 interface Props {
   profileId: string;
@@ -16,6 +17,7 @@ interface Props {
 export default function WalletList({ profileId, wallets, onChange }: Props) {
   const [newAddress, setNewAddress] = useState('');
   const [adding, setAdding] = useState(false);
+  const [removingId, setRemovingId] = useState<string | null>(null);
 
   const handleAdd = async () => {
     if (!newAddress) return;
@@ -27,42 +29,62 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
   };
 
   const handleRemove = async (id: string) => {
+    setRemovingId(id);
     await supabase.from('wallets').delete().eq('id', id);
+    setRemovingId(null);
     onChange();
   };
 
   return (
-    <div className="space-y-4 text-sm text-white">
-      <h3 className="font-semibold">Wallets</h3>
-      <ul className="space-y-2">
+    <div className="rounded-xl border border-white/10 py-6 px-5 backdrop-blur bg-black/30 shadow-lg space-y-6 text-white">
+      <h3 className="text-lg font-semibold tracking-wide">Wallets</h3>
+
+      <ul className="space-y-3 max-h-64 overflow-y-auto pr-1">
         {wallets.map((w) => (
-          <li key={w.id} className="flex items-center gap-2">
-            <span className="flex-1 break-all text-xs bg-white/10 px-2 py-1 rounded">
-              {w.address}
-            </span>
+          <li
+            key={w.id}
+            className="flex items-center justify-between bg-white/5 px-3 py-2 rounded-lg text-xs backdrop-blur border border-white/10"
+          >
+            <span className="break-all">{w.address}</span>
             <button
               onClick={() => handleRemove(w.id)}
-              className="text-red-400 hover:underline"
+              className="text-red-400 hover:text-red-300 transition"
+              disabled={removingId === w.id}
             >
-              Remove
+              {removingId === w.id ? (
+                <Loader2 className="animate-spin w-4 h-4" />
+              ) : (
+                <Trash2 className="w-4 h-4" />
+              )}
             </button>
           </li>
         ))}
+        {wallets.length === 0 && (
+          <li className="text-center text-gray-400 text-sm">No wallets linked yet.</li>
+        )}
       </ul>
-      <div className="flex items-center gap-2">
+
+      <div className="flex items-center gap-2 pt-2 border-t border-white/10">
         <input
           type="text"
           value={newAddress}
           onChange={(e) => setNewAddress(e.target.value)}
-          className="flex-1 p-1 text-black rounded text-xs"
-          placeholder="New address"
+          className="flex-1 px-3 py-2 bg-gray-900 border border-white/10 rounded-md text-white placeholder:text-gray-500 text-xs"
+          placeholder="Enter wallet address"
         />
         <button
           onClick={handleAdd}
-          disabled={adding}
-          className="bg-teal-600 text-white px-2 py-1 rounded text-xs disabled:opacity-50"
+          disabled={adding || newAddress.trim() === ''}
+          className="flex items-center gap-1 bg-teal-500 hover:bg-teal-400 text-black font-semibold px-3 py-2 rounded transition disabled:opacity-50 text-xs"
         >
-          Add
+          {adding ? (
+            <Loader2 className="animate-spin w-4 h-4" />
+          ) : (
+            <>
+              <Plus className="w-4 h-4" />
+              Add
+            </>
+          )}
         </button>
       </div>
     </div>

@@ -1,4 +1,5 @@
 // src/app/hooks/useUserProfile.ts
+
 import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { UserProfile } from '@/types/user';
@@ -19,18 +20,44 @@ export function useUserProfile(address?: string) {
       setProfile(null);
       return;
     }
+
     setLoading(true);
     setError(null);
 
     try {
       const { data, error: profileErr } = await supabase
         .from('profiles')
-        .select('*, wallets(id, address, chain_id, created_at)')
-        .eq('wallets.address', address)
+        .select(`
+          id, username, email, created_at, avatar_url,
+          wallets(id, address, chain_id, created_at)
+        `)
         .maybeSingle();
 
       if (profileErr) throw profileErr;
-      setProfile(data ?? null);
+
+      console.debug('Fetched profile:', data);
+
+      if (!data) {
+        setProfile(null);
+        return;
+      }
+
+      // Filtrar wallets en JS
+      const matchedWallet = data.wallets?.find(w => w.address?.toLowerCase() === address.toLowerCase());
+
+      if (matchedWallet) {
+        // Si querés, podés guardar el wallet seleccionado también si te sirve
+        setProfile({
+          ...data,
+          wallets: [matchedWallet],
+        });
+      } else {
+        // No se encontró el wallet → setear perfil = null o con wallets vacíos
+        setProfile({
+          ...data,
+          wallets: [],
+        });
+      }
     } catch (err) {
       console.error('Error fetching user profile:', err);
       setError('Could not fetch profile.');

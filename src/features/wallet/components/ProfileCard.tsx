@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { FaEdit, FaRegCopy, FaCheck } from 'react-icons/fa';
 import { motion } from 'framer-motion';
