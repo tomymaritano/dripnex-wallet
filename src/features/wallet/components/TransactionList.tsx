@@ -59,7 +59,7 @@ export default function TransactionList({ transactions, currentAddress }: Props)
             <motion.li
               key={tx.hash}
               variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
-              className="flex justify-between items-center border border-white/5 px-4 py-3 rounded-lg bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
+              className="flex justify-between items-center border border-white/5 px-4 py-3 rounded-lg bg-black/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
             >
               <div className="flex items-center gap-3">
                 {icon}

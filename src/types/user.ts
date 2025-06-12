@@ -9,6 +9,7 @@ export interface Wallet {
 export interface UserProfile {
   id: string;
   username: string;
+  name: string;
   email: string;
   created_at: string;
   avatar_url?: string;

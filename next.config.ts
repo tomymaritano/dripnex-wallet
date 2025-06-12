@@ -10,6 +10,8 @@ const securityHeaders = [
       "img-src 'self' https: data:",
       "connect-src 'self' https: ws:",
       "font-src 'self' https://fonts.gstatic.com data:",
+      "frame-src https://verify.walletconnect.com https://verify.walletconnect.org", // <- ESTA ES LA CLAVE
+
       "frame-ancestors 'none'",
     ].join('; '),
   },
