@@ -4,7 +4,8 @@ import { useWalletInfo } from '@/app/hooks/useWalletInfo';
 import { Copy } from 'lucide-react'; // opcional
 
 export default function WalletInfoCard() {
-  const { address, isConnected } = useWalletInfo();
+  const { address, isConnected, balance, balanceSymbol } = useWalletInfo();
+
 
   if (!isConnected) return null;
 
@@ -25,6 +26,14 @@ export default function WalletInfoCard() {
             </button>
           </div>
         </div>
+        {balance && (
+          <div className="flex flex-col">
+            <span className="text-xs uppercase text-gray-400 mb-1">Balance</span>
+            <span className="break-all text-sm">
+              {balance} {balanceSymbol}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

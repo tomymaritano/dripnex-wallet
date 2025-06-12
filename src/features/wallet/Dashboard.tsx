@@ -18,18 +18,19 @@ import { useTokenPricesBatch } from '@/lib/hooks/useTokenPricesBatch';
 export default function Dashboard() {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
-    const { prices } = useTokenPricesBatch();
+  const { prices } = useTokenPricesBatch();
 
   const { profile, refetch } = useUserProfile(address);
   const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
 
   useEffect(() => {
-    if (isConnected && address && chainId && profile) {
+    if (isConnected && address && chainId) {
+
       supabase
         .from('wallets')
         .upsert(
-          { address, chain_id: chainId, profile_id: profile.id },
-          { onConflict: 'address' }
+          { address, chain_id: chainId, profile_id: profile?.id ?? null },
+          { onConflict: 'address,chain_id' }
         );
     }
   }, [address, chainId, isConnected, profile]);

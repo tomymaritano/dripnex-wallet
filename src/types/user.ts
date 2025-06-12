@@ -1,6 +1,6 @@
 export interface Wallet {
   id: string;
-  profile_id: string;
+  profile_id: string | null;
   address: string;
   chain_id: number | null;
   created_at: string;

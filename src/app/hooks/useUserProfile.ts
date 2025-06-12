@@ -37,6 +37,8 @@ export function useUserProfile(address?: string) {
           wallets ( id, address, chain_id, created_at, profile_id )
         `)
         .eq('id', walletData.profile_id)
+        .limit(1)
+
         .maybeSingle();
 
       if (profileErr) throw profileErr;

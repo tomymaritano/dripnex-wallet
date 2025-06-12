@@ -9,9 +9,10 @@ CREATE TABLE profiles (
 CREATE TABLE wallets (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   profile_id uuid REFERENCES profiles(id) ON DELETE CASCADE,
-  address text UNIQUE NOT NULL,
+  address text NOT NULL,
   chain_id integer,
-  created_at timestamptz DEFAULT now()
+  created_at timestamptz DEFAULT now(),
+  UNIQUE (address, chain_id)
 );
 
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;

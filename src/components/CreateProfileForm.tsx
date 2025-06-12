@@ -32,6 +32,8 @@ export default function CreateProfileForm({ address }: { address: string }) {
       .from('wallets')
       .select('id')
       .eq('address', address)
+      .limit(1)
+
       .maybeSingle();
 
     if (fetchError) {
