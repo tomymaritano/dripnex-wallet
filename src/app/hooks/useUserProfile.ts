@@ -57,7 +57,9 @@ export function useUserProfile(address?: string) {
         email: data.email ?? '',
         avatar_url: data.avatar_url ?? '',
         created_at: data.created_at ?? '',
-        wallets: data.wallets?.filter(w => w.address?.toLowerCase() === address.toLowerCase()) ?? [],
+        // Return all wallets linked to this profile instead of only the
+        // currently connected address so multiwallet management works.
+        wallets: data.wallets ?? [],
       });
     } catch (err) {
       console.error('Error fetching user profile:', err);

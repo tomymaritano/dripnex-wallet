@@ -18,15 +18,29 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
   const [removingId, setRemovingId] = useState<string | null>(null);
   const [addressError, setAddressError] = useState('');
 
+  const isDuplicate = wallets.some(
+    (w) => w.address.toLowerCase() === newAddress.toLowerCase()
+  );
+
+  const handleAddressChange = (value: string) => {
+    setNewAddress(value);
+    if (value === '' || isAddress(value)) {
+      setAddressError('');
+    } else {
+      setAddressError('Invalid address');
+    }
+  };
 
   const handleAdd = async () => {
-    if (!newAddress || !isAddress(newAddress)) {
-      setAddressError('Invalid address');
-      return;
-    }
+    if (!newAddress || !isAddress(newAddress) || isDuplicate) return;
+
     setAddressError('');
     setAdding(true);
-    await supabase.from('wallets').insert({ profile_id: profileId, address: newAddress });
+
+    await supabase
+      .from('wallets')
+      .insert({ profile_id: profileId, address: newAddress });
+
     setAdding(false);
     setNewAddress('');
     onChange();
@@ -34,7 +48,9 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
 
   const handleRemove = async (id: string) => {
     setRemovingId(id);
+
     await supabase.from('wallets').delete().eq('id', id);
+
     setRemovingId(null);
     onChange();
   };
@@ -50,7 +66,9 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
             className="flex items-center justify-between bg-white/10 px-4 py-3 rounded-lg text-sm backdrop-blur border border-white/10 transition hover:bg-white/15"
           >
             <div className="flex flex-col text-xs text-gray-200">
-              <span className="text-[10px] uppercase text-gray-400 mb-1">Address</span>
+              <span className="text-[10px] uppercase text-gray-400 mb-1">
+                Address
+              </span>
               <span className="break-all">{w.address}</span>
             </div>
             <button
@@ -66,8 +84,11 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
             </button>
           </div>
         ))}
+
         {wallets.length === 0 && (
-          <div className="text-center text-gray-400 text-sm py-6">No wallets linked yet.</div>
+          <div className="text-center text-gray-400 text-sm py-6">
+            No wallets linked yet.
+          </div>
         )}
       </div>
 
@@ -78,22 +99,18 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
             <input
               type="text"
               value={newAddress}
-              onChange={(e) => {
-                const value = e.target.value;
-                setNewAddress(value);
-                if (value === '' || isAddress(value)) {
-                  setAddressError('');
-                } else {
-                  setAddressError('Invalid address');
-                }
-              }}
+              onChange={(e) => handleAddressChange(e.target.value)}
               className="flex-1 px-3 py-2 bg-white/10 border border-white/10 rounded-md text-white placeholder:text-gray-400 text-xs backdrop-blur"
               placeholder="Enter wallet address"
             />
             <button
               onClick={handleAdd}
-              disabled={adding || newAddress.trim() === '' || !!addressError}
-
+              disabled={
+                adding ||
+                newAddress.trim() === '' ||
+                !!addressError ||
+                isDuplicate
+              }
               className="flex items-center gap-1 bg-teal-500 hover:bg-teal-400 text-black font-semibold px-3 py-2 rounded transition disabled:opacity-50 text-xs"
             >
               {adding ? (
@@ -106,8 +123,13 @@ export default function WalletList({ profileId, wallets, onChange }: Props) {
               )}
             </button>
           </div>
+
           {addressError && (
             <p className="text-red-400 text-xs mt-1">{addressError}</p>
+          )}
+
+          {isDuplicate && (
+            <p className="text-red-400 text-xs mt-1">Wallet already linked.</p>
           )}
         </div>
       </div>

@@ -4,22 +4,25 @@ import { useBalance } from 'wagmi';
 import Image from 'next/image';
 import { useTokenPrice } from '@/lib/hooks/useTokenPrice';
 import tokenLogos from '@/lib/tokenLogos';
+import type { ERC20Token } from '@/lib/networks';
+
 
 interface Props {
   address: `0x${string}`;
   chainId: number;
-  token?: { address: `0x${string}`; symbol: string; coingeckoId?: string };
+  token?: ERC20Token;
   price?: number;
 }
 
-export default function TokenBalance({ address, chainId, token }: Props) {
+export default function TokenBalance({ address, chainId, token, price: priceProp }: Props) {
   const { data, isLoading } = useBalance({
     address,
     chainId,
     token: token?.address,
   });
 
-  const price = useTokenPrice(token?.coingeckoId);
+const fetchedPrice = useTokenPrice(token?.coingeckoId);
+  const price = typeof priceProp === 'number' ? priceProp : fetchedPrice;
   const tokenBalance = Number(data?.formatted ?? 0);
   const usdValue = price ? (tokenBalance * price).toFixed(2) : null;
 

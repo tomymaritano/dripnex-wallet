@@ -13,5 +13,7 @@ describe('NETWORKS', () => {
 
   it('includes ERC20 tokens', () => {
     expect(NETWORKS.ethereum.tokens[0].symbol).toBe('USDC');
+    expect(NETWORKS.ethereum.tokens[0].coingeckoId).toBe('usd-coin');
+
   });
 });
