@@ -12,10 +12,14 @@ import DonateWidget from './components/DonateWidget';
 import WalletList from './components/WalletList';
 import WalletInfoCard from '@/components/WalletInfoCard';
 import TokenGroup from './components/TokenGroup';
+import { useTokenPricesBatch } from '@/lib/hooks/useTokenPricesBatch';
+
 
 export default function Dashboard() {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
+    const { prices } = useTokenPricesBatch();
+
   const { profile, refetch } = useUserProfile(address);
   const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
 
@@ -66,6 +70,7 @@ export default function Dashboard() {
                 chainId={net.chainId}
                 address={address as `0x${string}`}
                 tokens={net.tokens}
+                prices={prices}
                 initiallyOpen={index === 0}  // 👈 solo el primero abierto
               />
             ))}

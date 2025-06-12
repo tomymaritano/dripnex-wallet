@@ -9,6 +9,7 @@ interface Props {
   address: `0x${string}`;
   chainId: number;
   token?: { address: `0x${string}`; symbol: string; coingeckoId?: string };
+  price?: number;
 }
 
 export default function TokenBalance({ address, chainId, token }: Props) {

@@ -19,13 +19,24 @@ export function useUserProfile(address?: string) {
     setError(null);
 
     try {
+      const { data: walletData, error: walletErr } = await supabase
+        .from('wallets')
+        .select('profile_id')
+        .eq('address', address.toLowerCase())
+        .maybeSingle();
+
+      if (walletErr) throw walletErr;
+      if (!walletData) {
+        setProfile(null);
+        return;
+      }
       const { data, error: profileErr } = await supabase
         .from('profiles')
         .select(`
           id, username, name, email, avatar_url, created_at,
           wallets ( id, address, chain_id, created_at, profile_id )
         `)
-        .eq('wallets.address', address.toLowerCase())
+        .eq('id', walletData.profile_id)
         .maybeSingle();
 
       if (profileErr) throw profileErr;
