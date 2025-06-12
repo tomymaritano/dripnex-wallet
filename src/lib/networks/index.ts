@@ -19,6 +19,7 @@ export interface ERC20Token {
   address: `0x${string}`;
   symbol: string;
   decimals: number;
+  coingeckoId: string;
 }
 
 export interface NetworkProvider {
@@ -44,79 +45,87 @@ export const NETWORKS: Record<string, NetworkProvider> = {
     name: 'Ethereum',
     explorer: 'https://etherscan.io/tx/',
     client: client(mainnet),
-    tokens: [
-      {
-        symbol: 'USDC',
-        address: '0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
-        decimals: 6,
-      },
-      {
-        symbol: 'DAI',
-        address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
-        decimals: 18,
-      },
-    ],
+      tokens: [
+        {
+          symbol: 'USDC',
+          address: '0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+          decimals: 6,
+          coingeckoId: 'usd-coin',
+        },
+        {
+          symbol: 'DAI',
+          address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+          decimals: 18,
+          coingeckoId: 'dai',
+        },
+      ],
   },
   polygon: {
     chainId: polygon.id,
     name: 'Polygon',
     explorer: 'https://polygonscan.com/tx/',
     client: client(polygon),
-    tokens: [
-      {
-        symbol: 'USDC',
-        address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
-        decimals: 6,
-      },
-      {
-        symbol: 'DAI',
-        address: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
-        decimals: 18,
-      },
-    ],
+      tokens: [
+        {
+          symbol: 'USDC',
+          address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+          decimals: 6,
+          coingeckoId: 'usd-coin',
+        },
+        {
+          symbol: 'DAI',
+          address: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
+          decimals: 18,
+          coingeckoId: 'dai',
+        },
+      ],
   },
   bsc: {
     chainId: bsc.id,
     name: 'BNB Chain',
     explorer: 'https://bscscan.com/tx/',
     client: client(bsc),
-    tokens: [
-      {
-        symbol: 'USDT',
-        address: '0x55d398326f99059FF775485246999027B3197955',
-        decimals: 18,
-      },
-      {
-        symbol: 'BUSD',
-        address: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
-        decimals: 18,
-      },
-    ],
+      tokens: [
+        {
+          symbol: 'USDT',
+          address: '0x55d398326f99059FF775485246999027B3197955',
+          decimals: 18,
+          coingeckoId: 'tether',
+        },
+        {
+          symbol: 'BUSD',
+          address: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+          decimals: 18,
+          coingeckoId: 'binance-usd',
+        },
+      ],
   },
   arbitrum: {
     chainId: arbitrum.id,
     name: 'Arbitrum',
     explorer: 'https://arbiscan.io/tx/',
     client: client(arbitrum),
-    tokens: [
-      {
-        symbol: 'USDC',
-        address: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
-        decimals: 6,
-      },
-    ],
+      tokens: [
+        {
+          symbol: 'USDC',
+          address: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
+          decimals: 6,
+          coingeckoId: 'usd-coin',
+        },
+      ],
   },
   optimism: {
     chainId: optimism.id,
     name: 'Optimism',
     explorer: 'https://optimistic.etherscan.io/tx/',
     client: client(optimism),
-    tokens: [
-      {
-        symbol: 'USDC',
-        address: '0x4200000000000000000000000000000000000042',
-        decimals: 6,
-      },
-    ],
-  },
-};
+      tokens: [
+        {
+          symbol: 'USDC',
+          address: '0x4200000000000000000000000000000000000042',
+          decimals: 6,
+          coingeckoId: 'usd-coin',
+        },
+      ],
+    },
+  };
