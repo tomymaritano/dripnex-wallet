@@ -1,32 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import { useUserProfile } from '@/app/hooks/useUserProfile';
+import { useUserProfile } from '@/features/profile/hooks/useUserProfile';
+import { useUpdateProfile } from '@/features/profile/hooks/useUpdateProfile';
 import { useAccount } from 'wagmi';
-import { supabase } from '@/lib/supabaseClient';
 
 /**
  * Form that allows a user to update their profile username.
  */
 export default function UserProfileForm() {
   const { address } = useAccount();
-  const { profile, loading } = useUserProfile(address);
+  const { data: profile, isLoading } = useUserProfile(address);
   const [username, setUsername] = useState(profile?.username || '');
+  const updateProfile = useUpdateProfile(profile?.id ?? '');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!profile) return;
-
-    const { error } = await supabase
-      .from('profiles')
-      .update({ username })
-      .eq('id', profile.id);
-
+    const { error } = await updateProfile.mutateAsync({ username });
     setMessage(error ? 'Error saving username' : 'Username saved!');
   };
 
-  if (loading) return <p>Loading profile...</p>;
+  if (isLoading) return <p>Loading profile...</p>;
 
   return (
     <form onSubmit={handleSubmit} className="mt-6 space-y-4 bg-black/30 p-6 rounded-lg border border-gray-700 text-white">

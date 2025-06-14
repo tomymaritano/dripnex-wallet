@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { useCreateProfile } from '@/features/profile/hooks/useCreateProfile';
 
 /**
  * Simple form for creating a user profile associated with a wallet.
@@ -15,6 +15,8 @@ export default function CreateProfileForm({ address }: { address: string }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
+  const createProfile = useCreateProfile();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -27,51 +29,15 @@ export default function CreateProfileForm({ address }: { address: string }) {
 
     setLoading(true);
 
-    // Check if wallet already linked to a profile
-    const { data: existingWallet, error: fetchError } = await supabase
-      .from('wallets')
-      .select('id')
-      .eq('address', address)
-      .limit(1)
-
-      .maybeSingle();
-
-    if (fetchError) {
-      console.error('Error fetching existing wallet:', fetchError);
-    }
-
-    if (existingWallet) {
-      setError('Ya existe un perfil con esta wallet.');
-      setLoading(false);
-      return;
-    }
-
-    // Create profile and link wallet
-    const { data: profileData, error: profileErr } = await supabase
-      .from('profiles')
-      .insert({ username, email })
-      .select('id')
-      .single();
-
-    if (profileErr || !profileData) {
-      setLoading(false);
-      setError('Falló la creación del perfil');
-      console.error(profileErr);
-      return;
-    }
-
-    const { error: walletErr } = await supabase
-      .from('wallets')
-      .insert({ profile_id: profileData.id, address });
-
-    setLoading(false);
-
-    if (walletErr) {
-      setError('Falló la creación del perfil');
-      console.error(walletErr);
-    } else {
+    try {
+      await createProfile.mutateAsync({ username, email, address });
       setSuccess(true);
       setTimeout(() => window.location.reload(), 1000);
+    } catch (err) {
+      console.error(err);
+      setError('Falló la creación del perfil');
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useUserProfile } from '@/app/hooks/useUserProfile';
+import { useUserProfile } from '@/features/profile/hooks/useUserProfile';
 import { useAccount } from 'wagmi';
 import { useState } from 'react';
 import EditProfileForm from './EditProfileForm';

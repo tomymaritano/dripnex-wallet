@@ -1,9 +1,9 @@
 'use client';
 
-import { supabase } from '@/lib/supabaseClient';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { useUpdateProfile } from '@/features/profile/hooks/useUpdateProfile';
 
 type Profile = {
   id: string;
@@ -23,6 +23,7 @@ export default function EditProfileForm({ profile, onCancel, onSuccess }: Props)
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const updateProfile = useUpdateProfile(profile.id);
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,17 +31,14 @@ export default function EditProfileForm({ profile, onCancel, onSuccess }: Props)
     setError('');
     setSuccess(false);
 
-    const { error: updateError } = await supabase
-      .from('profiles')
-      .update({ username, email })
-      .eq('id', profile.id);
+    const { error } = await updateProfile.mutateAsync({ username, email });
 
     setSaving(false);
 
-    if (updateError) {
+    if (error) {
       setError('❌ Error al actualizar el perfil.');
       toast.error('❌ Hubo un problema al guardar los cambios.');
-      console.error(updateError);
+      console.error(error);
     } else {
       setSuccess(true);
       toast.success('✅ Cambios guardados correctamente');
