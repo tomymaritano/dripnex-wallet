@@ -4,7 +4,7 @@ import { useAccount, useChainId } from 'wagmi';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { NETWORKS } from '@/lib/networks';
-import { useUserProfile } from '@/app/hooks/useUserProfile';
+import { useUserProfile } from '@/features/profile/hooks/useUserProfile';
 import { fetchTransactions, ParsedTransaction } from '@/lib/fetchTransactions';
 import TransactionList from './components/TransactionList';
 import TransferPanel from './components/TransferPanel';
